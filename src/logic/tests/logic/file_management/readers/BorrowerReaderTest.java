@@ -1,4 +1,4 @@
-package logic.file_management.read_classes;
+package logic.file_management.readers;
 
 import logic.file_management.ReadCSV;
 import org.junit.jupiter.api.Test;

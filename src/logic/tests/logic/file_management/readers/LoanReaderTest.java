@@ -1,4 +1,4 @@
-package logic.file_management.read_classes;
+package logic.file_management.readers;
 
 import logic.loan_classes.Borrower;
 import logic.loan_classes.Loan;
@@ -33,18 +33,13 @@ class LoanReaderTest {
                 ids.get(0),
                 ids.get(1)
         };
-        assertArrayEquals(new int[] {1, 2}, idsArray);
+        assertArrayEquals(new int[] {2014759998, 810571556}, idsArray);
     }
 
     @Test
     void returnsLoanTest() throws IOException {
         Loan testLoan = new Loan(2000, new Borrower(1002244364, "Sebastian", "25252525",
                 "69696969", "Cartagena"), "2020-02-10");
-        System.out.println(loanReader.get(405908048));
-
-        loanReader.reset();
-
-        System.out.println(loanReader.get(1860060514));
-        loanReader.close();
+        System.out.println(loanReader.get(655294301));
     }
 }

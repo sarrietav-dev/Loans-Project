@@ -1,10 +1,10 @@
-package logic.file_management.write_classes;
+package logic.file_management.writers;
 
 import logic.FetchInformation;
 import logic.file_management.IdentificationManagerCSV;
 import logic.file_management.ReadCSV;
 import logic.file_management.WriteCSV;
-import logic.file_management.read_classes.LoanReader;
+import logic.file_management.readers.LoanReader;
 import logic.loan_classes.Borrower;
 import logic.loan_classes.Loan;
 

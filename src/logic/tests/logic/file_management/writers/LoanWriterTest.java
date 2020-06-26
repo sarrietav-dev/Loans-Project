@@ -1,4 +1,4 @@
-package logic.file_management.write_classes;
+package logic.file_management.writers;
 
 import logic.file_management.WriteCSV;
 import logic.loan_classes.Borrower;

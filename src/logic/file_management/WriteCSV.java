@@ -18,10 +18,10 @@ public abstract class WriteCSV {
 
     protected abstract String getCSVRow(FetchInformation fetchInformationObject);
 
-    protected static String getString(String[] info2) {
+    protected static String getString(String[] info) {
         StringBuilder csvRow = new StringBuilder();
 
-        for (String data : info2)
+        for (String data : info)
             csvRow.append(data).append(",");
         csvRow.substring(0, csvRow.length() - 1);
         csvRow.append("\n");

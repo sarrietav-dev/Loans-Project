@@ -1,4 +1,4 @@
-package logic.file_management.read_classes.class_makers;
+package logic.file_management.makers;
 
 import logic.file_management.Maker;
 import logic.loan_classes.Borrower;

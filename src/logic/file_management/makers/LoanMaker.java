@@ -1,8 +1,8 @@
-package logic.file_management.read_classes.class_makers;
+package logic.file_management.makers;
 
 import logic.file_management.Maker;
 import logic.file_management.ReadCSV;
-import logic.file_management.read_classes.BorrowerReader;
+import logic.file_management.readers.BorrowerReader;
 import logic.loan_classes.Borrower;
 import logic.loan_classes.Dates;
 import logic.loan_classes.Loan;

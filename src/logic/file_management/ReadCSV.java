@@ -12,7 +12,6 @@ public abstract class ReadCSV {
     public abstract boolean doesIDExist(int id) throws IOException;
 
     public abstract void close() throws IOException;
-    public abstract void reset() throws IOException;
 
     public abstract Object get(int id) throws IOException;
 }
