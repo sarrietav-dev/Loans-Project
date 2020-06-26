@@ -3,8 +3,7 @@ package logic.file_management.makers;
 import logic.file_management.Maker;
 import logic.loan_classes.Borrower;
 
-public class BorrowerMaker implements Maker {
-    private final String[] info;
+public class BorrowerMaker extends Maker {
 
     private final static int ID = 0;
     private final static int NAME = 1;
@@ -13,7 +12,7 @@ public class BorrowerMaker implements Maker {
     private final static int ADDRESS = 4;
 
     public BorrowerMaker(String[] info) {
-        this.info = info;
+        super(info);
     }
 
     @Override

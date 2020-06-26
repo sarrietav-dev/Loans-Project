@@ -1,6 +1,6 @@
 package logic.file_management.readers;
 
-import logic.loan_classes.Borrower;
+import logic.file_management.FilteredSearch;
 import logic.loan_classes.Loan;
 import org.junit.jupiter.api.Test;
 
@@ -18,12 +18,20 @@ class LoanReaderTest {
 
     @Test
     void getAllDataTest() throws IOException {
-        ArrayList<String[]> strings = loanReader.getAllData();
+        String[][] strings = loanReader.getAllData();
         for (String[] dataPack : strings) {
             for (String data : dataPack)
                 System.out.print(data + ", ");
             System.out.println();
         }
+        loanReader.close();
+    }
+
+    @Test
+    void getFilteredLoans() throws IOException {
+        FilteredSearch search = new LoanReader();
+        for (Loan loan : search.search(1002244364, FilteredSearch.BORROWER))
+            System.out.println(loan);
     }
 
     @Test
@@ -34,12 +42,12 @@ class LoanReaderTest {
                 ids.get(1)
         };
         assertArrayEquals(new int[] {2014759998, 810571556}, idsArray);
+        loanReader.close();
     }
 
     @Test
     void returnsLoanTest() throws IOException {
-        Loan testLoan = new Loan(2000, new Borrower(1002244364, "Sebastian", "25252525",
-                "69696969", "Cartagena"), "2020-02-10");
         System.out.println(loanReader.get(655294301));
+        loanReader.close();
     }
 }

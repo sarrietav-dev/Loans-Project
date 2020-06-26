@@ -2,7 +2,13 @@ package logic.file_management;
 
 import java.io.IOException;
 
-public interface Maker {
-    Object make() throws IOException;
+public abstract class Maker {
+    protected String[] info;
+
+    protected Maker(String[] info) {
+        this.info = info;
+    }
+
+    public abstract Object make() throws IOException;
 }
 

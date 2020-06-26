@@ -43,12 +43,14 @@ public class BorrowerReader extends ReadCSV {
     }
 
     @Override
-    public ArrayList<String[]> getAllData() throws IOException {
+    public String[][] getAllData() throws IOException {
         String line;
         ArrayList<String[]> data = new ArrayList<>();
+
         while((line = bufferedReader.readLine()) != null)
             data.add(line.split(","));
-        return data;
+
+        return ArrayConverter.convert(data);
     }
 
     @Override

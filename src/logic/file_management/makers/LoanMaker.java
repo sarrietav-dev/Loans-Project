@@ -1,6 +1,7 @@
 package logic.file_management.makers;
 
 import logic.file_management.Maker;
+import logic.file_management.MultipleMaker;
 import logic.file_management.ReadCSV;
 import logic.file_management.readers.BorrowerReader;
 import logic.loan_classes.Borrower;
@@ -8,9 +9,11 @@ import logic.loan_classes.Dates;
 import logic.loan_classes.Loan;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class LoanMaker implements Maker {
-    private final String[] info;
+public class LoanMaker extends Maker implements MultipleMaker {
+    String[][] infos;
+
     private final static int ID = 0;
     private final static int AMOUNT = 1;
     private final static int BORROWER_ID = 2;
@@ -18,7 +21,24 @@ public class LoanMaker implements Maker {
     private final static int IS_PAID = 4;
 
     public LoanMaker(String[] info) {
-        this.info = info;
+        super(info);
+    }
+
+    public LoanMaker(String[]... infos) {
+        super(null);
+        this.infos = infos;
+    }
+
+    @Override
+    public Loan[] makeMultiple() throws IOException {
+        ArrayList<Loan> loans = new ArrayList<>();
+
+        for (String[] info : infos) {
+            this.info = info;
+            loans.add(make());
+        }
+
+        return convert(loans);
     }
 
     @Override
@@ -45,5 +65,15 @@ public class LoanMaker implements Maker {
 
     private boolean getIsPaid() {
         return Boolean.parseBoolean(info[IS_PAID]);
+    }
+
+    private Loan[] convert(ArrayList<Loan> loans) {
+
+        Loan[] returnArray = new Loan[loans.size()];
+
+        for(int i = 0; i < loans.size(); i++)
+            returnArray[i] = loans.get(i);
+
+        return returnArray;
     }
 }

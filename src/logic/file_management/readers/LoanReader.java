@@ -3,13 +3,14 @@ package logic.file_management.readers;
 import logic.exceptions.ObjectNotFoundException;
 import logic.file_management.Maker;
 import logic.file_management.ReadCSV;
-import logic.file_management.Searchable;
+import logic.file_management.FilteredSearch;
 import logic.file_management.makers.LoanMaker;
+import logic.loan_classes.Loan;
 
 import java.io.*;
 import java.util.ArrayList;
 
-public class LoanReader extends ReadCSV implements Searchable {
+public class LoanReader extends ReadCSV implements FilteredSearch {
     private final BufferedReader bufferedReader;
 
     public LoanReader() throws FileNotFoundException {
@@ -27,14 +28,14 @@ public class LoanReader extends ReadCSV implements Searchable {
     }
 
     @Override
-    public ArrayList<String[]> getAllData() throws IOException {
+    public String[][] getAllData() throws IOException {
         String line;
         ArrayList<String[]> data = new ArrayList<>();
 
         while((line = bufferedReader.readLine()) != null)
             data.add(line.split(","));
 
-        return data;
+        return ArrayConverter.convert(data);
     }
 
     @Override
@@ -55,14 +56,33 @@ public class LoanReader extends ReadCSV implements Searchable {
     }
 
     @Override
-    public Object get(int id) throws IOException {
+    public Loan get(int id) throws IOException {
         Maker loanMaker = new LoanMaker(getLoanInfo(id));
-        return loanMaker.make();
+        return (Loan) loanMaker.make();
     }
 
     // TODO: Add functionality to this.
     @Override
-    public void search(int ID, boolean filter) {
+    public Loan[] search(final int ID, boolean filter) throws IOException {
+        if (filter == FilteredSearch.LOAN) {
+            return new Loan[] {
+                    get(ID)
+            };
+        } else if (filter == FilteredSearch.BORROWER) {
+            return getFilteredLoans(ID);
+        }
 
+        throw new ObjectNotFoundException("There's no Loan or Borrower with that ID");
+    }
+
+    private Loan[] getFilteredLoans(final int ID) throws IOException {
+        final int BORROWER_ID = 2;
+        ArrayList<String[]> loans = new ArrayList<>();
+
+        for (String[] data : getAllData())
+            if (Integer.parseInt(data[BORROWER_ID]) == ID)
+                loans.add(data);
+
+        return new LoanMaker(ArrayConverter.convert(loans)).makeMultiple();
     }
 }
