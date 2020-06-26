@@ -1,10 +1,11 @@
 package logic.loan_classes;
 
 import logic.FetchInformation;
+import logic.IDGetterSetter;
 
 import java.util.Objects;
 
-public class Borrower implements FetchInformation {
+public class Borrower implements IDGetterSetter, FetchInformation {
     private int id;
     private String name;
     private String homePhoneNumber;

@@ -15,7 +15,7 @@ class LoanWriterTest {
             "30011200300", "Since"), "2020-09-20");
     @Test
     void writesToCSVTest() throws IOException {
-        WriteCSV loanWriter = new LoanWriter(testLoan2);
+        WriteCSV loanWriter = new LoanWriter(testLoan, testLoan2);
         loanWriter.write();
     }
 

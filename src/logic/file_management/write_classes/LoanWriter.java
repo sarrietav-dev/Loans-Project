@@ -1,5 +1,6 @@
 package logic.file_management.write_classes;
 
+import logic.FetchInformation;
 import logic.file_management.IdentificationManagerCSV;
 import logic.file_management.ReadCSV;
 import logic.file_management.WriteCSV;
@@ -13,15 +14,17 @@ import java.io.IOException;
 
 public class LoanWriter extends WriteCSV implements IdentificationManagerCSV {
     FileWriter writer;
+    private static final int LOAN_INFO = 0;
     private static final int BORROWER = 1;
 
-    public LoanWriter(Loan loan) throws IOException {
-        super(loan);
+    public LoanWriter(Loan... loans) throws IOException {
+        super(loans);
 
         File PATH = new File(PARENT_FOLDER_PATH.getPath() + File.separator + "loans.csv");
         writer = new FileWriter(PATH, APPEND);
 
-        loan.setID(writeID());
+        for (Loan loanItem : loans)
+            loanItem.setID(writeID());
     }
 
     @Override
@@ -43,14 +46,15 @@ public class LoanWriter extends WriteCSV implements IdentificationManagerCSV {
     }
 
     private void writeLoan() throws IOException {
-        writer.write(getCSVRow());
+        for (FetchInformation loans : objects)
+            writer.write(getCSVRow(loans));
         writer.close();
     }
 
     @Override
-    protected String getCSVRow() {
-        Object[] objects = object.getInfo();
-        String[] info = (String[]) objects[0];
+    protected String getCSVRow(FetchInformation loan) {
+        Object[] objects = loan.getInfo();
+        String[] info = (String[]) objects[LOAN_INFO];
 
         StringBuilder csvRow = new StringBuilder();
         for (String data : info)
@@ -62,7 +66,9 @@ public class LoanWriter extends WriteCSV implements IdentificationManagerCSV {
     }
 
     private void writeBorrower() throws IOException {
-        WriteCSV borrowerWriter = new BorrowerWriter((Borrower) object.getInfo()[BORROWER]);
-        borrowerWriter.write();
+        for (FetchInformation loan : objects) {
+            WriteCSV borrowerWriter = new BorrowerWriter((Borrower) loan.getInfo()[BORROWER]);
+            borrowerWriter.write();
+        }
     }
 }
