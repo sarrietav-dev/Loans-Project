@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class WriteCSV {
-    protected FetchInformation[] objectsRecieve;
+    protected FetchInformation[] objects;
     protected File PARENT_FOLDER_PATH = new File("data" + File.separator);
     protected final boolean APPEND = true;
 
