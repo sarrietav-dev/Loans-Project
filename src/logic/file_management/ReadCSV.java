@@ -6,7 +6,7 @@ import java.io.IOException;
 public abstract class ReadCSV {
     protected File PARENT_FOLDER_PATH = new File("data");
 
-    public abstract String[][] getAllData() throws IOException;
+    public abstract String[][] getAllRawData() throws IOException;
 
     public abstract boolean doesIDExist(int id) throws IOException;
 

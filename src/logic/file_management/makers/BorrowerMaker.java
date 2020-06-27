@@ -3,6 +3,9 @@ package logic.file_management.makers;
 import logic.file_management.Maker;
 import logic.loan_classes.Borrower;
 
+/**
+ * The class helps making a {@link Borrower} from a data string.
+ */
 public class BorrowerMaker extends Maker {
 
     private final static int ID = 0;
@@ -15,6 +18,10 @@ public class BorrowerMaker extends Maker {
         super(info);
     }
 
+    /**
+     * Makes the data to a {@link Borrower} object.
+     * @return A {@link Borrower} from the given string.
+     */
     @Override
     public Borrower make() {
         return new Borrower(getID(), getName(), getHomePhoneNumber(), getCellphoneNumber(), getAddress());

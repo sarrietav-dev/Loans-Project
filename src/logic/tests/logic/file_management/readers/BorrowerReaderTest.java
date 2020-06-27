@@ -10,7 +10,7 @@ class BorrowerReaderTest {
     @Test
     void getAllDataTest() throws IOException {
         ReadCSV borrowerReader = new BorrowerReader();
-        String[][] strings = borrowerReader.getAllData();
+        String[][] strings = borrowerReader.getAllRawData();
         for (String[] dataPack : strings) {
             for (String data : dataPack)
                 System.out.print(data + ", ");

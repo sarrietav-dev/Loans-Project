@@ -37,6 +37,10 @@ public class Borrower implements IDGetterSetter, FetchInformation {
         this.address = address;
     }
 
+    /**
+     * Returns
+     * @return
+     */
     public String[] getInfo() {
         return new String[] {
                 String.valueOf(id),

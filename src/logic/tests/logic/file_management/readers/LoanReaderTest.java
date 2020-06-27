@@ -1,6 +1,6 @@
 package logic.file_management.readers;
 
-import logic.file_management.FilteredSearch;
+import logic.file_management.Filter;
 import logic.loan_classes.Loan;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ class LoanReaderTest {
 
     @Test
     void getAllDataTest() throws IOException {
-        String[][] strings = loanReader.getAllData();
+        String[][] strings = loanReader.getAllRawData();
         for (String[] dataPack : strings) {
             for (String data : dataPack)
                 System.out.print(data + ", ");
@@ -29,8 +29,8 @@ class LoanReaderTest {
 
     @Test
     void getFilteredLoans() throws IOException {
-        FilteredSearch search = new LoanReader();
-        for (Loan loan : search.search(1002244364, FilteredSearch.BORROWER))
+        Filter search = new LoanReader();
+        for (Loan loan : search.searchByBorrower(1002244364))
             System.out.println(loan);
     }
 
