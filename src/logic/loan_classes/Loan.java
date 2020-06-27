@@ -3,9 +3,10 @@ package logic.loan_classes;
 import logic.FetchInformation;
 import logic.IDGetterSetter;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Loan implements IDGetterSetter, FetchInformation {
+public class Loan implements IDGetterSetter, FetchInformation, Serializable {
     private int loanNumber;
     private double amount;
     private final Borrower borrower;
