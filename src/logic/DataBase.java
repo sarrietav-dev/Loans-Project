@@ -23,13 +23,20 @@ public class DataBase {
     }
 
     private void load() throws IOException, ClassNotFoundException {
-        FileInputStream fileInputStream = new FileInputStream(PATH);
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        try {
+            FileInputStream fileInputStream = new FileInputStream(PATH);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
-        data = (HashMap<Borrower, ArrayList<Loan>>) objectInputStream.readObject();
+            data = (HashMap<Borrower, ArrayList<Loan>>) objectInputStream.readObject();
 
-        objectInputStream.close();
-        fileInputStream.close();
+            objectInputStream.close();
+            fileInputStream.close();
+        }
+        catch (EOFException e) {
+            updateData(new HashMap<>());
+            load();
+        }
+
     }
 
     public HashMap<Borrower, ArrayList<Loan>> getData() {

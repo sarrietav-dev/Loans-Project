@@ -20,12 +20,4 @@ public class ReadBorrower extends CRUD {
         return false;
     }
 
-    public static boolean hasThisLoan(final int ID) {
-        Set<Map.Entry<Borrower, ArrayList<Loan>>> entrySet = dataBase.getData().entrySet();
-        for (Map.Entry<Borrower, ArrayList<Loan>> entry : entrySet)
-            for (Loan loan : entry.getValue())
-                if (loan.getLoanNumber() == ID)
-                    return true;
-        return false;
-    }
 }

@@ -11,9 +11,15 @@ import java.util.HashMap;
 import static logic.file_management.borrower_crud.ReadBorrower.doesBorrowerExists;
 
 public class CreateBorrower extends CRUD {
-    public static void create(Borrower borrower) throws IOException, ClassNotFoundException {
+    public static void create(Borrower borrower) throws IOException {
         if (!doesBorrowerExists(borrower))
             createBorrower(borrower);
+    }
+
+    public static void create(Borrower... borrowers) throws IOException {
+        for (Borrower borrower : borrowers)
+            if (!doesBorrowerExists(borrower))
+                createBorrower(borrower);
     }
 
     private static void createBorrower(Borrower borrower) throws IOException {

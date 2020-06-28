@@ -6,10 +6,15 @@ import java.util.Objects;
 public class Loan implements Serializable {
     private int loanNumber;
     private double amount;
-    private final Borrower borrower;
+    private Borrower borrower;
     private final Dates dates;
     private boolean isPaid = false;
-    private final double installmentsPrice;
+    private double installmentsPrice;
+
+    public Loan(double amount, String authDate) {
+        this.amount = amount;
+        dates = new Dates(authDate);
+    }
 
     public Loan(double amount, Borrower borrower, String authDate) {
         setAmount(amount);
@@ -18,7 +23,7 @@ public class Loan implements Serializable {
         installmentsPrice = amount / 6;
     }
 
-    public Loan(int loanNumber, double amount, Borrower borrower, Dates dates, boolean isPaid) {
+    private Loan(int loanNumber, double amount, Borrower borrower, Dates dates, boolean isPaid) {
         this.loanNumber = loanNumber;
         setAmount(amount);
         this.borrower = borrower;
@@ -36,6 +41,10 @@ public class Loan implements Serializable {
 
     public Borrower getBorrower() {
         return borrower;
+    }
+
+    public void setBorrower(Borrower borrower) {
+        this.borrower = borrower;
     }
 
     public int getLoanNumber() {
@@ -63,7 +72,7 @@ public class Loan implements Serializable {
         return "Loan{" +
                 "loanNumber=" + loanNumber +
                 ", amount=" + amount +
-                ", borrower=" + borrower.toString() +
+                (borrower == null ? "NULL" : ", borrower=" + borrower.toString()) +
                 ", dates=" + dates.toString() +
                 ", isPaid=" + isPaid +
                 '}';
