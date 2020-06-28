@@ -1,33 +1,38 @@
 package logic.loan_classes;
 
-import logic.FetchInformation;
-import logic.IDGetterSetter;
 import logic.exceptions.DateOutOfLimitException;
 
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Objects;
+import java.util.HashMap;
 
-public class Dates implements IDGetterSetter, FetchInformation, Serializable {
-    private int ID;
+public class Dates implements Serializable {
     private Calendar authorizationDate;
     private Calendar deliveryDate;
-    private final Calendar[] paymentDates = new Calendar[]{
-            Calendar.getInstance(),
-            Calendar.getInstance(),
-            Calendar.getInstance(),
-            Calendar.getInstance(),
-            Calendar.getInstance(),
-            Calendar.getInstance()
+    private HashMap<Calendar, PaymentStatus> paymentDates = new HashMap<>() {
+        {
+            put(Calendar.getInstance(), new PaymentStatus());
+            put(Calendar.getInstance(), new PaymentStatus());
+            put(Calendar.getInstance(), new PaymentStatus());
+            put(Calendar.getInstance(), new PaymentStatus());
+            put(Calendar.getInstance(), new PaymentStatus());
+            put(Calendar.getInstance(), new PaymentStatus());
+        }
     };
 
     public Dates(String date) {
         setAuthorizationDate(date);
         setDeliveryDate();
         setPaymentDates();
+    }
+
+    public boolean arePaymentsPaid() {
+        for (PaymentStatus status : paymentDates.values())
+            if (!status.isPaid())
+                return false;
+        return true;
     }
 
     private void setAuthorizationDate(String authorizationDate) {
@@ -50,60 +55,11 @@ public class Dates implements IDGetterSetter, FetchInformation, Serializable {
 
     private void setPaymentDates() {
         int days = 30;
-        for (Calendar paymentDate : paymentDates) {
+        for (Calendar paymentDate : paymentDates.keySet()) {
             paymentDate.setTime(deliveryDate.getTime());
             paymentDate.add(Calendar.DATE, days);
             days += 30;
         }
-    }
-
-    public String[] getInfo() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return new String[] {
-                String.valueOf(ID),
-                dateFormat.format(authorizationDate.getTime()),
-        };
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Dates dates = (Dates) o;
-        return ID == dates.ID &&
-                authorizationDate.equals(dates.authorizationDate) &&
-                deliveryDate.equals(dates.deliveryDate) &&
-                Arrays.equals(paymentDates, dates.paymentDates);
-    }
-
-    @Override
-    public String toString() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return "Dates{" +
-                "ID=" + ID +
-                ", authorizationDate=" + dateFormat.format(authorizationDate.getTime()) +
-                ", deliveryDate=" + dateFormat.format(deliveryDate.getTime()) +
-                ", paymentDates=" + Arrays.toString(getPaymentDatesFormatted()) +
-                '}';
-    }
-
-    private String[] getPaymentDatesFormatted() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return new String[] {
-                dateFormat.format(paymentDates[0].getTime()),
-                dateFormat.format(paymentDates[1].getTime()),
-                dateFormat.format(paymentDates[2].getTime()),
-                dateFormat.format(paymentDates[3].getTime()),
-                dateFormat.format(paymentDates[4].getTime()),
-                dateFormat.format(paymentDates[5].getTime()),
-        };
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(ID, authorizationDate, deliveryDate);
-        result = 31 * result + Arrays.hashCode(paymentDates);
-        return result;
     }
 
     public String getAuthorizationDate() {
@@ -111,21 +67,12 @@ public class Dates implements IDGetterSetter, FetchInformation, Serializable {
         return dateFormat.format(authorizationDate.getTime());
     }
 
-    public Calendar[] getPaymentDates() {
+    public HashMap<Calendar, PaymentStatus> getPaymentDates() {
         return paymentDates;
-    }
-
-    @Override
-    public void setID(int id) {
-        this.ID = id;
     }
 
     public Calendar getDeliveryDate() {
         return deliveryDate;
     }
 
-    @Override
-    public int getID() {
-        return ID;
-    }
 }

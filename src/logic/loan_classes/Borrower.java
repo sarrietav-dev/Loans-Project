@@ -1,47 +1,34 @@
 package logic.loan_classes;
 
-import logic.FetchInformation;
-import logic.IDGetterSetter;
-
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class Borrower implements IDGetterSetter, FetchInformation, Serializable {
+public class Borrower implements Serializable {
     private int id;
     private String name;
     private String homePhoneNumber;
     private String cellphoneNumber;
     private String address;
+    private ArrayList<Loan> loans;
+    private String username;
+    private String password;
 
     public Borrower() {
 
     }
 
-    public Borrower(int id) {
-        setID(id);
-    }
-
-    public Borrower(int id, String name) {
-        setID(id);
-        this.name = name;
-    }
-
-    public Borrower(String name) {
-        this.name = name;
-    }
-
-    public Borrower(int id, String name, String homePhoneNumber, String cellphoneNumber, String address) {
-        setID(id);
+    public Borrower(String username, String password, int id, String name, String homePhoneNumber,
+                    String cellphoneNumber, String address){
+        this.id = id;
         this.name = name;
         this.homePhoneNumber = homePhoneNumber;
         this.cellphoneNumber = cellphoneNumber;
         this.address = address;
+        this.username = username;
+        this.password = password;
     }
 
-    /**
-     * Returns
-     * @return
-     */
     public String[] getInfo() {
         return new String[] {
                 String.valueOf(id),
@@ -57,11 +44,7 @@ public class Borrower implements IDGetterSetter, FetchInformation, Serializable 
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Borrower borrower = (Borrower) o;
-        return id == borrower.id &&
-                name.equals(borrower.name) &&
-                homePhoneNumber.equals(borrower.homePhoneNumber) &&
-                cellphoneNumber.equals(borrower.cellphoneNumber) &&
-                address.equals(borrower.address);
+        return id == borrower.id || username.equalsIgnoreCase(borrower.username);
     }
 
     @Override
@@ -84,13 +67,10 @@ public class Borrower implements IDGetterSetter, FetchInformation, Serializable 
         return id;
     }
 
-    @Override
-    public void setID(int id) {
-        this.id = id;
+    public String[] getDataAccess() {
+        return new String[] {
+            username, password
+        };
     }
 
-    @Override
-    public int getID() {
-        return id;
-    }
 }
