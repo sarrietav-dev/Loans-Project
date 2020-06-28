@@ -1,5 +1,4 @@
 package logic.loan_management;
 
-public class LoanManager {
-
+public class PaymentManager {
 }
