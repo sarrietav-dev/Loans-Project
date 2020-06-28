@@ -38,6 +38,14 @@ public class Loan implements Serializable {
         return borrower;
     }
 
+    public int getLoanNumber() {
+        return loanNumber;
+    }
+
+    public void setLoanNumber(int loanNumber) {
+        this.loanNumber = loanNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

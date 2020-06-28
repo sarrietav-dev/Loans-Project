@@ -1,4 +1,6 @@
 package logic.file_management.loan_crud;
 
-public interface UpdateLoan {
+import logic.file_management.CRUD;
+
+public class UpdateLoan extends CRUD {
 }

@@ -1,4 +1,6 @@
 package logic.file_management.loan_crud;
 
-public interface DeleteLoan {
+import logic.file_management.CRUD;
+
+public class DeleteLoan extends CRUD {
 }

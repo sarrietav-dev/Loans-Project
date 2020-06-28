@@ -1,5 +1,9 @@
 package logic.file_management.loan_crud;
 
-public interface CreateLoan {
-    void create();
+import logic.file_management.CRUD;
+
+public class CreateLoan extends CRUD {
+    public static void create() {
+
+    }
 }

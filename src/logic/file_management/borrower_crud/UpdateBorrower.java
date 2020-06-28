@@ -1,4 +1,6 @@
 package logic.file_management.borrower_crud;
 
-public interface UpdateBorrower {
+import logic.file_management.CRUD;
+
+public class UpdateBorrower extends CRUD {
 }
