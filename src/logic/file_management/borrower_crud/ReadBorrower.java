@@ -2,10 +2,7 @@ package logic.file_management.borrower_crud;
 
 import logic.file_management.CRUD;
 import logic.loan_classes.Borrower;
-import logic.loan_classes.Loan;
 
-import java.util.ArrayList;
-import java.util.Map;
 import java.util.Set;
 
 public class ReadBorrower extends CRUD {
@@ -19,5 +16,4 @@ public class ReadBorrower extends CRUD {
                 return true;
         return false;
     }
-
 }

@@ -22,6 +22,10 @@ public interface CalendarFormatter {
 
         return tempCalendar;
     }
+
+    static String format(Date date) {
+        return formatter.format(date);
+    }
     
     private static void checkDateCorrect(String date) {
         String[] dateSplit = date.split("-");

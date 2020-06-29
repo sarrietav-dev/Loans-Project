@@ -1,6 +1,6 @@
 package logic.file_management.borrower_crud;
 
-import logic.file_management.loan_crud.ReadLoan;
+import logic.exceptions.BorrowerAlreadyExistsException;
 import logic.loan_classes.Borrower;
 import org.junit.jupiter.api.Test;
 
@@ -21,8 +21,8 @@ class CreateBorrowerTest {
             CreateBorrower.create(tempBorrower, tempBorrower2, tempBorrower3, tempBorrower4);
             for (Borrower borrower : ReadBorrower.getAllBorrowers())
                 System.out.println(borrower);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (BorrowerAlreadyExistsException e) {
+            System.out.println("Borrower already exists!");
         }
     }
 }

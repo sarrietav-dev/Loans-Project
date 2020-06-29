@@ -12,17 +12,17 @@ public class DataBase {
     private static HashMap<Borrower, ArrayList<Loan>> data;
     private static final File PATH = new File("data" + File.separator +"data.dat");
 
-    private DataBase() throws IOException, ClassNotFoundException {
+    private DataBase() {
         load();
     }
 
-    public static DataBase getInstance() throws IOException, ClassNotFoundException {
+    public static DataBase getInstance() {
         if (dataBase == null)
             dataBase = new DataBase();
         return dataBase;
     }
 
-    private void load() throws IOException, ClassNotFoundException {
+    private void load() {
         try {
             FileInputStream fileInputStream = new FileInputStream(PATH);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
@@ -36,6 +36,9 @@ public class DataBase {
             updateData(new HashMap<>());
             load();
         }
+        catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -43,15 +46,17 @@ public class DataBase {
         return data;
     }
 
-    public void updateData(HashMap<Borrower, ArrayList<Loan>> data) throws IOException {
+    public void updateData(HashMap<Borrower, ArrayList<Loan>> data) {
         DataBase.data = data;
 
-        FileOutputStream fileOutputStream = new FileOutputStream(PATH);
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-
-        objectOutputStream.writeObject(data);
-
-        objectOutputStream.close();
-        fileOutputStream.close();
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(PATH);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(data);
+            objectOutputStream.close();
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

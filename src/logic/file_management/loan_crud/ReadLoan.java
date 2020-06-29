@@ -1,6 +1,8 @@
 package logic.file_management.loan_crud;
 
+import logic.exceptions.ObjectNotFoundException;
 import logic.file_management.CRUD;
+import logic.file_management.borrower_crud.ReadBorrower;
 import logic.loan_classes.Borrower;
 import logic.loan_classes.Loan;
 
@@ -16,5 +18,13 @@ public class ReadLoan extends CRUD {
                 if (loan.getLoanNumber() == ID)
                     return true;
         return false;
+    }
+
+    public static Loan getLoan(final int ID) {
+        for (Borrower borrower : dataBase.getData().keySet())
+            for (Loan loan : dataBase.getData().get(borrower))
+                if (loan.getLoanNumber() == ID)
+                    return loan;
+        throw new ObjectNotFoundException("There's no borrower with that Loan");
     }
 }

@@ -7,20 +7,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Map;
 
-public class Dates implements Serializable {
+public class Dates implements Serializable, PaymentMethods {
     private Calendar authorizationDate;
     private Calendar deliveryDate;
-    private HashMap<Calendar, PaymentStatus> paymentDates = new HashMap<>() {
-        {
-            put(Calendar.getInstance(), new PaymentStatus());
-            put(Calendar.getInstance(), new PaymentStatus());
-            put(Calendar.getInstance(), new PaymentStatus());
-            put(Calendar.getInstance(), new PaymentStatus());
-            put(Calendar.getInstance(), new PaymentStatus());
-            put(Calendar.getInstance(), new PaymentStatus());
-        }
-    };
+    // FIXME: 28/06/20 The keys of this HashMap appear unordered. Order them according to their month.
+    //  Don't worry about the values, all are equal.
+    private final HashMap<String, PaymentStatus> paymentDates = new HashMap<>();
 
     public Dates(String date) {
         setAuthorizationDate(date);
@@ -28,11 +22,38 @@ public class Dates implements Serializable {
         setPaymentDates();
     }
 
+    @Override
     public boolean arePaymentsPaid() {
         for (PaymentStatus status : paymentDates.values())
             if (!status.isPaid())
                 return false;
         return true;
+    }
+
+    @Override
+    public void pay() {
+        for (Map.Entry<String, PaymentStatus> entry : paymentDates.entrySet()) {
+            if (!entry.getValue().isPaid()) {
+                entry.getValue().pay();
+                if (isDelayed(entry.getKey(), entry.getValue()))
+                    entry.getValue().setDelayed(true);
+            }
+        }
+    }
+
+    @Override
+    public void pay(Calendar calendar) {
+        for (Map.Entry<String, PaymentStatus> entry : paymentDates.entrySet()) {
+            if (!entry.getValue().isPaid()) {
+                entry.getValue().pay(calendar);
+                if (isDelayed(entry.getKey(), entry.getValue()))
+                    entry.getValue().setDelayed(true);
+            }
+        }
+    }
+
+    private boolean isDelayed(String paymentDate, PaymentStatus status) {
+        return CalendarFormatter.format(paymentDate).getTime().equals(CalendarFormatter.format(status.getPaymentDate()).getTime());
     }
 
     private void setAuthorizationDate(String authorizationDate) {
@@ -55,10 +76,11 @@ public class Dates implements Serializable {
 
     private void setPaymentDates() {
         int days = 30;
-        for (Calendar paymentDate : paymentDates.keySet()) {
-            paymentDate.setTime(deliveryDate.getTime());
+        Calendar paymentDate = Calendar.getInstance();
+        paymentDate.setTime(deliveryDate.getTime());
+        for (int i = 0; i < 6; i++) {
             paymentDate.add(Calendar.DATE, days);
-            days += 30;
+            paymentDates.put(CalendarFormatter.format(paymentDate.getTime()), new PaymentStatus());
         }
     }
 
@@ -67,12 +89,27 @@ public class Dates implements Serializable {
         return dateFormat.format(authorizationDate.getTime());
     }
 
-    public HashMap<Calendar, PaymentStatus> getPaymentDates() {
-        return paymentDates;
-    }
-
     public Calendar getDeliveryDate() {
         return deliveryDate;
     }
 
+    @Override
+    public String toString() {
+        return "Dates{" +
+                "authorizationDate=" + CalendarFormatter.format(authorizationDate.getTime())  +
+                ", deliveryDate=" + CalendarFormatter.format(deliveryDate.getTime())  +
+                ", paymentDates=" + paymentDatesToString() +
+                '}';
+    }
+
+    private String paymentDatesToString() {
+        StringBuilder toString = new StringBuilder();
+        for (Map.Entry<String, PaymentStatus> entry : paymentDates.entrySet()) {
+            String tempString = String.format("%s:%s, ",
+                    entry.getKey(),
+                    entry.getValue().toString());
+            toString.append(tempString);
+        }
+        return toString.toString();
+    }
 }

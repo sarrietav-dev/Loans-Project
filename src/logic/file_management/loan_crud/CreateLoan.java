@@ -13,7 +13,7 @@ public class CreateLoan extends CRUD {
         UpdateBorrower.addLoan(loan);
     }
 
-    public static void create(Loan loan, final int BORROWER_ID) throws IOException {
+    public static void create(Loan loan, final int BORROWER_ID) {
         loan.setLoanNumber(setID());
         UpdateBorrower.addLoan(loan, BORROWER_ID);
     }

@@ -9,7 +9,6 @@ public class FilePersistence {
     public static void guardar(Object obj, String archivo){
 
         try{
-
             File f = new File(ruta +archivo);
             FileOutputStream fos = new FileOutputStream(f);
             ObjectOutputStream oos = new ObjectOutputStream(fos);

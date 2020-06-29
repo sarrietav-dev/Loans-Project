@@ -47,6 +47,10 @@ public class Loan implements Serializable {
         this.borrower = borrower;
     }
 
+    public Dates getDates() {
+        return dates;
+    }
+
     public int getLoanNumber() {
         return loanNumber;
     }

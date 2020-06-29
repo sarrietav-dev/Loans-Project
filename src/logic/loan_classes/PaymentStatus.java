@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 public class PaymentStatus implements Serializable {
     private boolean isPaid;
-    private Calendar paymentDate;
+    private String paymentDate;
     private boolean isDelayed;
 
     public PaymentStatus() {
@@ -13,18 +13,24 @@ public class PaymentStatus implements Serializable {
     }
 
     public void pay() {
-
+        isPaid = true;
+        paymentDate = CalendarFormatter.format(Calendar.getInstance().getTime());
     }
 
     public void pay(Calendar paymentDate) {
+        isPaid = true;
+        this.paymentDate = CalendarFormatter.format(paymentDate.getTime());
+    }
 
+    public void setDelayed(boolean delayed) {
+        isDelayed = delayed;
     }
 
     public boolean isPaid() {
         return isPaid;
     }
 
-    public Calendar getPaymentDate() {
+    public String getPaymentDate() {
         return paymentDate;
     }
 
@@ -36,7 +42,7 @@ public class PaymentStatus implements Serializable {
     public String toString() {
         return "PaymentStatus{" +
                 "isPaid=" + isPaid +
-                ", paymentDate=" + paymentDate +
+                ", paymentDate=" + (isPaid ? paymentDate: "NOT PAID YET") +
                 ", isDelayed=" + isDelayed +
                 '}';
     }
