@@ -9,7 +9,7 @@ public interface CalendarFormatter {
 
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-    static Calendar format(String date) {
+    static Calendar format(String date, boolean toCalendar) {
         Calendar tempCalendar = Calendar.getInstance();
 
         try {
@@ -21,6 +21,15 @@ public interface CalendarFormatter {
         }
 
         return tempCalendar;
+    }
+
+    static Date format(String date) {
+        checkDateCorrect(date);
+        try {
+            return formatter.parse(date);
+        } catch (ParseException | NullPointerException e) {
+            throw new NullPointerException("Incorrect Date.");
+        }
     }
 
     static String format(Date date) {
