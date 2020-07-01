@@ -12,14 +12,17 @@ public class ReadBorrower extends CRUD {
     }
 
     public static boolean doesBorrowerExist(Borrower borrower) {
-        return dataBase.getData().keySet().stream().anyMatch(borrower::equals);
+        return dataBase.getData().keySet().stream()
+                .anyMatch(borrower::equals);
     }
 
     public static boolean isAnyLoanDelayed(Borrower borrower) {
-        return dataBase.getData().get(borrower).stream().anyMatch(loan -> loan.getDates().isDelayed());
+        return dataBase.getData().get(borrower).stream()
+                .anyMatch(loan -> loan.getDates().isDelayed());
     }
 
     public static double totalAmountBorrowed(Borrower borrower) {
-        return dataBase.getData().get(borrower).stream().mapToDouble(Loan::getAmount).sum();
+        return dataBase.getData().get(borrower).stream()
+                .mapToDouble(Loan::getAmount).sum();
     }
 }

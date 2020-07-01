@@ -7,8 +7,12 @@ import logic.loan_classes.Loan;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import static logic.file_management.borrower_crud.ReadBorrower.isAnyLoanDelayed;
 
 public class UpdateBorrower extends CRUD {
     public static void addLoan(Loan loan) {
@@ -18,17 +22,25 @@ public class UpdateBorrower extends CRUD {
 
     public static void addLoan(Loan loan, final int BORROWER_ID) {
         HashMap<Borrower, ArrayList<Loan>> data = dataBase.getData();
-        Set<Map.Entry<Borrower, ArrayList<Loan>>> entrySet = data.entrySet();
-        for (Map.Entry<Borrower, ArrayList<Loan>> entry : entrySet) {
-            if (BORROWER_ID == entry.getKey().getId()) {
-                if (ReadBorrower.isAnyLoanDelayed(entry.getKey())) {
-                    throw new CannotAddMoreLoansException("Borrower " + entry.getKey().getName() + " has a delayed installment.");
-                } else {
-                    loan.setBorrower(entry.getKey());
-                    entry.getValue().add(loan);
-                    dataBase.updateData(data);
-                }
+        Set<Entry<Borrower, ArrayList<Loan>>> entrySet = data.entrySet();
+
+        List<Entry<Borrower, ArrayList<Loan>>> entryList = entrySet.stream()
+                .filter(entry -> BORROWER_ID == entry.getKey().getId())
+                .collect(Collectors.toList());
+
+        entryList.forEach(entry -> {
+            if (isAnyLoanDelayed(entry.getKey())) {
+                throw new CannotAddMoreLoansException("Borrower " + entry.getKey().getName() +
+                        " has a delayed installment.");
+            } else {
+                setAddLoanOperation(loan, entry);
+                dataBase.updateData(data);
             }
-        }
+        });
+    }
+
+    private static void setAddLoanOperation(Loan loan, Entry<Borrower, ArrayList<Loan>> entry) {
+        loan.setBorrower(entry.getKey());
+        entry.getValue().add(loan);
     }
 }

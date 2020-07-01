@@ -1,6 +1,5 @@
 package logic.file_management.loan_crud;
 
-import logic.DataBase;
 import logic.file_management.CRUD;
 import logic.loan_classes.Borrower;
 import logic.loan_classes.Loan;

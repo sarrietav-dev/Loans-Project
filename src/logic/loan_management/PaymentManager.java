@@ -8,7 +8,7 @@ import logic.loan_classes.PaymentMethods;
 import java.util.Date;
 
 public class PaymentManager {
-
+    // TODO: 30/06/20 Add PDF
     private static PaymentMethods loanDates;
 
     /**
@@ -46,6 +46,11 @@ public class PaymentManager {
         UpdateLoan.update(loan);
     }
 
+    /**
+     * Pays all the installments. You'll be changed 5% interest.<br/>
+     * @param LOAN_ID Within the given borrower, looks for a loan with that ID.
+     * @param DATE_OF_PAYMENT The date when the loan was paid. Every installment will be paid in that date.
+     */
     public static void payLoan(final int LOAN_ID, final Date DATE_OF_PAYMENT) {
         Loan loan = ReadLoan.getLoan(LOAN_ID);
         loanDates = loan.getDates();

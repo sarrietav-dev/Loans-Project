@@ -5,8 +5,6 @@ import logic.loan_classes.Borrower;
 import logic.loan_classes.Loan;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-
 class CreateLoanTest {
     @Test
     void createTest() {
@@ -17,8 +15,6 @@ class CreateLoanTest {
         try {
             CreateLoan.create(loan);
             CreateLoan.create(loan1, 1002244364);
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (CannotAddMoreLoansException e) {
             System.out.println(e.getMessage());
         }

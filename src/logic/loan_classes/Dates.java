@@ -2,20 +2,20 @@ package logic.loan_classes;
 
 import logic.exceptions.DateOutOfLimitException;
 import logic.exceptions.ObjectNotFoundException;
+import logic.loan_classes.setpayment_implementation.SetPayment;
+import logic.loan_classes.setpayment_implementation.SetPaymentOptions;
 
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-import static logic.loan_classes.DateSorter.dateQuickSort;
+import java.util.*;
 
 public class Dates implements Serializable, PaymentMethods {
     private Date authorizationDate;
     private Date deliveryDate;
-    private final HashMap<Date, PaymentStatus> paymentDates = new HashMap<>();
-    private Date[] orderedDates;
+    protected final HashMap<Date, PaymentStatus> paymentDates = new HashMap<>();
+    private List<Date> orderedDates;
+
+    protected Dates() {
+    }
 
     public Dates(String date) {
         setAuthorizationDate(date);
@@ -56,55 +56,34 @@ public class Dates implements Serializable, PaymentMethods {
     }
 
     private void sortDates() {
-        Date[] dates = new Date[paymentDates.keySet().size()];
-        int i = 0;
-        for (Date date : paymentDates.keySet()) {
-            dates[i] = date;
-            i++;
-        }
-        dateQuickSort(dates, 0, dates.length - 1);
-        orderedDates = dates;
+        orderedDates = Arrays.asList(new Date[6]);
+        orderedDates.addAll(paymentDates.keySet());
+        orderedDates.sort(Date::compareTo);
     }
 
     @Override
     public boolean arePaymentsPaid() {
-        for (PaymentStatus status : paymentDates.values())
-            if (status.isNotPaid())
-                return false;
-        return true;
+        return paymentDates.values().stream()
+                .noneMatch(PaymentStatus::isNotPaid);
     }
 
     @Override
     public void payAll() {
-        for (Date orderedDate : orderedDates)
-            for (Date paymentDate : paymentDates.keySet())
-                if (paymentDates.get(paymentDate).isNotPaid() && orderedDate.equals(paymentDate)) {
-                    setPaymentForPayAll(new Date(), paymentDate);
-                }
+        searchAndPay(SetPaymentOptions.PAY_ALL, new Date());
         setAllDelayedStatus(new Date());
     }
 
     @Override
     public void payAll(Date date) {
-        for (Date orderedDate : orderedDates)
-            for (Date paymentDate : paymentDates.keySet())
-                if (paymentDates.get(paymentDate).isNotPaid() && orderedDate.equals(paymentDate)) {
-                    setPaymentForPayAll(date, paymentDate);
-                }
+        searchAndPay(SetPaymentOptions.PAY_ALL, date);
         setAllDelayedStatus(date);
-    }
-
-    private void setPaymentForPayAll(Date actualPaymentDate, Date dateToBeModified) {
-        paymentDates.get(dateToBeModified).pay(actualPaymentDate);
     }
 
     private void setAllDelayedStatus(Date actualPaymentDate) {
         if (isLastPaymentDelayed(actualPaymentDate))
-            for (PaymentStatus status : paymentDates.values())
-                status.setDelayed(true);
+            paymentDates.values().forEach(status -> status.setDelayed(true));
         else
-            for (PaymentStatus status : paymentDates.values())
-                status.setDelayed(false);
+            paymentDates.values().forEach(status -> status.setDelayed(false));
     }
 
     private boolean isLastPaymentDelayed(Date actualPaymentDate) {
@@ -113,43 +92,30 @@ public class Dates implements Serializable, PaymentMethods {
 
     private Date getLastPayment() {
         for (Date paymentDate : paymentDates.keySet())
-            if (paymentDate.equals(orderedDates[5]))
+            if (paymentDate.equals(orderedDates.get(5)))
                 return paymentDate;
         throw new ObjectNotFoundException();
     }
 
     @Override
     public void pay() {
-        for (Date date : orderedDates)
-            for (Date keyDate : paymentDates.keySet())
-                if (paymentDates.get(keyDate).isNotPaid() && date.equals(keyDate)) {
-                    setPayment(keyDate, new Date());
-                    return;
-                }
+        searchAndPay(SetPaymentOptions.PAY, new Date());
     }
 
     @Override
     public void pay(Date date) {
+        searchAndPay(SetPaymentOptions.PAY, date);
+    }
+
+    private void searchAndPay(SetPaymentOptions option, Date date) {
         for (Date orderedDate : orderedDates)
             for (Date paymentDate : paymentDates.keySet())
                 if (paymentDates.get(paymentDate).isNotPaid() && orderedDate.equals(paymentDate)) {
-                    setPayment(paymentDate, date);
+                    new SetPayment(option).getSetter().pay(paymentDate, date);
+                    if (option == SetPaymentOptions.PAY)
+                        return;
                 }
-    }
 
-    private void setPayment(Date expectedPaymentDate, Date actualPaymentDate) {
-        paymentDates.get(expectedPaymentDate).pay(actualPaymentDate);
-        setDelayed(expectedPaymentDate);
-    }
-
-    private void setDelayed(Date expectedPaymentDate) {
-        if (isDelayed(expectedPaymentDate))
-            paymentDates.get(expectedPaymentDate).setDelayed(true);
-    }
-
-    private boolean isDelayed(Date expectedPaymentDate) {
-        PaymentStatus status = paymentDates.get(expectedPaymentDate);
-        return expectedPaymentDate.before(status.getPaymentDate());
     }
 
     public boolean isDelayed() {
