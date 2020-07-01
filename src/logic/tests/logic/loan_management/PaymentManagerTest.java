@@ -6,8 +6,8 @@ import logic.loan_classes.Loan;
 import org.junit.jupiter.api.Test;
 
 class PaymentManagerTest {
-    private final int LOAN_ID = 784128717 ;
-    private Loan loan = ReadLoan.getLoan(LOAN_ID);
+    private final int LOAN_ID = 1409892506;
+    private final Loan loan = ReadLoan.getLoan(LOAN_ID);
 
     @Test
     void payTest() {

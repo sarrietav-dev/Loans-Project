@@ -56,7 +56,7 @@ public class Dates implements Serializable, PaymentMethods {
     }
 
     private void sortDates() {
-        orderedDates = Arrays.asList(new Date[6]);
+        orderedDates = new ArrayList<>();
         orderedDates.addAll(paymentDates.keySet());
         orderedDates.sort(Date::compareTo);
     }
@@ -111,7 +111,7 @@ public class Dates implements Serializable, PaymentMethods {
         for (Date orderedDate : orderedDates)
             for (Date paymentDate : paymentDates.keySet())
                 if (paymentDates.get(paymentDate).isNotPaid() && orderedDate.equals(paymentDate)) {
-                    new SetPayment(option).getSetter().pay(paymentDate, date);
+                    new SetPayment(option, paymentDates).getSetter().pay(paymentDate, date);
                     if (option == SetPaymentOptions.PAY)
                         return;
                 }

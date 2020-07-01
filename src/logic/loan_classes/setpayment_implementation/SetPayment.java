@@ -1,15 +1,17 @@
 package logic.loan_classes.setpayment_implementation;
 
-import logic.loan_classes.Dates;
 import logic.loan_classes.PaymentStatus;
 
 import java.util.Date;
+import java.util.HashMap;
 
-public class SetPayment extends Dates {
+public class SetPayment {
     SetPaymentOptions option;
+    protected final HashMap<Date, PaymentStatus> paymentDates;
 
-    public SetPayment(SetPaymentOptions option) {
+    public SetPayment(SetPaymentOptions option, HashMap<Date, PaymentStatus> paymentDates) {
         this.option = option;
+        this.paymentDates = paymentDates;
     }
 
     public SetPaymentInterface getSetter() {
@@ -21,7 +23,7 @@ public class SetPayment extends Dates {
                 };
             }
             case PAY_ALL -> {
-                return (actual, toBeModified) -> paymentDates.get(toBeModified).pay(actual);
+                return (expected, actual) -> paymentDates.get(expected).pay(actual);
             }
             default -> throw new IllegalStateException("Unexpected value: " + option);
         }
