@@ -5,23 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public interface CalendarFormatter {
+public interface DateFormatter {
 
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-    static Calendar format(String date, boolean toCalendar) {
-        Calendar tempCalendar = Calendar.getInstance();
-
-        try {
-            checkDateCorrect(date);
-            Date dateParsed = formatter.parse(date);
-            tempCalendar.setTime(dateParsed);
-        } catch (NullPointerException | ParseException e) {
-            throw new NullPointerException("Incorrect Date.");
-        }
-
-        return tempCalendar;
-    }
 
     static Date format(String date) {
         checkDateCorrect(date);

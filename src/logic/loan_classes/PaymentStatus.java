@@ -1,36 +1,31 @@
 package logic.loan_classes;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 
 public class PaymentStatus implements Serializable {
     private boolean isPaid;
-    private String paymentDate;
+    private Date paymentDate;
     private boolean isDelayed;
 
     public PaymentStatus() {
         isPaid = false;
     }
 
-    public void pay() {
+    public void pay(Date paymentDate) {
         isPaid = true;
-        paymentDate = CalendarFormatter.format(Calendar.getInstance().getTime());
-    }
-
-    public void pay(Calendar paymentDate) {
-        isPaid = true;
-        this.paymentDate = CalendarFormatter.format(paymentDate.getTime());
+        this.paymentDate = paymentDate;
     }
 
     public void setDelayed(boolean delayed) {
         isDelayed = delayed;
     }
 
-    public boolean isPaid() {
-        return isPaid;
+    public boolean isNotPaid() {
+        return !isPaid;
     }
 
-    public String getPaymentDate() {
+    public Date getPaymentDate() {
         return paymentDate;
     }
 
@@ -42,7 +37,7 @@ public class PaymentStatus implements Serializable {
     public String toString() {
         return "PaymentStatus{" +
                 "isPaid=" + isPaid +
-                ", paymentDate=" + (isPaid ? paymentDate: "NOT PAID YET") +
+                ", paymentDate=" + (isPaid ? paymentDate : "NOT PAID YET") +
                 ", isDelayed=" + isDelayed +
                 '}';
     }

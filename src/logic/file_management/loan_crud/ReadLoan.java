@@ -2,7 +2,6 @@ package logic.file_management.loan_crud;
 
 import logic.exceptions.ObjectNotFoundException;
 import logic.file_management.CRUD;
-import logic.file_management.borrower_crud.ReadBorrower;
 import logic.loan_classes.Borrower;
 import logic.loan_classes.Loan;
 

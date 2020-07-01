@@ -23,6 +23,10 @@ public class Borrower implements Serializable {
         this.address = address;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public int getId() {
         return id;
     }

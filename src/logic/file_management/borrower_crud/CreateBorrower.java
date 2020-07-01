@@ -8,17 +8,17 @@ import logic.loan_classes.Loan;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static logic.file_management.borrower_crud.ReadBorrower.doesBorrowerExists;
+import static logic.file_management.borrower_crud.ReadBorrower.doesBorrowerExist;
 
 public class CreateBorrower extends CRUD {
     public static void create(Borrower borrower) {
-        if (!doesBorrowerExists(borrower))
+        if (!doesBorrowerExist(borrower))
             createBorrower(borrower);
     }
 
     public static void create(Borrower... borrowers) {
         for (Borrower borrower : borrowers)
-            if (doesBorrowerExists(borrower))
+            if (doesBorrowerExist(borrower))
                 throw new BorrowerAlreadyExistsException("That ID is Taken!");
             else
                 createBorrower(borrower);

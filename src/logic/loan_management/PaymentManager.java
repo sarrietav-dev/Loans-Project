@@ -1,22 +1,25 @@
 package logic.loan_management;
 
-import logic.DataBase;
 import logic.file_management.loan_crud.ReadLoan;
+import logic.file_management.loan_crud.UpdateLoan;
 import logic.loan_classes.Loan;
+import logic.loan_classes.PaymentMethods;
 
-import java.util.Calendar;
+import java.util.Date;
 
 public class PaymentManager {
-    DataBase dataBase = DataBase.getInstance();
+
+    private static PaymentMethods loanDates;
 
     /**
      * It pays the first unpaid installment. It takes the system date.
-     * @param BORROWER_ID Looks a borrower with that ID.
      * @param LOAN_ID Within the given borrower, looks for a loan with that ID.
      */
     public static void payInstallment(final int LOAN_ID) {
         Loan loan = ReadLoan.getLoan(LOAN_ID);
-        // TODO: 28/06/20 Call PaymentMethods pay()
+        loanDates = loan.getDates();
+        loanDates.pay();
+        UpdateLoan.update(loan);
     }
 
     /**
@@ -24,8 +27,12 @@ public class PaymentManager {
      * @param LOAN_ID Within the given borrower, looks for a loan with that ID.
      * @param DATE_OF_PAYMENT The date when the installment was paid.
      */
-    public static void payInstallment(final int LOAN_ID, final Calendar DATE_OF_PAYMENT) {
+    public static void payInstallment(final int LOAN_ID, final Date DATE_OF_PAYMENT) {
         // TODO: 28/06/20 Call PaymentMethods pay(Calendar)
+        Loan loan = ReadLoan.getLoan(LOAN_ID);
+        loanDates = loan.getDates();
+        loanDates.pay(DATE_OF_PAYMENT);
+        UpdateLoan.update(loan);
     }
 
     /**
@@ -33,6 +40,16 @@ public class PaymentManager {
      * @param LOAN_ID Within the given borrower, looks for a loan with that ID.
      */
     public static void payLoan(final int LOAN_ID) {
-        // TODO: 28/06/20 Call PaymentMethods payAll()
+        Loan loan = ReadLoan.getLoan(LOAN_ID);
+        loanDates = loan.getDates();
+        loanDates.payAll();
+        UpdateLoan.update(loan);
+    }
+
+    public static void payLoan(final int LOAN_ID, final Date DATE_OF_PAYMENT) {
+        Loan loan = ReadLoan.getLoan(LOAN_ID);
+        loanDates = loan.getDates();
+        loanDates.payAll(DATE_OF_PAYMENT);
+        UpdateLoan.update(loan);
     }
 }

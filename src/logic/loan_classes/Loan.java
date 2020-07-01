@@ -39,6 +39,10 @@ public class Loan implements Serializable {
             throw new IllegalArgumentException("Invalid amount. It should be greater than 0!");
     }
 
+    public double getAmount() {
+        return amount;
+    }
+
     public Borrower getBorrower() {
         return borrower;
     }

@@ -1,5 +1,6 @@
 package logic.file_management.borrower_crud;
 
+import logic.exceptions.CannotAddMoreLoansException;
 import logic.file_management.CRUD;
 import logic.loan_classes.Borrower;
 import logic.loan_classes.Loan;
@@ -20,10 +21,13 @@ public class UpdateBorrower extends CRUD {
         Set<Map.Entry<Borrower, ArrayList<Loan>>> entrySet = data.entrySet();
         for (Map.Entry<Borrower, ArrayList<Loan>> entry : entrySet) {
             if (BORROWER_ID == entry.getKey().getId()) {
-                loan.setBorrower(entry.getKey());
-                loan.setBorrower(entry.getKey());
-                entry.getValue().add(loan);
-                dataBase.updateData(data);
+                if (ReadBorrower.isAnyLoanDelayed(entry.getKey())) {
+                    throw new CannotAddMoreLoansException("Borrower " + entry.getKey().getName() + " has a delayed installment.");
+                } else {
+                    loan.setBorrower(entry.getKey());
+                    entry.getValue().add(loan);
+                    dataBase.updateData(data);
+                }
             }
         }
     }

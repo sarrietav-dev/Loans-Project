@@ -1,11 +1,11 @@
 package logic.loan_classes;
 
-import java.util.Calendar;
-import java.util.HashMap;
+import java.util.Date;
 
 public interface PaymentMethods {
     boolean arePaymentsPaid();
     void pay();
-    void pay(Calendar calendar);
-    // TODO: 28/06/20 Declare payAll()
+    void pay(Date date);
+    void payAll();
+    void payAll(Date date);
 }

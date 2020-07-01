@@ -36,6 +36,16 @@ public class DataBase {
             updateData(new HashMap<>());
             load();
         }
+        catch (InvalidClassException e) {
+            try {
+                PrintWriter printWriter = new PrintWriter(PATH);
+                printWriter.print("");
+                printWriter.close();
+                System.out.println("Classes incompatible. File erased. Run the test again.");
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
+        }
         catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

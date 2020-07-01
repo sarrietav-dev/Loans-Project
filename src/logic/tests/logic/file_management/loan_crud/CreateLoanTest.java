@@ -1,12 +1,11 @@
 package logic.file_management.loan_crud;
 
+import logic.exceptions.CannotAddMoreLoansException;
 import logic.loan_classes.Borrower;
 import logic.loan_classes.Loan;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CreateLoanTest {
     @Test
@@ -20,6 +19,8 @@ class CreateLoanTest {
             CreateLoan.create(loan1, 1002244364);
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (CannotAddMoreLoansException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

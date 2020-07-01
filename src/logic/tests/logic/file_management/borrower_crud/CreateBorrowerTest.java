@@ -4,8 +4,6 @@ import logic.exceptions.BorrowerAlreadyExistsException;
 import logic.loan_classes.Borrower;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-
 class CreateBorrowerTest {
     @Test
     void createBorrower() {
