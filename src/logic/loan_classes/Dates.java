@@ -1,130 +1,144 @@
 package logic.loan_classes;
 
-import logic.FetchInformation;
-import logic.IDGetterSetter;
 import logic.exceptions.DateOutOfLimitException;
+import logic.exceptions.ObjectNotFoundException;
+import logic.loan_classes.setpayment_implementation.SetPayment;
+import logic.loan_classes.setpayment_implementation.SetPaymentOptions;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Objects;
+import java.io.Serializable;
+import java.util.*;
 
-public class Dates implements IDGetterSetter, FetchInformation {
-    private int ID;
-    private Calendar authorizationDate;
-    private Calendar deliveryDate;
-    private final Calendar[] paymentDates = new Calendar[]{
-            Calendar.getInstance(),
-            Calendar.getInstance(),
-            Calendar.getInstance(),
-            Calendar.getInstance(),
-            Calendar.getInstance(),
-            Calendar.getInstance()
-    };
+public class Dates implements Serializable, PaymentMethods {
+    private Date authorizationDate;
+    private Date deliveryDate;
+    protected final HashMap<Date, PaymentStatus> paymentDates = new HashMap<>();
+    private List<Date> orderedDates;
+
+    protected Dates() {
+    }
 
     public Dates(String date) {
         setAuthorizationDate(date);
         setDeliveryDate();
         setPaymentDates();
+        sortDates();
     }
 
     private void setAuthorizationDate(String authorizationDate) {
-        Calendar authDate = CalendarFormatter.format(authorizationDate);
+        Date authDate = DateFormatter.format(authorizationDate);
         if (isAuthDateWithinLimits(authDate))
             this.authorizationDate = authDate;
         else
             throw new DateOutOfLimitException("Date out of limits! Only between the first 20 days of the month!");
     }
 
-    private boolean isAuthDateWithinLimits(Calendar tempCalendar) {
-        return tempCalendar.get(Calendar.DAY_OF_MONTH) <= 20;
+    private boolean isAuthDateWithinLimits(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.DAY_OF_MONTH) <= 20;
     }
 
     private void setDeliveryDate() {
-        deliveryDate = Calendar.getInstance();
-        deliveryDate.setTime(authorizationDate.getTime());
-        deliveryDate.add(Calendar.DATE, 7);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(authorizationDate);
+        calendar.add(Calendar.DATE, 7);
+        deliveryDate = calendar.getTime();
     }
 
     private void setPaymentDates() {
         int days = 30;
-        for (Calendar paymentDate : paymentDates) {
-            paymentDate.setTime(deliveryDate.getTime());
+        Calendar paymentDate = Calendar.getInstance();
+        paymentDate.setTime(deliveryDate);
+        for (int i = 0; i < 6; i++) {
             paymentDate.add(Calendar.DATE, days);
-            days += 30;
+            paymentDates.put(paymentDate.getTime(), new PaymentStatus());
         }
     }
 
-    public String[] getInfo() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return new String[] {
-                String.valueOf(ID),
-                dateFormat.format(authorizationDate.getTime()),
-        };
+    private void sortDates() {
+        orderedDates = new ArrayList<>();
+        orderedDates.addAll(paymentDates.keySet());
+        orderedDates.sort(Date::compareTo);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Dates dates = (Dates) o;
-        return ID == dates.ID &&
-                authorizationDate.equals(dates.authorizationDate) &&
-                deliveryDate.equals(dates.deliveryDate) &&
-                Arrays.equals(paymentDates, dates.paymentDates);
+    public boolean arePaymentsPaid() {
+        return paymentDates.values().stream()
+                .noneMatch(PaymentStatus::isNotPaid);
+    }
+
+    @Override
+    public void payAll() {
+        searchAndPay(SetPaymentOptions.PAY_ALL, new Date());
+        setAllDelayedStatus(new Date());
+    }
+
+    @Override
+    public void payAll(Date date) {
+        searchAndPay(SetPaymentOptions.PAY_ALL, date);
+        setAllDelayedStatus(date);
+    }
+
+    private void setAllDelayedStatus(Date actualPaymentDate) {
+        if (isLastPaymentDelayed(actualPaymentDate))
+            paymentDates.values().forEach(status -> status.setDelayed(true));
+        else
+            paymentDates.values().forEach(status -> status.setDelayed(false));
+    }
+
+    private boolean isLastPaymentDelayed(Date actualPaymentDate) {
+        return getLastPayment().before(actualPaymentDate);
+    }
+
+    private Date getLastPayment() {
+        for (Date paymentDate : paymentDates.keySet())
+            if (paymentDate.equals(orderedDates.get(5)))
+                return paymentDate;
+        throw new ObjectNotFoundException();
+    }
+
+    @Override
+    public void pay() {
+        searchAndPay(SetPaymentOptions.PAY, new Date());
+    }
+
+    @Override
+    public void pay(Date date) {
+        searchAndPay(SetPaymentOptions.PAY, date);
+    }
+
+    private void searchAndPay(SetPaymentOptions option, Date date) {
+        for (Date orderedDate : orderedDates)
+            for (Date paymentDate : paymentDates.keySet())
+                if (paymentDates.get(paymentDate).isNotPaid() && orderedDate.equals(paymentDate)) {
+                    new SetPayment(option, paymentDates).getSetter().pay(paymentDate, date);
+                    if (option == SetPaymentOptions.PAY)
+                        return;
+                }
+
+    }
+
+    public boolean isDelayed() {
+        return paymentDates.values().stream().anyMatch(PaymentStatus::isDelayed);
     }
 
     @Override
     public String toString() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return "Dates{" +
-                "ID=" + ID +
-                ", authorizationDate=" + dateFormat.format(authorizationDate.getTime()) +
-                ", deliveryDate=" + dateFormat.format(deliveryDate.getTime()) +
-                ", paymentDates=" + Arrays.toString(getPaymentDatesFormatted()) +
+                "authorizationDate=" + DateFormatter.format(authorizationDate)  +
+                ", deliveryDate=" + DateFormatter.format(deliveryDate)  +
+                ", paymentDates=" + paymentDatesToString() +
                 '}';
     }
 
-    private String[] getPaymentDatesFormatted() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return new String[] {
-                dateFormat.format(paymentDates[0].getTime()),
-                dateFormat.format(paymentDates[1].getTime()),
-                dateFormat.format(paymentDates[2].getTime()),
-                dateFormat.format(paymentDates[3].getTime()),
-                dateFormat.format(paymentDates[4].getTime()),
-                dateFormat.format(paymentDates[5].getTime()),
-        };
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(ID, authorizationDate, deliveryDate);
-        result = 31 * result + Arrays.hashCode(paymentDates);
-        return result;
-    }
-
-    public String getAuthorizationDate() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return dateFormat.format(authorizationDate.getTime());
-    }
-
-    public Calendar[] getPaymentDates() {
-        return paymentDates;
-    }
-
-    @Override
-    public void setID(int id) {
-        this.ID = id;
-    }
-
-    public Calendar getDeliveryDate() {
-        return deliveryDate;
-    }
-
-    @Override
-    public int getID() {
-        return ID;
+    private String paymentDatesToString() {
+        StringBuilder toString = new StringBuilder();
+        for (Map.Entry<Date, PaymentStatus> entry : paymentDates.entrySet()) {
+            String tempString = String.format("%s:%s, ",
+                    entry.getKey(),
+                    entry.getValue().toString());
+            toString.append(tempString);
+        }
+        return toString.toString();
     }
 }

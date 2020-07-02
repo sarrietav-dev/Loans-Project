@@ -2,25 +2,23 @@ package logic.loan_classes;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
-public interface CalendarFormatter {
+public interface DateFormatter {
 
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-    static Calendar format(String date) {
-        Calendar tempCalendar = Calendar.getInstance();
-
+    static Date format(String date) {
+        checkDateCorrect(date);
         try {
-            checkDateCorrect(date);
-            Date dateParsed = formatter.parse(date);
-            tempCalendar.setTime(dateParsed);
-        } catch (NullPointerException | ParseException e) {
+            return formatter.parse(date);
+        } catch (ParseException | NullPointerException e) {
             throw new NullPointerException("Incorrect Date.");
         }
+    }
 
-        return tempCalendar;
+    static String format(Date date) {
+        return formatter.format(date);
     }
     
     private static void checkDateCorrect(String date) {

@@ -1,11 +1,9 @@
 package logic.loan_classes;
 
-import logic.FetchInformation;
-import logic.IDGetterSetter;
-
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Borrower implements IDGetterSetter, FetchInformation {
+public class Borrower implements Serializable {
     private int id;
     private String name;
     private String homePhoneNumber;
@@ -16,39 +14,21 @@ public class Borrower implements IDGetterSetter, FetchInformation {
 
     }
 
-    public Borrower(int id) {
-        setID(id);
-    }
-
-    public Borrower(int id, String name) {
-        setID(id);
-        this.name = name;
-    }
-
-    public Borrower(String name) {
-        this.name = name;
-    }
-
-    public Borrower(int id, String name, String homePhoneNumber, String cellphoneNumber, String address) {
-        setID(id);
+    public Borrower(int id, String name, String homePhoneNumber,
+                    String cellphoneNumber, String address){
+        this.id = id;
         this.name = name;
         this.homePhoneNumber = homePhoneNumber;
         this.cellphoneNumber = cellphoneNumber;
         this.address = address;
     }
 
-    /**
-     * Returns
-     * @return
-     */
-    public String[] getInfo() {
-        return new String[] {
-                String.valueOf(id),
-                name,
-                homePhoneNumber,
-                cellphoneNumber,
-                address
-        };
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override
@@ -56,11 +36,7 @@ public class Borrower implements IDGetterSetter, FetchInformation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Borrower borrower = (Borrower) o;
-        return id == borrower.id &&
-                name.equals(borrower.name) &&
-                homePhoneNumber.equals(borrower.homePhoneNumber) &&
-                cellphoneNumber.equals(borrower.cellphoneNumber) &&
-                address.equals(borrower.address);
+        return id == borrower.id;
     }
 
     @Override
@@ -79,17 +55,4 @@ public class Borrower implements IDGetterSetter, FetchInformation {
         return Objects.hash(id, name, homePhoneNumber, cellphoneNumber, address);
     }
 
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setID(int id) {
-        this.id = id;
-    }
-
-    @Override
-    public int getID() {
-        return id;
-    }
 }
