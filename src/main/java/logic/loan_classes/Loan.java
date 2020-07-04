@@ -1,7 +1,6 @@
 package logic.loan_classes;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 public class Loan implements Serializable {
     private int loanNumber;
@@ -9,7 +8,8 @@ public class Loan implements Serializable {
     private Borrower borrower;
     private final Dates dates;
     private boolean isPaid = false;
-    private double installmentsPrice;
+    private double capital;
+    private double interestCollected;
 
     public Loan(double amount, String authDate) {
         this.amount = amount;
@@ -20,16 +20,6 @@ public class Loan implements Serializable {
         setAmount(amount);
         dates = new Dates(authDate);
         this.borrower = borrower;
-        installmentsPrice = amount / 6;
-    }
-
-    private Loan(int loanNumber, double amount, Borrower borrower, Dates dates, boolean isPaid) {
-        this.loanNumber = loanNumber;
-        setAmount(amount);
-        this.borrower = borrower;
-        this.dates = dates;
-        this.isPaid = isPaid;
-        installmentsPrice = amount / 6;
     }
 
     private void setAmount(double amount) {
@@ -63,16 +53,50 @@ public class Loan implements Serializable {
         this.loanNumber = loanNumber;
     }
 
+    public double getInstallmentsPrice() {
+        return amount / 6;
+    }
+
+    public void sumToInterests(double amount) {
+        interestCollected += amount;
+    }
+
+    public void sumToCapital(double amount) {
+        capital += amount;
+        setPaid();
+    }
+
+    public boolean isPaid() {
+        return isPaid;
+    }
+
+    public void setPaid() {
+        if (capital == amount)
+            isPaid = true;
+    }
+
+    public double getCapital() {
+        return capital;
+    }
+
+    public void setCapital(double capital) {
+        this.capital = capital;
+    }
+
+    public double getInterestCollected() {
+        return interestCollected;
+    }
+
+    public void setInterestCollected(double interestCollected) {
+        this.interestCollected = interestCollected;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Loan loan = (Loan) o;
-        return loanNumber == loan.loanNumber &&
-                Double.compare(loan.amount, amount) == 0 &&
-                isPaid == loan.isPaid &&
-                borrower.equals(loan.borrower) &&
-                dates.equals(loan.dates);
+        return loanNumber == loan.loanNumber;
     }
 
     @Override
@@ -84,10 +108,5 @@ public class Loan implements Serializable {
                 ", dates=" + dates.toString() +
                 ", isPaid=" + isPaid +
                 '}';
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(loanNumber, amount, borrower, dates, isPaid);
     }
 }

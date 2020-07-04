@@ -6,20 +6,19 @@ import java.util.Objects;
 public class Borrower implements Serializable {
     private int id;
     private String name;
-    private String homePhoneNumber;
-    private String cellphoneNumber;
+    private String homePhone;
+    private String mobilePhone;
     private String address;
 
     public Borrower() {
 
     }
 
-    public Borrower(int id, String name, String homePhoneNumber,
-                    String cellphoneNumber, String address){
+    public Borrower(int id, String name, String homePhone, String mobilePhone, String address){
         this.id = id;
         this.name = name;
-        this.homePhoneNumber = homePhoneNumber;
-        this.cellphoneNumber = cellphoneNumber;
+        this.homePhone = homePhone;
+        this.mobilePhone = mobilePhone;
         this.address = address;
     }
 
@@ -44,15 +43,15 @@ public class Borrower implements Serializable {
         return "Borrower{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", homePhoneNumber='" + homePhoneNumber + '\'' +
-                ", cellphoneNumber='" + cellphoneNumber + '\'' +
+                ", homePhoneNumber='" + homePhone + '\'' +
+                ", cellphoneNumber='" + mobilePhone + '\'' +
                 ", address='" + address + '\'' +
                 '}';
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, homePhoneNumber, cellphoneNumber, address);
+        return Objects.hash(id, name, homePhone, mobilePhone, address);
     }
 
 }

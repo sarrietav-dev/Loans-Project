@@ -1,15 +1,14 @@
 package logic.loan_management;
 
 import logic.file_management.loan_crud.ReadLoan;
-import logic.file_management.loan_crud.UpdateLoan;
 import logic.loan_classes.Loan;
-import logic.loan_classes.PaymentMethods;
+import logic.loan_classes.PaymentManager;
 
 import java.util.Date;
 
-public class PaymentManager {
+public class PaymentMethods {
     // TODO: 30/06/20 Add PDF
-    private static PaymentMethods loanDates;
+    private static PaymentManager paymentManager;
 
     /**
      * It pays the first unpaid installment. It takes the system date.
@@ -17,9 +16,9 @@ public class PaymentManager {
      */
     public static void payInstallment(final int LOAN_ID) {
         Loan loan = ReadLoan.getLoan(LOAN_ID);
-        loanDates = loan.getDates();
-        loanDates.pay();
-        UpdateLoan.update(loan);
+        paymentManager = new PaymentManager(loan, new Date());
+        paymentManager.pay();
+        // TODO: 4/07/20 Add Receipt
     }
 
     /**
@@ -28,11 +27,10 @@ public class PaymentManager {
      * @param DATE_OF_PAYMENT The date when the installment was paid.
      */
     public static void payInstallment(final int LOAN_ID, final Date DATE_OF_PAYMENT) {
-        // TODO: 28/06/20 Call PaymentMethods pay(Calendar)
         Loan loan = ReadLoan.getLoan(LOAN_ID);
-        loanDates = loan.getDates();
-        loanDates.pay(DATE_OF_PAYMENT);
-        UpdateLoan.update(loan);
+        paymentManager = new PaymentManager(loan, DATE_OF_PAYMENT);
+        paymentManager.pay();
+        // TODO: 4/07/20 Add Receipt
     }
 
     /**
@@ -41,9 +39,9 @@ public class PaymentManager {
      */
     public static void payLoan(final int LOAN_ID) {
         Loan loan = ReadLoan.getLoan(LOAN_ID);
-        loanDates = loan.getDates();
-        loanDates.payAll();
-        UpdateLoan.update(loan);
+        paymentManager = new PaymentManager(loan, new Date());
+        paymentManager.payAll();
+        // TODO: 4/07/20 Add Receipt
     }
 
     /**
@@ -53,8 +51,8 @@ public class PaymentManager {
      */
     public static void payLoan(final int LOAN_ID, final Date DATE_OF_PAYMENT) {
         Loan loan = ReadLoan.getLoan(LOAN_ID);
-        loanDates = loan.getDates();
-        loanDates.payAll(DATE_OF_PAYMENT);
-        UpdateLoan.update(loan);
+        paymentManager = new PaymentManager(loan, DATE_OF_PAYMENT);
+        paymentManager.payAll();
+        // TODO: 4/07/20 Add Receipt
     }
 }
