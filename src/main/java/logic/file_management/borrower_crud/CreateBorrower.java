@@ -29,6 +29,6 @@ public class CreateBorrower extends CRUD {
     private static void createBorrower(Borrower borrower) {
         HashMap<Borrower, ArrayList<Loan>> data = dataBase.getData();
         data.put(borrower, new ArrayList<>());
-        dataBase.updateData(data);
+        dataBase.updateDataList(data);
     }
 }

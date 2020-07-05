@@ -33,9 +33,13 @@ public class UpdateBorrower extends CRUD {
                 // TODO: 4/07/20 Change this to search if any non-paid installment is late from today's date.
                 throw new CannotAddMoreLoansException("Borrower " + entry.getKey().getName() +
                         " has a delayed installment.");
-            } else {
+            } else if (ReadBorrower.totalAmountBorrowed(entry.getKey()) > dataBase.getMaximumToLendPerBorrower()) {
+                throw new CannotAddMoreLoansException("Borrower " + entry.getKey().getName() +
+                        " has exceeded the limit of borrowed money");
+            }
+            else {
                 setAddLoanOperation(loan, entry);
-                dataBase.updateData(data);
+                dataBase.updateDataList(data);
             }
         });
     }
