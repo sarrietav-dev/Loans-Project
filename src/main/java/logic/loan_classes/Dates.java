@@ -10,9 +10,6 @@ public class Dates implements Serializable {
     private Date deliveryDate;
     protected final HashMap<Date, PaymentStatus> paymentDates = new HashMap<>();
 
-    protected Dates() {
-    }
-
     public Dates(String date) {
         setAuthorizationDate(date);
         setDeliveryDate();

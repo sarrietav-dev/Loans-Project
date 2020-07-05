@@ -17,10 +17,6 @@ public class PaymentStatus implements Serializable {
         this.paymentDate = paymentDate;
     }
 
-    public void setDelayed(boolean delayed) {
-        isDelayed = delayed;
-    }
-
     public boolean isNotPaid() {
         return !isPaid;
     }

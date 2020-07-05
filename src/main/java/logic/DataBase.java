@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DataBase {
+    // TODO: 4/07/20 Add someway to manage the maximum amount to lend
     private static DataBase dataBase;
     private static HashMap<Borrower, ArrayList<Loan>> data;
     private static final File PATH = new File("data" + File.separator +"data.dat");

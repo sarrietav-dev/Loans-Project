@@ -79,16 +79,8 @@ public class Loan implements Serializable {
         return capital;
     }
 
-    public void setCapital(double capital) {
-        this.capital = capital;
-    }
-
     public double getInterestCollected() {
         return interestCollected;
-    }
-
-    public void setInterestCollected(double interestCollected) {
-        this.interestCollected = interestCollected;
     }
 
     @Override
@@ -105,8 +97,11 @@ public class Loan implements Serializable {
                 "loanNumber=" + loanNumber +
                 ", amount=" + amount +
                 (borrower == null ? "NULL" : ", borrower=" + borrower.toString()) +
-                ", dates=" + dates.toString() +
+                ", dates=" + dates +
                 ", isPaid=" + isPaid +
+                ", capital=" + capital +
+                ", interestCollected=" + interestCollected +
                 '}';
     }
+
 }

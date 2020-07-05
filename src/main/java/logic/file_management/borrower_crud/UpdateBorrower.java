@@ -30,6 +30,7 @@ public class UpdateBorrower extends CRUD {
 
         entryList.forEach(entry -> {
             if (isAnyLoanDelayed(entry.getKey())) {
+                // TODO: 4/07/20 Change this to search if any non-paid installment is late from today's date.
                 throw new CannotAddMoreLoansException("Borrower " + entry.getKey().getName() +
                         " has a delayed installment.");
             } else {
