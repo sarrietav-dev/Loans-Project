@@ -12,7 +12,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static logic.file_management.borrower_crud.ReadBorrower.isAnyLoanDelayed;
+import static logic.file_management.borrower_crud.ReadBorrower.hasAnyLoanDelayed;
 
 public class UpdateBorrower extends CRUD {
     public static void addLoan(Loan loan) {
@@ -29,8 +29,7 @@ public class UpdateBorrower extends CRUD {
                 .collect(Collectors.toList());
 
         entryList.forEach(entry -> {
-            if (isAnyLoanDelayed(entry.getKey())) {
-                // TODO: 4/07/20 Change this to search if any non-paid installment is late from today's date.
+            if (hasAnyLoanDelayed(entry.getKey())) {
                 throw new CannotAddMoreLoansException("Borrower " + entry.getKey().getName() +
                         " has a delayed installment.");
             } else if (ReadBorrower.totalAmountBorrowed(entry.getKey()) > dataBase.getMaximumToLendPerBorrower()) {

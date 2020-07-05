@@ -21,41 +21,13 @@ public class PaymentManager {
         setInstallmentPaid();
     }
 
-    private double getInterests() {
-        if (isDelayed()) {
-            long daysDelayed = (getLastNotPaidDate().getTime() - paymentDate.getTime()) / (1000*60*60*24);
-            return loan.getInstallmentsPrice() * ((daysDelayed * .05) + .15);
-        }
-        else
-            return loan.getInstallmentsPrice() * .15;
-    }
-
-    private boolean isDelayed() {
-        return getLastNotPaidDate().before(paymentDate);
-    }
-
     private void setInstallmentPaid() {
         loanDates.getPaymentDates().get(getLastNotPaidDate()).pay(paymentDate);
-    }
-
-    private Date getLastNotPaidDate() {
-        for (Date paymentDate : loanDates.getDatesSorted())
-            if (loanDates.getPaymentDates().get(paymentDate).isNotPaid())
-                return paymentDate;
-        throw new NullPointerException();
     }
 
     public void payAll() {
         getDistributeMoney(DISTRIBUTE_MONEY_OPTION.PAY_ALL).distributeMoney();
         setAllInstallmentsPaid();
-    }
-
-    private int getNotPaidInstallments() {
-        int notPaidInstallmentsCounter = 0;
-        for (Date paymentDate : loanDates.getDatesSorted())
-            if (loanDates.getPaymentDates().get(paymentDate).isNotPaid())
-                notPaidInstallmentsCounter++;
-        return notPaidInstallmentsCounter;
     }
 
     private void setAllInstallmentsPaid() {
@@ -81,8 +53,8 @@ public class PaymentManager {
                     moneyToInterests = interests;
                     moneyToCapital = loan.getInstallmentsPrice() - interests;
 
-                    loan.sumToInterests(moneyToInterests);
                     loan.sumToCapital(moneyToCapital);
+                    loan.sumToInterests(moneyToInterests);
                 };
             }
             case PAY_ALL -> {
@@ -98,6 +70,34 @@ public class PaymentManager {
             }
             default -> throw new IllegalStateException("Unexpected value: " + option);
         }
+    }
+
+    private double getInterests() {
+        if (isDelayed()) {
+            long daysDelayed = (getLastNotPaidDate().getTime() - paymentDate.getTime()) / (1000*60*60*24);
+            return loan.getBalance() * ((daysDelayed * .05) + .15);
+        }
+        else
+            return loan.getBalance() * .15;
+    }
+
+    private boolean isDelayed() {
+        return getLastNotPaidDate().before(paymentDate);
+    }
+
+    private Date getLastNotPaidDate() {
+        for (Date paymentDate : loanDates.getDatesSorted())
+            if (loanDates.getPaymentDates().get(paymentDate).isNotPaid())
+                return paymentDate;
+        throw new NullPointerException();
+    }
+
+    private int getNotPaidInstallments() {
+        int notPaidInstallmentsCounter = 0;
+        for (Date paymentDate : loanDates.getDatesSorted())
+            if (loanDates.getPaymentDates().get(paymentDate).isNotPaid())
+                notPaidInstallmentsCounter++;
+        return notPaidInstallmentsCounter;
     }
 
     private enum DISTRIBUTE_MONEY_OPTION {

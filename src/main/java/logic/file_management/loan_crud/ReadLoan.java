@@ -25,6 +25,6 @@ public class ReadLoan extends CRUD {
     }
 
     public static boolean isLoanDelayed(final Loan loan) {
-        return loan.getDates().isDelayed();
+        return loan.isDelayed();
     }
 }

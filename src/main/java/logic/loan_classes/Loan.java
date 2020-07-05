@@ -1,10 +1,12 @@
 package logic.loan_classes;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Loan implements Serializable {
     private int loanNumber;
     private double amount;
+    private double balance;
     private Borrower borrower;
     private final Dates dates;
     private boolean isPaid = false;
@@ -13,6 +15,7 @@ public class Loan implements Serializable {
 
     public Loan(double amount, String authDate) {
         this.amount = amount;
+        balance = amount;
         dates = new Dates(authDate);
     }
 
@@ -20,6 +23,7 @@ public class Loan implements Serializable {
         setAmount(amount);
         dates = new Dates(authDate);
         this.borrower = borrower;
+        balance = amount;
     }
 
     private void setAmount(double amount) {
@@ -54,7 +58,11 @@ public class Loan implements Serializable {
     }
 
     public double getInstallmentsPrice() {
-        return amount / 6;
+        final double AMOUNT_BORROWED = amount;
+        final int FINANCING_PERIOD = 6;
+        final double INTEREST_RATE = .15;
+
+        return (INTEREST_RATE * AMOUNT_BORROWED) / 1 - Math.pow(1 + INTEREST_RATE, - FINANCING_PERIOD);
     }
 
     public void sumToInterests(double amount) {
@@ -63,7 +71,21 @@ public class Loan implements Serializable {
 
     public void sumToCapital(double amount) {
         capital += amount;
+        subtractToBalance(amount);
         setPaid();
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    private void subtractToBalance(double amount) {
+        balance -= amount;
+    }
+    public boolean isDelayed() {
+        return dates.getDatesSorted().stream()
+                .filter(paymentDate -> dates.getPaymentDates().get(paymentDate).isNotPaid())
+                .anyMatch(paymentDate -> paymentDate.before(new Date()));
     }
 
     public boolean isPaid() {
