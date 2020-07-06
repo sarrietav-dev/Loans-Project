@@ -1,17 +1,18 @@
 package logic;
 
-import logic.loan_classes.Borrower;
+import logic.loan_classes.Client;
 import logic.loan_classes.Loan;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+@SuppressWarnings("unchecked")
 public class DataBase {
     private static DataBase dataBase;
-    private static HashMap<Borrower, ArrayList<Loan>> data;
+    private static HashMap<Client, ArrayList<Loan>> data;
     private static double maximumAmountToLend = 999999999;
-    private static double maximumToLendPerBorrower = 100000;
+    private static double maximumToLendPerClient = 100000;
     private static final File PATH = new File("data" + File.separator +"data.dat");
 
     private DataBase() {
@@ -24,14 +25,15 @@ public class DataBase {
         return dataBase;
     }
 
+    @SuppressWarnings("unchecked")
     private void load() {
         try {
             FileInputStream fileInputStream = new FileInputStream(PATH);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
-            data = (HashMap<Borrower, ArrayList<Loan>>) objectInputStream.readObject();
+            data = (HashMap<Client, ArrayList<Loan>>) objectInputStream.readObject();
             maximumAmountToLend = objectInputStream.readDouble();
-            maximumToLendPerBorrower = objectInputStream.readDouble();
+            maximumToLendPerClient = objectInputStream.readDouble();
 
             objectInputStream.close();
             fileInputStream.close();
@@ -56,7 +58,7 @@ public class DataBase {
 
     }
 
-    public HashMap<Borrower, ArrayList<Loan>> getData() {
+    public HashMap<Client, ArrayList<Loan>> getData() {
         return data;
     }
 
@@ -69,16 +71,16 @@ public class DataBase {
         uploadDataToTheDataBase();
     }
 
-    public double getMaximumToLendPerBorrower() {
-        return maximumToLendPerBorrower;
+    public double getMaximumToLendPerClient() {
+        return maximumToLendPerClient;
     }
 
-    public void setMaximumToLendPerBorrower(double maximumToLendPerBorrower) {
-        DataBase.maximumToLendPerBorrower = maximumToLendPerBorrower;
+    public void setMaximumToLendPerClient(double maximumToLendPerClient) {
+        DataBase.maximumToLendPerClient = maximumToLendPerClient;
         uploadDataToTheDataBase();
     }
 
-    public void updateDataList(HashMap<Borrower, ArrayList<Loan>> data) {
+    public void updateDataList(HashMap<Client, ArrayList<Loan>> data) {
         DataBase.data = data;
         uploadDataToTheDataBase();
     }
@@ -90,7 +92,7 @@ public class DataBase {
 
             objectOutputStream.writeObject(data);
             objectOutputStream.writeDouble(maximumAmountToLend);
-            objectOutputStream.writeDouble(maximumToLendPerBorrower);
+            objectOutputStream.writeDouble(maximumToLendPerClient);
 
             objectOutputStream.close();
             fileOutputStream.close();

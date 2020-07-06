@@ -20,7 +20,7 @@ public class InformationPack {
         this.collector = collector;
         this.moneyToCapital = moneyToCapital;
         this.moneyToInterests = moneyToInterests;
-        this.loanBalance = loan.getCapital();
+        this.loanBalance = loan.getBalance();
     }
 
     public Loan getLoan() {

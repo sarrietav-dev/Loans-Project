@@ -6,7 +6,6 @@ import java.util.Date;
 public class PaymentStatus implements Serializable {
     private boolean isPaid;
     private Date paymentDate;
-    private boolean isDelayed;
 
     public PaymentStatus() {
         isPaid = false;
@@ -21,20 +20,11 @@ public class PaymentStatus implements Serializable {
         return !isPaid;
     }
 
-    public Date getPaymentDate() {
-        return paymentDate;
-    }
-
-    public boolean isDelayed() {
-        return isDelayed;
-    }
-
     @Override
     public String toString() {
         return "PaymentStatus{" +
                 "isPaid=" + isPaid +
                 ", paymentDate=" + (isPaid ? paymentDate : "NOT PAID YET") +
-                ", isDelayed=" + isDelayed +
                 '}';
     }
 }

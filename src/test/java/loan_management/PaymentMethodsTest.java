@@ -1,40 +1,49 @@
 package loan_management;
 
+import logic.Employee;
 import logic.file_management.loan_crud.ReadLoan;
 import logic.loan_classes.DateFormatter;
 import logic.loan_classes.Loan;
 import logic.loan_management.PaymentMethods;
+import logic.pdf.Receipt;
 import org.junit.jupiter.api.Test;
 
+import java.util.Date;
+
 class PaymentMethodsTest {
-    private final int LOAN_ID = 1409892506;
+    private final int LOAN_ID = 2055165890;
     private final Loan loan = ReadLoan.getLoan(LOAN_ID);
+    private final Employee employee = new Employee();
 
     @Test
     void payTest() {
         System.out.println(loan.getDates());
-        PaymentMethods.payInstallment(LOAN_ID);
+        Receipt receipt = PaymentMethods.payInstallment(employee, LOAN_ID, new Date());
         System.out.println(loan.getDates());
+        receipt.generateReceipt();
     }
 
     @Test
     void payCustomDateTest() {
         System.out.println(loan.getDates());
-        PaymentMethods.payInstallment(LOAN_ID, DateFormatter.format("2021-05-10"));
+        Receipt receipt = PaymentMethods.payInstallment(employee, LOAN_ID, DateFormatter.format("2021-05-10"));
         System.out.println(loan.getDates());
+        receipt.generateReceipt();
     }
 
     @Test
     void payAllTest() {
         System.out.println(loan.getDates());
-        PaymentMethods.payLoan(LOAN_ID);
+        Receipt receipt = PaymentMethods.payLoan(employee, LOAN_ID, new Date());
         System.out.println(loan.getDates());
+        receipt.generateReceipt();
     }
 
     @Test
     void payAllCustomDateTest() {
         System.out.println(loan.getDates());
-        PaymentMethods.payLoan(LOAN_ID, DateFormatter.format("2022-01-01"));
+        Receipt receipt = PaymentMethods.payLoan(employee, LOAN_ID, DateFormatter.format("2022-01-01"));
         System.out.println(loan.getDates());
+        receipt.generateReceipt();
     }
 }

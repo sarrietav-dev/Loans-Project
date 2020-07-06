@@ -7,7 +7,7 @@ public class Loan implements Serializable {
     private int loanNumber;
     private double amount;
     private double balance;
-    private Borrower borrower;
+    private Client client;
     private final Dates dates;
     private boolean isPaid = false;
     private double capital;
@@ -19,10 +19,10 @@ public class Loan implements Serializable {
         dates = new Dates(authDate);
     }
 
-    public Loan(double amount, Borrower borrower, String authDate) {
+    public Loan(double amount, Client client, String authDate) {
         setAmount(amount);
         dates = new Dates(authDate);
-        this.borrower = borrower;
+        this.client = client;
         balance = amount;
     }
 
@@ -37,12 +37,12 @@ public class Loan implements Serializable {
         return amount;
     }
 
-    public Borrower getBorrower() {
-        return borrower;
+    public Client getClient() {
+        return client;
     }
 
-    public void setBorrower(Borrower borrower) {
-        this.borrower = borrower;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public Dates getDates() {
@@ -60,9 +60,9 @@ public class Loan implements Serializable {
     public double getInstallmentsPrice() {
         final double AMOUNT_BORROWED = amount;
         final int FINANCING_PERIOD = 6;
-        final double INTEREST_RATE = .15;
+        final double INTEREST_RATE = 0.15;
 
-        return (INTEREST_RATE * AMOUNT_BORROWED) / 1 - Math.pow(1 + INTEREST_RATE, - FINANCING_PERIOD);
+        return (INTEREST_RATE * AMOUNT_BORROWED) / (1 - (Math.pow(1 + INTEREST_RATE, -1 * FINANCING_PERIOD)));
     }
 
     public void sumToInterests(double amount) {
@@ -97,14 +97,6 @@ public class Loan implements Serializable {
             isPaid = true;
     }
 
-    public double getCapital() {
-        return capital;
-    }
-
-    public double getInterestCollected() {
-        return interestCollected;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -118,7 +110,7 @@ public class Loan implements Serializable {
         return "Loan{" +
                 "loanNumber=" + loanNumber +
                 ", amount=" + amount +
-                (borrower == null ? "NULL" : ", borrower=" + borrower.toString()) +
+                (client == null ? ", NULL" : ", client=" + client.toString()) +
                 ", dates=" + dates +
                 ", isPaid=" + isPaid +
                 ", capital=" + capital +

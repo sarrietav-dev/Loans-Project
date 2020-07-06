@@ -1,5 +1,7 @@
 package logic.loan_classes;
 
+import logic.file_management.loan_crud.UpdateLoan;
+
 import java.util.Date;
 
 public class PaymentManager {
@@ -19,6 +21,7 @@ public class PaymentManager {
     public void pay() {
         getDistributeMoney(DISTRIBUTE_MONEY_OPTION.PAY).distributeMoney();
         setInstallmentPaid();
+        UpdateLoan.update(loan);
     }
 
     private void setInstallmentPaid() {
@@ -28,6 +31,7 @@ public class PaymentManager {
     public void payAll() {
         getDistributeMoney(DISTRIBUTE_MONEY_OPTION.PAY_ALL).distributeMoney();
         setAllInstallmentsPaid();
+        UpdateLoan.update(loan);
     }
 
     private void setAllInstallmentsPaid() {
@@ -62,7 +66,7 @@ public class PaymentManager {
                     int notPaidInstallments = getNotPaidInstallments();
 
                     moneyToCapital = loan.getInstallmentsPrice() * notPaidInstallments;
-                    moneyToInterests = moneyToCapital * .05;
+                    moneyToInterests = moneyToCapital * 0.05;
 
                     loan.sumToInterests(moneyToInterests);
                     loan.sumToCapital(moneyToCapital);
@@ -75,10 +79,10 @@ public class PaymentManager {
     private double getInterests() {
         if (isDelayed()) {
             long daysDelayed = (getLastNotPaidDate().getTime() - paymentDate.getTime()) / (1000*60*60*24);
-            return loan.getBalance() * ((daysDelayed * .05) + .15);
+            return loan.getBalance() * ((daysDelayed * 0.05) + 0.15);
         }
         else
-            return loan.getBalance() * .15;
+            return loan.getBalance() * 0.15;
     }
 
     private boolean isDelayed() {

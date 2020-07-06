@@ -53,10 +53,6 @@ public class Dates implements Serializable {
         return datesSorted;
     }
 
-    public boolean isDelayed() {
-        return paymentDates.values().stream().anyMatch(PaymentStatus::isDelayed);
-    }
-
     public HashMap<Date, PaymentStatus> getPaymentDates() {
         return paymentDates;
     }

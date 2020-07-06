@@ -8,7 +8,7 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DateFormatterTest implements DateFormatter {
-    String date = "25-25-25";
+    final String date = "25-25-25";
     @Test
     void formatTest() {
         assertThrows(NullPointerException.class, () -> DateFormatter.format(date));

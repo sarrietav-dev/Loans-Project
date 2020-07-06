@@ -1,7 +1,7 @@
 package logic.file_management;
 
 import logic.DataBase;
-import logic.loan_classes.Borrower;
+import logic.loan_classes.Client;
 import logic.loan_classes.Loan;
 
 import java.util.ArrayList;
@@ -9,13 +9,10 @@ import java.util.Map;
 import java.util.Set;
 
 public abstract class CRUD {
-    protected static DataBase dataBase;
+    protected static final DataBase dataBase = DataBase.getInstance();
 
-    static {
-            dataBase = DataBase.getInstance();
-    }
 
-    public static Set<Map.Entry<Borrower, ArrayList<Loan>>> getAllData() {
+    public static Set<Map.Entry<Client, ArrayList<Loan>>> getAllData() {
         return dataBase.getData().entrySet();
     }
 }

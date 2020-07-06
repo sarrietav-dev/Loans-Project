@@ -1,7 +1,7 @@
 package logic.file_management.loan_crud;
 
 import logic.file_management.CRUD;
-import logic.loan_classes.Borrower;
+import logic.loan_classes.Client;
 import logic.loan_classes.Loan;
 
 import java.util.ArrayList;
@@ -9,8 +9,8 @@ import java.util.HashMap;
 
 public class UpdateLoan extends CRUD {
     public static void update(Loan loan) {
-        HashMap<Borrower, ArrayList<Loan>> data = dataBase.getData();
-        ArrayList<Loan> loans = data.get(loan.getBorrower());
+        HashMap<Client, ArrayList<Loan>> data = dataBase.getData();
+        ArrayList<Loan> loans = data.get(loan.getClient());
         loans.removeIf(loanFromData -> loanFromData.getLoanNumber() == loan.getLoanNumber());
         loans.add(loan);
         dataBase.updateDataList(data);

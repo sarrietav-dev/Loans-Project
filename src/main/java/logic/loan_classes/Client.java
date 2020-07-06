@@ -3,18 +3,18 @@ package logic.loan_classes;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Borrower implements Serializable {
+public class Client implements Serializable {
     private int id;
     private String name;
     private String homePhone;
     private String mobilePhone;
     private String address;
 
-    public Borrower() {
+    public Client() {
 
     }
 
-    public Borrower(int id, String name, String homePhone, String mobilePhone, String address){
+    public Client(int id, String name, String homePhone, String mobilePhone, String address){
         this.id = id;
         this.name = name;
         this.homePhone = homePhone;
@@ -34,13 +34,13 @@ public class Borrower implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Borrower borrower = (Borrower) o;
-        return id == borrower.id;
+        Client client = (Client) o;
+        return id == client.id;
     }
 
     @Override
     public String toString() {
-        return "Borrower{" +
+        return "Client{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", homePhoneNumber='" + homePhone + '\'' +
