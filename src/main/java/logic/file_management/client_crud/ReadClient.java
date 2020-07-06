@@ -1,5 +1,6 @@
 package logic.file_management.client_crud;
 
+import logic.company_members.Employee;
 import logic.file_management.CRUD;
 import logic.file_management.loan_crud.ReadLoan;
 import logic.loan_classes.Client;
@@ -31,6 +32,11 @@ public class ReadClient extends CRUD {
     public static boolean hasAnyLoanDelayed(Client client) {
         return CLIENT_DATABASE.getData().get(client).stream()
                 .anyMatch(ReadLoan::isLoanDelayed);
+    }
+
+    public static double getAllBorrowedMoney() {
+        return CLIENT_DATABASE.getData().keySet().stream()
+                .mapToDouble(ReadClient::totalAmountBorrowed).sum();
     }
 
     public static Set<Client> getDelayedClients() {

@@ -1,7 +1,7 @@
 package logic.file_management.client_crud;
 
-import logic.exceptions.ClientAlreadyExistsException;
 import logic.exceptions.CannotAddMoreLoansException;
+import logic.exceptions.ClientAlreadyExistsException;
 import logic.file_management.CRUD;
 import logic.loan_classes.Client;
 import logic.loan_classes.Loan;
@@ -13,7 +13,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static logic.file_management.client_crud.ReadClient.hasAnyLoanDelayed;
+import static logic.file_management.client_crud.ReadClient.*;
 
 public class UpdateClient extends CRUD {
     public static void addLoan(Loan loan) {
@@ -34,20 +34,20 @@ public class UpdateClient extends CRUD {
                 .collect(Collectors.toList());
 
         entryList.forEach(entry -> {
-            if (hasAnyLoanDelayed(entry.getKey())) {
+            if (hasAnyLoanDelayed(entry.getKey()))
                 throw new CannotAddMoreLoansException("Client " + entry.getKey().getName() +
                         " has a delayed installment.");
-            } else if (ReadClient.totalAmountBorrowed(entry.getKey()) > CLIENT_DATABASE.getMaximumToLendPerClient()) {
+            else if (totalAmountBorrowed(entry.getKey()) > CLIENT_DATABASE.getMaximumToLendPerClient())
                 throw new CannotAddMoreLoansException("Client " + entry.getKey().getName() +
                         " has exceeded the limit of borrowed money");
-            } else if (loan.getAmount() > CLIENT_DATABASE.getMaximumToLendPerClient()) {
+            else if (loan.getAmount() > CLIENT_DATABASE.getMaximumToLendPerClient())
                 throw new CannotAddMoreLoansException("The loan surpasses the limit specified limit ("
                         + CLIENT_DATABASE.getMaximumToLendPerClient() + ").");
-            } // TODO: 6/07/20 If all money is borrowed.
-            else {
-                setAddLoanOperation(loan, entry);
-                CLIENT_DATABASE.updateDataList(data);
-            }
+            else if (getAllBorrowedMoney() > CLIENT_DATABASE.getMaximumAmountToLend())
+                throw new CannotAddMoreLoansException("All clients have borrowed all money");
+
+            setAddLoanOperation(loan, entry);
+            CLIENT_DATABASE.updateDataList(data);
         });
     }
 
