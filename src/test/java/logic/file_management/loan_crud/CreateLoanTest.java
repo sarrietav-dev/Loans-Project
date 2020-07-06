@@ -1,4 +1,4 @@
-package file_management.loan_crud;
+package logic.file_management.loan_crud;
 
 import logic.exceptions.CannotAddMoreLoansException;
 import logic.file_management.loan_crud.CreateLoan;

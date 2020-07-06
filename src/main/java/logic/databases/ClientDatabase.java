@@ -1,4 +1,4 @@
-package logic;
+package logic.databases;
 
 import logic.loan_classes.Client;
 import logic.loan_classes.Loan;
@@ -8,21 +8,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 @SuppressWarnings("unchecked")
-public class DataBase {
-    private static DataBase dataBase;
+public class ClientDatabase {
+    private static ClientDatabase clientDatabase;
     private static HashMap<Client, ArrayList<Loan>> data;
     private static double maximumAmountToLend = 999999999;
     private static double maximumToLendPerClient = 100000;
-    private static final File PATH = new File("data" + File.separator +"data.dat");
+    private static final File PATH = new File("data" + File.separator +"client-data.dat");
 
-    private DataBase() {
+    private ClientDatabase() {
         load();
     }
 
-    public static DataBase getInstance() {
-        if (dataBase == null)
-            dataBase = new DataBase();
-        return dataBase;
+    public static ClientDatabase getInstance() {
+        if (clientDatabase == null)
+            clientDatabase = new ClientDatabase();
+        return clientDatabase;
     }
 
     @SuppressWarnings("unchecked")
@@ -67,7 +67,7 @@ public class DataBase {
     }
 
     public void setMaximumAmountToLend(double maximumAmountToLend) {
-        DataBase.maximumAmountToLend = maximumAmountToLend;
+        ClientDatabase.maximumAmountToLend = maximumAmountToLend;
         uploadDataToTheDataBase();
     }
 
@@ -76,12 +76,12 @@ public class DataBase {
     }
 
     public void setMaximumToLendPerClient(double maximumToLendPerClient) {
-        DataBase.maximumToLendPerClient = maximumToLendPerClient;
+        ClientDatabase.maximumToLendPerClient = maximumToLendPerClient;
         uploadDataToTheDataBase();
     }
 
     public void updateDataList(HashMap<Client, ArrayList<Loan>> data) {
-        DataBase.data = data;
+        ClientDatabase.data = data;
         uploadDataToTheDataBase();
     }
 

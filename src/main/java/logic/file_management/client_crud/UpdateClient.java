@@ -26,7 +26,7 @@ public class UpdateClient extends CRUD {
     }
 
     public static void addLoan(Loan loan, final int CLIENT_ID) {
-        HashMap<Client, ArrayList<Loan>> data = dataBase.getData();
+        HashMap<Client, ArrayList<Loan>> data = CLIENT_DATABASE.getData();
         Set<Entry<Client, ArrayList<Loan>>> entrySet = data.entrySet();
 
         List<Entry<Client, ArrayList<Loan>>> entryList = entrySet.stream()
@@ -37,16 +37,16 @@ public class UpdateClient extends CRUD {
             if (hasAnyLoanDelayed(entry.getKey())) {
                 throw new CannotAddMoreLoansException("Client " + entry.getKey().getName() +
                         " has a delayed installment.");
-            } else if (ReadClient.totalAmountBorrowed(entry.getKey()) > dataBase.getMaximumToLendPerClient()) {
+            } else if (ReadClient.totalAmountBorrowed(entry.getKey()) > CLIENT_DATABASE.getMaximumToLendPerClient()) {
                 throw new CannotAddMoreLoansException("Client " + entry.getKey().getName() +
                         " has exceeded the limit of borrowed money");
-            } else if (loan.getAmount() > dataBase.getMaximumToLendPerClient()) {
+            } else if (loan.getAmount() > CLIENT_DATABASE.getMaximumToLendPerClient()) {
                 throw new CannotAddMoreLoansException("The loan surpasses the limit specified limit ("
-                        + dataBase.getMaximumToLendPerClient() + ").");
-            }
+                        + CLIENT_DATABASE.getMaximumToLendPerClient() + ").");
+            } // TODO: 6/07/20 If all money is borrowed.
             else {
                 setAddLoanOperation(loan, entry);
-                dataBase.updateDataList(data);
+                CLIENT_DATABASE.updateDataList(data);
             }
         });
     }

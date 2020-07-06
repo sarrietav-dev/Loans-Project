@@ -1,6 +1,5 @@
-package loan_classes;
+package logic.loan_classes;
 
-import logic.loan_classes.DateFormatter;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;

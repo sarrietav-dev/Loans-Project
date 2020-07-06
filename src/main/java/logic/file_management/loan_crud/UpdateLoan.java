@@ -9,10 +9,10 @@ import java.util.HashMap;
 
 public class UpdateLoan extends CRUD {
     public static void update(Loan loan) {
-        HashMap<Client, ArrayList<Loan>> data = dataBase.getData();
+        HashMap<Client, ArrayList<Loan>> data = CLIENT_DATABASE.getData();
         ArrayList<Loan> loans = data.get(loan.getClient());
         loans.removeIf(loanFromData -> loanFromData.getLoanNumber() == loan.getLoanNumber());
         loans.add(loan);
-        dataBase.updateDataList(data);
+        CLIENT_DATABASE.updateDataList(data);
     }
 }

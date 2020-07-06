@@ -30,8 +30,8 @@ public class CreateClient extends CRUD {
     }
 
     private static void createClient(Client client) {
-        HashMap<Client, ArrayList<Loan>> data = dataBase.getData();
+        HashMap<Client, ArrayList<Loan>> data = CLIENT_DATABASE.getData();
         data.put(client, new ArrayList<>());
-        dataBase.updateDataList(data);
+        CLIENT_DATABASE.updateDataList(data);
     }
 }

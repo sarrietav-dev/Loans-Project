@@ -1,4 +1,4 @@
-package logic;
+package logic.company_members;
 
 import logic.file_management.client_crud.CreateClient;
 import logic.file_management.loan_crud.CreateLoan;
@@ -6,10 +6,10 @@ import logic.loan_classes.Client;
 import logic.loan_classes.Loan;
 import logic.loan_management.PaymentMethods;
 
+import java.io.Serializable;
 import java.util.Date;
 
-// TODO: 5/07/20 Create an employee database
-public class Employee {
+public class Employee implements Serializable {
     private String id;
     private String password;
 
@@ -23,6 +23,16 @@ public class Employee {
 
     public Employee() {
 
+    }
+
+    public Employee(String id) {
+        this.id = id;
+    }
+
+    public Employee(String id, String name, double baseSalary) {
+        this.id = id;
+        this.name = name;
+        this.baseSalary = baseSalary;
     }
 
     public Employee(String name, String homePhone, String mobilePhone, String address, double baseSalary) {
@@ -85,4 +95,27 @@ public class Employee {
     public double getCurrentSalary() {
         return currentSalary;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return id.equals(employee.id);
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id='" + id + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", homePhone='" + homePhone + '\'' +
+                ", mobilePhone='" + mobilePhone + '\'' +
+                ", address='" + address + '\'' +
+                ", baseSalary=" + baseSalary +
+                ", currentSalary=" + currentSalary +
+                '}';
+    }
 }
+

@@ -1,4 +1,4 @@
-package file_management.client_crud;
+package logic.file_management.client_crud;
 
 import logic.exceptions.ClientAlreadyExistsException;
 import logic.file_management.client_crud.CreateClient;

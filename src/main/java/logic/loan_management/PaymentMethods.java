@@ -1,6 +1,6 @@
 package logic.loan_management;
 
-import logic.Employee;
+import logic.company_members.Employee;
 import logic.file_management.loan_crud.ReadLoan;
 import logic.loan_classes.Loan;
 import logic.loan_classes.PaymentManager;

@@ -4,6 +4,7 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import logic.loan_classes.DateFormatter;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -12,7 +13,7 @@ import java.util.Date;
 public class Receipt {
     private final InformationPack info;
 
-    private String path = "pdf_files/receipts";
+    private String path = "pdf_files"+ File.separator +"receipts" + File.separator;
     private final Document document;
 
     private static final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
@@ -26,7 +27,7 @@ public class Receipt {
 
     public void generateReceipt() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss:aa");
-        path += "/receipt-" + info.getLoan().getLoanNumber() + "-" + dateFormat.format(new Date()) + ".pdf";
+        path += "receipt-" + info.getLoan().getLoanNumber() + "-" + dateFormat.format(new Date()) + ".pdf";
         try {
             PdfWriter.getInstance(document, new FileOutputStream(path));
             document.open();

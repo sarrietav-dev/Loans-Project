@@ -10,17 +10,17 @@ import java.util.stream.Collectors;
 
 public class ReadClient extends CRUD {
     public static Set<Client> getAllClients() {
-        return dataBase.getData().keySet();
+        return CLIENT_DATABASE.getData().keySet();
     }
 
     public static boolean doesClientExist(Client client) {
-        return dataBase.getData().keySet().stream()
+        return CLIENT_DATABASE.getData().keySet().stream()
                 .anyMatch(client::equals);
     }
 
     public static double totalAmountBorrowed(Client client) {
         double sum = 0.0;
-        for (Loan loan : dataBase.getData().get(client)) {
+        for (Loan loan : CLIENT_DATABASE.getData().get(client)) {
             double amount = loan.getAmount();
             if (!loan.isPaid())
                 sum += amount;
@@ -29,7 +29,7 @@ public class ReadClient extends CRUD {
     }
 
     public static boolean hasAnyLoanDelayed(Client client) {
-        return dataBase.getData().get(client).stream()
+        return CLIENT_DATABASE.getData().get(client).stream()
                 .anyMatch(ReadLoan::isLoanDelayed);
     }
 

@@ -1,6 +1,6 @@
 package logic.pdf;
 
-import logic.Employee;
+import logic.company_members.Employee;
 import logic.loan_classes.Loan;
 
 import java.util.Date;
