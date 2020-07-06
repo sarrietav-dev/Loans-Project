@@ -1,6 +1,7 @@
 package logic.loan_management;
 
 import logic.company_members.Employee;
+import logic.exceptions.LoanAlreadyPaidException;
 import logic.file_management.loan_crud.ReadLoan;
 import logic.loan_classes.Loan;
 import logic.loan_classes.PaymentManager;
@@ -19,6 +20,8 @@ public class PaymentMethods {
      */
     public static Receipt payInstallment(final Employee employee, final int LOAN_ID, final Date DATE_OF_PAYMENT) {
         Loan loan = ReadLoan.getLoan(LOAN_ID);
+        if (loan.isPaid())
+            throw new LoanAlreadyPaidException();
         paymentManager = new PaymentManager(loan, DATE_OF_PAYMENT);
         paymentManager.pay();
 
@@ -35,6 +38,8 @@ public class PaymentMethods {
      */
     public static Receipt payLoan(final Employee employee, final int LOAN_ID, final Date DATE_OF_PAYMENT) {
         Loan loan = ReadLoan.getLoan(LOAN_ID);
+        if (loan.isPaid())
+            throw new LoanAlreadyPaidException();
         paymentManager = new PaymentManager(loan, DATE_OF_PAYMENT);
         paymentManager.payAll();
 

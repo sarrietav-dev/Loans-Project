@@ -43,8 +43,8 @@ public class Receipt {
     }
 
     private void addImage() throws IOException, DocumentException {
-        // TODO: 5/07/20 Resize the image.
         Image image = Image.getInstance("pdf_files/images/log-icetex.png");
+        image.setWidthPercentage(50);
         document.add(image);
     }
 

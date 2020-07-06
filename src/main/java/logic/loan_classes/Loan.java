@@ -93,7 +93,7 @@ public class Loan implements Serializable {
     }
 
     public void setPaid() {
-        if (capital == amount)
+        if (capital >= amount)
             isPaid = true;
     }
 
