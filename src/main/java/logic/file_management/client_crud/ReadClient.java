@@ -1,6 +1,5 @@
 package logic.file_management.client_crud;
 
-import logic.company_members.Employee;
 import logic.file_management.CRUD;
 import logic.file_management.loan_crud.ReadLoan;
 import logic.loan_classes.Client;

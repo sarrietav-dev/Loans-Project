@@ -12,13 +12,23 @@ import java.util.HashMap;
 import static logic.file_management.client_crud.ReadClient.doesClientExist;
 
 public class CreateClient extends CRUD {
+
+    /**
+     * Creates a client and adds it to the database. It must have an unique ID.
+     * @param client The client that will be added.
+     * @throws ClientAlreadyExistsException if the ID exists in the database.
+     */
     public static void create(Client client) {
         if (!doesClientExist(client))
             createClient(client);
         else
-            throw new ClientAlreadyExistsException("That ID is Taken!");
+            throw new ClientAlreadyExistsException("That ID is taken!");
     }
 
+    /**
+     * Takes a series of clients and add each one to the database.
+     * @param clients The array of clients that will be added
+     */
     public static void create(Client... clients) {
         Arrays.stream(clients).forEach(client -> {
             try {

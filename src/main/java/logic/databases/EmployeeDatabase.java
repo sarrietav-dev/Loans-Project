@@ -5,6 +5,9 @@ import logic.company_members.Employee;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * This class manages all the persistence client data between the hard disk and the running program.
+ */
 public class EmployeeDatabase {
     private static EmployeeDatabase employeeDatabase;
 
@@ -49,13 +52,21 @@ public class EmployeeDatabase {
         }
     }
 
+    /**
+     * Takes an arraylist with all the new data and updates the file where the old data was stored.
+     * @param employees A new arraylist that will be stored in the file.
+     */
     public void updateDataList(ArrayList<Employee> employees) {
         EmployeeDatabase.employees = employees;
         uploadDataToTheDatabase();
     }
 
+    /**
+     * Gets the database of employees.
+     * @return Returns a copy of all the available employees of the company.
+     */
     public ArrayList<Employee> getEmployees() {
-        return employees;
+        return new ArrayList<>(employees);
     }
 
     private void uploadDataToTheDatabase() {

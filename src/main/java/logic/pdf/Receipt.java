@@ -2,6 +2,7 @@ package logic.pdf;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
+import logic.exceptions.IllegalOperationException;
 import logic.loan_classes.DateFormatter;
 
 import java.io.File;
@@ -10,6 +11,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Makes the receipt of each payment.
+ */
 public class Receipt {
     private final InformationPack info;
 
@@ -19,6 +23,7 @@ public class Receipt {
     private static final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
     private static final Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
     private static final Font normalFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL);
+    private PdfWriter writer;
 
     public Receipt(InformationPack info) {
         this.info = info;
@@ -29,7 +34,7 @@ public class Receipt {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss:aa");
         path += "receipt-" + info.getLoan().getLoanNumber() + "-" + dateFormat.format(new Date()) + ".pdf";
         try {
-            PdfWriter.getInstance(document, new FileOutputStream(path));
+            writer = PdfWriter.getInstance(document, new FileOutputStream(path));
             document.open();
 
             addImage();
@@ -94,5 +99,15 @@ public class Receipt {
         for (int i = 0; i < numberOfParagraphs; i++) {
             paragraph.add(new Paragraph(" "));
         }
+    }
+
+    /**
+     * It returns the place where the receipt was stored in the system.
+     * @throws IllegalOperationException if the receipt hasn't been generated.
+     */
+    public String getReceiptPath() {
+        if (writer == null)
+            throw new IllegalOperationException("The receipt has not been generated yet");
+        return path;
     }
 }

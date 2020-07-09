@@ -8,6 +8,12 @@ public interface DateFormatter {
 
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
+    /**
+     * Converts a string date into a Date object.
+     * @param date A date in a string with the yyyy-MM-dd format.
+     * @return A date object.
+     * @throws NullPointerException if the date doesn't match the yyyy-MM-dd format.
+     */
     static Date format(String date) {
         checkDateCorrect(date);
         try {
@@ -17,6 +23,11 @@ public interface DateFormatter {
         }
     }
 
+    /**
+     * Takes a date object and converts it into string.
+     * @param date A date object.
+     * @return The string of the date in the yyyy-MM-dd format.
+     */
     static String format(Date date) {
         return formatter.format(date);
     }

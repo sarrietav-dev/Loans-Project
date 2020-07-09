@@ -3,6 +3,13 @@ package logic.loan_classes;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * This class exists to contain the info of each Installment:
+ * <ul>
+ *     <li>If it's paid.</li>
+ *     <li>When it was paid</li>
+ * </ul>
+ */
 public class PaymentStatus implements Serializable {
     private boolean isPaid;
     private Date paymentDate;

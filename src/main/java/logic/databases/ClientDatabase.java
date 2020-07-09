@@ -7,6 +7,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * This class manages all the persistence client data between the hard disk and the running program.
+ */
 @SuppressWarnings("unchecked")
 public class ClientDatabase {
     private static ClientDatabase clientDatabase;
@@ -55,11 +58,14 @@ public class ClientDatabase {
         catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
+    /**
+     * Gets all the data of the database.
+     * @return a copy the clients data.
+     */
     public HashMap<Client, ArrayList<Loan>> getData() {
-        return data;
+        return new HashMap<>(data);
     }
 
     public double getMaximumAmountToLend() {
@@ -80,6 +86,10 @@ public class ClientDatabase {
         uploadDataToTheDataBase();
     }
 
+    /**
+     * Takes a hashmap with all the new data and updates the file where the old data was stored.
+     * @param data The new data of clients.
+     */
     public void updateDataList(HashMap<Client, ArrayList<Loan>> data) {
         ClientDatabase.data = data;
         uploadDataToTheDataBase();

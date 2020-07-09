@@ -3,6 +3,10 @@ package logic.loan_classes;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Represents a person who goes to the company to borrow some money. It's primary key its his ID. <br>
+ * The client can have multiple loans until it reaches the limit given by the company.
+ */
 public class Client implements Serializable {
     private int id;
     private String name;

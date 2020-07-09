@@ -3,8 +3,6 @@ package logic.company_members.employee_crud;
 import logic.company_members.Employee;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class CreateEmployeeTest {
     @Test
     void createEmployeeTest() {

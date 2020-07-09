@@ -18,6 +18,9 @@ public class PaymentManager {
         this.paymentDate = paymentDate;
     }
 
+    /**
+     * It sets the last unpaid installment to paid, and calculates the money distributions.
+     */
     public void pay() {
         getDistributeMoney(DISTRIBUTE_MONEY_OPTION.PAY).distributeMoney();
         setInstallmentPaid();
@@ -28,6 +31,9 @@ public class PaymentManager {
         loanDates.getPaymentDates().get(getLastNotPaidDate()).pay(paymentDate);
     }
 
+    /**
+     * It pays all the loan's installment, but charges only the ones which were unpaid.
+     */
     public void payAll() {
         getDistributeMoney(DISTRIBUTE_MONEY_OPTION.PAY_ALL).distributeMoney();
         setAllInstallmentsPaid();
@@ -40,10 +46,25 @@ public class PaymentManager {
                 loanDates.getPaymentDates().get(paymentDate).pay(paymentDate);
     }
 
+    /**
+     * Every time it pays an installment, the company collects some interests.<br>
+     *     <ul>
+     *     <li>If the payment isn't delayed, it charges 15%. <br></li>
+     *     <li>If the payment is delayed, it changes 15% plus a 5% for each day that has been delayed.<br></li>
+     *     <li>If the payment is in advance, it charges 5% of the total paid.<br></li>
+     *     </ul>
+     * @return The interests collected in the actual payment.
+     */
     public double getMoneyToInterests() {
         return moneyToInterests;
     }
 
+    /**
+     * Capital is the money that will go to the loan itself. <br>
+     *     It takes the installment price, and the interests are subtracted. <br>
+     *         The bigger the interest, the less money will be added to the capital.
+     * @return The money that was added to the capital in the actual payment.
+     */
     public double getMoneyToCapital() {
         return moneyToCapital;
     }

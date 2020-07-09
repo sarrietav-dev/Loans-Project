@@ -5,6 +5,9 @@ import logic.loan_classes.Loan;
 
 import java.util.Date;
 
+/**
+ * It stores the info of a payment to print it on a receipt.
+ */
 public class InformationPack {
     private final Loan loan;
     private final Date paymentDate;
@@ -12,6 +15,7 @@ public class InformationPack {
     private final double moneyToCapital;
     private final double moneyToInterests;
     private final double loanBalance;
+    
 
     public InformationPack(Loan loan, Date paymentDate, Employee collector, double moneyToCapital,
                            double moneyToInterests) {

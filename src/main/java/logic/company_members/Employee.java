@@ -1,5 +1,7 @@
 package logic.company_members;
 
+import logic.exceptions.ClientAlreadyExistsException;
+import logic.exceptions.LoanAlreadyPaidException;
 import logic.file_management.client_crud.CreateClient;
 import logic.file_management.loan_crud.CreateLoan;
 import logic.loan_classes.Client;
@@ -43,18 +45,40 @@ public class Employee implements Serializable {
         this.baseSalary = baseSalary;
     }
 
+    /**
+     * Pays an installment of a loan.
+     * @param LOAN_ID The id of the loan that will be paid.
+     * @param DATE_OF_PAYMENT The date when the installment was paid.
+     * @throws LoanAlreadyPaidException If the loan was already paid (Each installment was paid).
+     */
     public void payAnInstallment(final int LOAN_ID, final Date DATE_OF_PAYMENT) {
         PaymentMethods.payInstallment(this, LOAN_ID, DATE_OF_PAYMENT);
     }
 
+    /**
+    * Takes the whole loan and pays the unpaid installments.
+    * @param LOAN_ID The id of the loan that will be paid.
+    * @param DATE_OF_PAYMENT If the loan was already paid (Each installment was paid).
+    * @throws LoanAlreadyPaidException If the loan was already paid (Each installment was paid).
+     */
     public void payALoan(final int LOAN_ID, final Date DATE_OF_PAYMENT) {
         PaymentMethods.payLoan(this, LOAN_ID, DATE_OF_PAYMENT);
     }
 
+    /**
+     * Adds a client to the database.
+     * @param client A client object to be added to the database.
+     * @throws ClientAlreadyExistsException if the client ID matches other client ID in the database.
+     * */
     public void addAClient(Client client) {
         CreateClient.create(client);
     }
 
+    /**
+    * Creates a loan and assigns it to a Client. The employee earns 1% of the total amount borrowed from the loan.
+    * @param loan The loan that will be created.
+    * @param CLIENT_ID The client ID where the load will be assigned.
+     */
     public void addALoan(Loan loan, final int CLIENT_ID) {
         CreateLoan.create(loan, CLIENT_ID);
         sumToSalary(loan.getAmount() * .01);

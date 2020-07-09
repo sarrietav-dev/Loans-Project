@@ -3,6 +3,12 @@ package logic.loan_classes;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * This class is the concept of a Loan. <br>
+ * It belongs to a client, and it has a unique ID, the amount borrowed, <br>
+ *     and the dates in which each installment needs to be paid.
+ *     It also manages the capital and the interest collected by each time the client pays.
+ */
 public class Loan implements Serializable {
     private int loanNumber;
     private double amount;
@@ -57,6 +63,11 @@ public class Loan implements Serializable {
         this.loanNumber = loanNumber;
     }
 
+    /**
+     * Calculates and returns the price of each installment (monthly).
+     * It uses the <a href="https://en.wikipedia.org/wiki/Equated_monthly_installment">EMI formula.</a>
+     * @return A double with the monthly price.
+     */
     public double getInstallmentsPrice() {
         final double AMOUNT_BORROWED = amount;
         final int FINANCING_PERIOD = 6;
@@ -82,6 +93,11 @@ public class Loan implements Serializable {
     private void subtractToBalance(double amount) {
         balance -= amount;
     }
+
+    /**
+     * Looks if any installment is delayed according to the machine's date.
+     * @return If the loan is delayed or not.
+     */
     public boolean isDelayed() {
         return dates.getDatesSorted().stream()
                 .filter(paymentDate -> dates.getPaymentDates().get(paymentDate).isNotPaid())

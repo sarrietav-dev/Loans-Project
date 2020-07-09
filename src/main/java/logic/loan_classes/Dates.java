@@ -5,11 +5,19 @@ import logic.exceptions.DateOutOfLimitException;
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * Calculates and stores a loan's payment dates of each installment,<br>
+ *     the authorization date and the delivery date.
+ */
 public class Dates implements Serializable {
     private Date authorizationDate;
     private Date deliveryDate;
     protected final HashMap<Date, PaymentStatus> paymentDates = new HashMap<>();
 
+    /**
+     * @param date The authorization date of the loan.
+     * @throws DateOutOfLimitException if the authorization date is off the limits given by the company.
+     */
     public Dates(String date) {
         setAuthorizationDate(date);
         setDeliveryDate();
@@ -47,13 +55,17 @@ public class Dates implements Serializable {
         }
     }
 
+    /**
+     * Shows the payment dates of each installment.
+     * @return A list of dates, in ascending order.
+     */
     public List<Date> getDatesSorted() {
         List<Date> datesSorted = new ArrayList<>(paymentDates.keySet());
         datesSorted.sort(Date::compareTo);
         return datesSorted;
     }
 
-    public HashMap<Date, PaymentStatus> getPaymentDates() {
+    HashMap<Date, PaymentStatus> getPaymentDates() {
         return paymentDates;
     }
 
