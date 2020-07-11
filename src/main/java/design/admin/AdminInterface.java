@@ -45,22 +45,26 @@ public class AdminInterface extends javax.swing.JFrame {
 
         panelImage1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        buttonCheckEmployees.setIcon(new javax.swing.ImageIcon(getClass().getResource("/design/admin/checkEmployees.png"))); // NOI18N
+        buttonCheckEmployees.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/checkEmployees.png"))); // NOI18N
         buttonCheckEmployees.setText("Check Employees");
+        buttonCheckEmployees.setAnimacion(false);
         buttonCheckEmployees.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCheckEmployeesActionPerformed(evt);
             }
         });
 
-        buttonCheckClients.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/employee/Ussers.png"))); // NOI18N
+        buttonCheckClients.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Ussers.png"))); // NOI18N
         buttonCheckClients.setText("Check Clients");
+        buttonCheckClients.setAnimacion(false);
 
-        buttonLoanConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/design/admin/checkLoanConfig.png"))); // NOI18N
+        buttonLoanConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/checkLoanConfig.png"))); // NOI18N
         buttonLoanConfig.setText("Loan config");
+        buttonLoanConfig.setAnimacion(false);
 
-        buttonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/exit.png"))); // NOI18N
+        buttonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
         buttonExit.setText("Exit");
+        buttonExit.setAnimacion(false);
 
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);

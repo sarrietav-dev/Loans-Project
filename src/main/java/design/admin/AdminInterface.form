@@ -149,9 +149,10 @@
                 <Component class="org.edisoncor.gui.button.ButtonIpod" name="buttonCheckEmployees">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/design/admin/checkEmployees.png"/>
+                      <Image iconType="3" name="/images/checkEmployees.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Check Employees"/>
+                    <Property name="animacion" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCheckEmployeesActionPerformed"/>
@@ -160,25 +161,28 @@
                 <Component class="org.edisoncor.gui.button.ButtonIpod" name="buttonCheckClients">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/vista/employee/Ussers.png"/>
+                      <Image iconType="3" name="/images/Ussers.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Check Clients"/>
+                    <Property name="animacion" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="org.edisoncor.gui.button.ButtonIpod" name="buttonLoanConfig">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/design/admin/checkLoanConfig.png"/>
+                      <Image iconType="3" name="/images/checkLoanConfig.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Loan config"/>
+                    <Property name="animacion" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="org.edisoncor.gui.button.ButtonIpod" name="buttonExit">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/vista/exit.png"/>
+                      <Image iconType="3" name="/images/exit.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Exit"/>
+                    <Property name="animacion" type="boolean" value="false"/>
                   </Properties>
                 </Component>
               </SubComponents>

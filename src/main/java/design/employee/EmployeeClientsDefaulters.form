@@ -65,14 +65,14 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="panelImage1" max="32767" attributes="0"/>
-                          <Component id="labelCustom1" alignment="1" max="32767" attributes="0"/>
+                          <Component id="labelCustom1" alignment="1" pref="452" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="184" max="-2" attributes="0"/>
                       <Component id="buttonBack" min="-2" pref="89" max="-2" attributes="0"/>
-                      <EmptySpace pref="213" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -83,9 +83,9 @@
                       <Component id="labelCustom1" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="panelImage1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="17" max="32767" attributes="0"/>
                       <Component id="buttonBack" min="-2" pref="86" max="-2" attributes="0"/>
-                      <EmptySpace pref="22" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -179,9 +179,10 @@
             <Component class="org.edisoncor.gui.button.ButtonIpod" name="buttonBack">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/vista/admin/back.jpg"/>
+                  <Image iconType="3" name="/images/back.jpg"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Back"/>
+                <Property name="animacion" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>

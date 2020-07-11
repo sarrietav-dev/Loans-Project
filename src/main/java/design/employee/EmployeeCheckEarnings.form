@@ -173,9 +173,10 @@
             <Component class="org.edisoncor.gui.button.ButtonIpod" name="buttonBack">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/vista/admin/back.jpg"/>
+                  <Image iconType="3" name="/images/back.jpg"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Back"/>
+                <Property name="animacion" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>

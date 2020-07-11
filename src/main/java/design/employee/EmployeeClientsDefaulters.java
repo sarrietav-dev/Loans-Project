@@ -81,8 +81,9 @@ public class EmployeeClientsDefaulters extends javax.swing.JFrame {
         labelCustom1.setText("Defaulter Clients");
         labelCustom1.setColorDeSegundoBorde(new java.awt.Color(0, 0, 0));
 
-        buttonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/admin/back.jpg"))); // NOI18N
+        buttonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back.jpg"))); // NOI18N
         buttonBack.setText("Back");
+        buttonBack.setAnimacion(false);
 
         javax.swing.GroupLayout panelCurves2Layout = new javax.swing.GroupLayout(panelCurves2);
         panelCurves2.setLayout(panelCurves2Layout);
@@ -92,12 +93,12 @@ public class EmployeeClientsDefaulters extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelCurves2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelImage1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelCustom1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(labelCustom1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(panelCurves2Layout.createSequentialGroup()
-                .addGap(170, 170, 170)
+                .addGap(184, 184, 184)
                 .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelCurves2Layout.setVerticalGroup(
             panelCurves2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,9 +107,9 @@ public class EmployeeClientsDefaulters extends javax.swing.JFrame {
                 .addComponent(labelCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panelImage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);

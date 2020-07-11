@@ -79,8 +79,9 @@ public class EmployeeCheckEarnings extends javax.swing.JFrame {
         labelCustom1.setText("Employee's Earnings");
         labelCustom1.setColorDeSegundoBorde(new java.awt.Color(0, 0, 0));
 
-        buttonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/admin/back.jpg"))); // NOI18N
+        buttonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back.jpg"))); // NOI18N
         buttonBack.setText("Back");
+        buttonBack.setAnimacion(false);
 
         javax.swing.GroupLayout panelCurves1Layout = new javax.swing.GroupLayout(panelCurves1);
         panelCurves1.setLayout(panelCurves1Layout);

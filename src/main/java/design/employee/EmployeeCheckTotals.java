@@ -160,8 +160,9 @@ public class EmployeeCheckTotals extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        buttonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/admin/back.jpg"))); // NOI18N
+        buttonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back.jpg"))); // NOI18N
         buttonBack.setText("Back");
+        buttonBack.setAnimacion(false);
 
         javax.swing.GroupLayout panelCurves1Layout = new javax.swing.GroupLayout(panelCurves1);
         panelCurves1.setLayout(panelCurves1Layout);

@@ -116,15 +116,18 @@ public class AdminLoans extends javax.swing.JFrame {
 
         panelImage2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        buttonConfirm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/design/admin/confirm.png"))); // NOI18N
+        buttonConfirm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirm.png"))); // NOI18N
         buttonConfirm.setText("Confirm");
+        buttonConfirm.setAnimacion(false);
         buttonConfirm.setEnabled(false);
 
-        buttonEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/design/admin/edit.png"))); // NOI18N
+        buttonEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
         buttonEdit.setText("Edit");
+        buttonEdit.setAnimacion(false);
 
-        buttonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/design/admin/back.jpg"))); // NOI18N
+        buttonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back.jpg"))); // NOI18N
         buttonBack.setText("Back");
+        buttonBack.setAnimacion(false);
 
         javax.swing.GroupLayout panelImage2Layout = new javax.swing.GroupLayout(panelImage2);
         panelImage2.setLayout(panelImage2Layout);
