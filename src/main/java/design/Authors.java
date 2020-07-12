@@ -210,6 +210,9 @@ public class Authors extends javax.swing.JFrame {
 
     private void buttonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackActionPerformed
         // TODO add your handling code here:
+        LoginMenu LoginMenu1 = new LoginMenu();
+        this.setVisible(false);
+        LoginMenu1.setVisible(true);
     }//GEN-LAST:event_buttonBackActionPerformed
 
     /**

@@ -166,6 +166,9 @@
                     <Property name="text" type="java.lang.String" value="Check Clients"/>
                     <Property name="animacion" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCheckClientsActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="org.edisoncor.gui.button.ButtonIpod" name="buttonLoanConfig">
                   <Properties>
@@ -175,6 +178,9 @@
                     <Property name="text" type="java.lang.String" value="Loan config"/>
                     <Property name="animacion" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonLoanConfigActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="org.edisoncor.gui.button.ButtonIpod" name="buttonExit">
                   <Properties>
@@ -184,6 +190,9 @@
                     <Property name="text" type="java.lang.String" value="Exit"/>
                     <Property name="animacion" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonExitActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

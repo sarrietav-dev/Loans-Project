@@ -5,6 +5,8 @@
  */
 package design.employee;
 
+import design.LoginMenu;
+
 /**
  *
  * @author Administrador
@@ -46,14 +48,29 @@ public class EmployeeInterface extends javax.swing.JFrame {
         buttonCheckClients.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Ussers.png"))); // NOI18N
         buttonCheckClients.setText("Check Clients");
         buttonCheckClients.setAnimacion(false);
+        buttonCheckClients.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCheckClientsActionPerformed(evt);
+            }
+        });
 
         buttonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
         buttonExit.setText("Exit");
         buttonExit.setAnimacion(false);
+        buttonExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExitActionPerformed(evt);
+            }
+        });
 
         buttonExit1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/config.png"))); // NOI18N
         buttonExit1.setText("Config");
         buttonExit1.setAnimacion(false);
+        buttonExit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExit1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);
@@ -137,6 +154,27 @@ public class EmployeeInterface extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonExit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExit1ActionPerformed
+        // TODO add your handling code here:
+        EmployeeConfigAccount EmployeeConfigAccount1 = new EmployeeConfigAccount();
+        this.setVisible(false);
+        EmployeeConfigAccount1.setVisible(true);
+    }//GEN-LAST:event_buttonExit1ActionPerformed
+
+    private void buttonCheckClientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCheckClientsActionPerformed
+        // TODO add your handling code here:
+        EmployeeClients EmployeeClients1 = new EmployeeClients();
+        this.setVisible(false);
+        EmployeeClients1.setVisible(true);
+    }//GEN-LAST:event_buttonCheckClientsActionPerformed
+
+    private void buttonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExitActionPerformed
+        // TODO add your handling code here:
+        LoginMenu LoginMenu1 = new LoginMenu();
+        this.setVisible(false);
+        LoginMenu1.setVisible(true);
+    }//GEN-LAST:event_buttonExitActionPerformed
 
     /**
      * @param args the command line arguments

@@ -175,6 +175,11 @@ public class AdminEmployees extends javax.swing.JFrame {
         buttonDelete.setText("Delete");
 
         buttonBack.setText("Back");
+        buttonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelImage3Layout = new javax.swing.GroupLayout(panelImage3);
         panelImage3.setLayout(panelImage3Layout);
@@ -317,6 +322,13 @@ public class AdminEmployees extends javax.swing.JFrame {
     private void insertAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertAddressActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_insertAddressActionPerformed
+
+    private void buttonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackActionPerformed
+        // TODO add your handling code here:
+        AdminInterface AdminInterface1 = new AdminInterface();
+        this.setVisible(false);
+        AdminInterface1.setVisible(true);
+    }//GEN-LAST:event_buttonBackActionPerformed
 
     /**
      * @param args the command line arguments

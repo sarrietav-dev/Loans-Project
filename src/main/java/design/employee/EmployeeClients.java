@@ -55,7 +55,6 @@ public class EmployeeClients extends javax.swing.JFrame {
         panelDeslizante1 = new org.edisoncor.gui.varios.PanelDeslizante();
         buttonDefaulterClients = new org.edisoncor.gui.button.ButtonIpod();
         panelImage5 = new org.edisoncor.gui.panel.PanelImage();
-        buttonEarnings = new org.edisoncor.gui.button.ButtonIpod();
         buttonTotals = new org.edisoncor.gui.button.ButtonIpod();
         panelImage7 = new org.edisoncor.gui.panel.PanelImage();
         buttonBack = new org.edisoncor.gui.button.ButtonAction();
@@ -273,6 +272,11 @@ public class EmployeeClients extends javax.swing.JFrame {
         buttonDefaulterClients.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/defaulter.png"))); // NOI18N
         buttonDefaulterClients.setText("Defaulters");
         buttonDefaulterClients.setAnimacion(false);
+        buttonDefaulterClients.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDefaulterClientsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelImage6Layout = new javax.swing.GroupLayout(panelImage6);
         panelImage6.setLayout(panelImage6Layout);
@@ -304,15 +308,6 @@ public class EmployeeClients extends javax.swing.JFrame {
 
         panelImage5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Information"));
 
-        buttonEarnings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/earnings.png"))); // NOI18N
-        buttonEarnings.setText("Earnings");
-        buttonEarnings.setAnimacion(false);
-        buttonEarnings.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEarningsActionPerformed(evt);
-            }
-        });
-
         buttonTotals.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/info.png"))); // NOI18N
         buttonTotals.setText("Info");
         buttonTotals.setAnimacion(false);
@@ -326,41 +321,43 @@ public class EmployeeClients extends javax.swing.JFrame {
         panelImage5.setLayout(panelImage5Layout);
         panelImage5Layout.setHorizontalGroup(
             panelImage5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelImage5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelImage5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonTotals, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonEarnings, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImage5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonTotals, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         panelImage5Layout.setVerticalGroup(
             panelImage5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImage5Layout.createSequentialGroup()
+            .addGroup(panelImage5Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
                 .addComponent(buttonTotals, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonEarnings, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         panelImage7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         buttonBack.setText("Back");
+        buttonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelImage7Layout = new javax.swing.GroupLayout(panelImage7);
         panelImage7.setLayout(panelImage7Layout);
         panelImage7Layout.setHorizontalGroup(
             panelImage7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImage7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelImage7Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
                 .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelImage7Layout.setVerticalGroup(
             panelImage7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelImage7Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImage7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout panelCurves1Layout = new javax.swing.GroupLayout(panelCurves1);
@@ -379,8 +376,8 @@ public class EmployeeClients extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(panelImage5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelImage7, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelImage6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                            .addComponent(panelImage6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(panelImage7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(0, 29, Short.MAX_VALUE))
         );
         panelCurves1Layout.setVerticalGroup(
@@ -446,15 +443,34 @@ public class EmployeeClients extends javax.swing.JFrame {
 
     private void buttonClientsLoansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClientsLoansActionPerformed
         // TODO add your handling code here:
+        EmployeeClientsLoans EmployeeClientsLoans1 = new EmployeeClientsLoans();
+        EmployeeClientsLoans1.adminOrEmployee = false;
+        this.setVisible(false);
+        EmployeeClientsLoans1.setVisible(true);
     }//GEN-LAST:event_buttonClientsLoansActionPerformed
-
-    private void buttonEarningsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEarningsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonEarningsActionPerformed
 
     private void buttonTotalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTotalsActionPerformed
         // TODO add your handling code here:
+        EmployeeCheckTotals EmployeeCheckTotals1 = new EmployeeCheckTotals();
+        EmployeeCheckTotals1.adminOrEmployee = false;
+        this.setVisible(false);
+        EmployeeCheckTotals1.setVisible(true);
     }//GEN-LAST:event_buttonTotalsActionPerformed
+
+    private void buttonDefaulterClientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDefaulterClientsActionPerformed
+        // TODO add your handling code here:
+        EmployeeClientsDefaulters EmployeeClientsDefaulters1 = new EmployeeClientsDefaulters();
+        EmployeeClientsDefaulters1.adminOrEmployee = false;
+        this.setVisible(false);
+        EmployeeClientsDefaulters1.setVisible(true);
+    }//GEN-LAST:event_buttonDefaulterClientsActionPerformed
+
+    private void buttonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackActionPerformed
+        // TODO add your handling code here:
+        EmployeeInterface EmployeeInterface1 = new EmployeeInterface();
+        this.setVisible(false);
+        EmployeeInterface1.setVisible(true);
+    }//GEN-LAST:event_buttonBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -499,7 +515,6 @@ public class EmployeeClients extends javax.swing.JFrame {
     private org.edisoncor.gui.button.ButtonAction buttonConsult;
     private org.edisoncor.gui.button.ButtonIpod buttonDefaulterClients;
     private org.edisoncor.gui.button.ButtonAction buttonDelete;
-    private org.edisoncor.gui.button.ButtonIpod buttonEarnings;
     private org.edisoncor.gui.button.ButtonAction buttonEdit;
     private org.edisoncor.gui.button.ButtonIpod buttonTotals;
     private javax.swing.JTextField insertAddress;

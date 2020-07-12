@@ -5,6 +5,10 @@
  */
 package design.admin;
 
+import design.employee.EmployeeCheckTotals;
+import design.employee.EmployeeClientsDefaulters;
+import design.employee.EmployeeClientsLoans;
+
 /**
  *
  * @author Administrador
@@ -233,7 +237,7 @@ public class AdminClients extends javax.swing.JFrame {
         });
 
         buttonInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/info.png"))); // NOI18N
-        buttonInfo.setText("Information");
+        buttonInfo.setText("Info");
         buttonInfo.setAnimacion(false);
         buttonInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,8 +268,13 @@ public class AdminClients extends javax.swing.JFrame {
         panelImage6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Client Filters"));
 
         buttonDefaultersClients.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/defaulter.png"))); // NOI18N
-        buttonDefaultersClients.setText("Defaluters");
+        buttonDefaultersClients.setText("Defaulters");
         buttonDefaultersClients.setAnimacion(false);
+        buttonDefaultersClients.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDefaultersClientsActionPerformed(evt);
+            }
+        });
 
         buttonClientsLoans.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/loan.png"))); // NOI18N
         buttonClientsLoans.setText("With Loans");
@@ -303,6 +312,11 @@ public class AdminClients extends javax.swing.JFrame {
         panelImage7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         buttonBack.setText("Back");
+        buttonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelImage7Layout = new javax.swing.GroupLayout(panelImage7);
         panelImage7.setLayout(panelImage7Layout);
@@ -400,15 +414,41 @@ public class AdminClients extends javax.swing.JFrame {
 
     private void buttonEarningsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEarningsActionPerformed
         // TODO add your handling code here:
+        AdminCheckEarnings AdminCheckEarnings1 = new AdminCheckEarnings();
+        this.setVisible(false);
+        AdminCheckEarnings1.setVisible(true);
     }//GEN-LAST:event_buttonEarningsActionPerformed
 
     private void buttonInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInfoActionPerformed
         // TODO add your handling code here:
+        EmployeeCheckTotals EmployeeCheckTotals1 = new EmployeeCheckTotals();
+        EmployeeCheckTotals1.adminOrEmployee = true;
+        this.setVisible(false);
+        EmployeeCheckTotals1.setVisible(true);
     }//GEN-LAST:event_buttonInfoActionPerformed
 
     private void buttonClientsLoansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClientsLoansActionPerformed
         // TODO add your handling code here:
+        EmployeeClientsLoans EmployeeClientsLoans1 = new EmployeeClientsLoans();
+        EmployeeClientsLoans1.adminOrEmployee = true;
+        this.setVisible(false);
+        EmployeeClientsLoans1.setVisible(true);
     }//GEN-LAST:event_buttonClientsLoansActionPerformed
+
+    private void buttonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackActionPerformed
+        // TODO add your handling code here:
+        AdminInterface AdminInterface1 = new AdminInterface();
+        this.setVisible(false);
+        AdminInterface1.setVisible(true);
+    }//GEN-LAST:event_buttonBackActionPerformed
+
+    private void buttonDefaultersClientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDefaultersClientsActionPerformed
+        // TODO add your handling code here:
+        EmployeeClientsDefaulters EmployeeClientsDefaulters1 = new EmployeeClientsDefaulters();
+        EmployeeClientsDefaulters1.adminOrEmployee = true;
+        this.setVisible(false);
+        EmployeeClientsDefaulters1.setVisible(true);
+    }//GEN-LAST:event_buttonDefaultersClientsActionPerformed
 
     /**
      * @param args the command line arguments

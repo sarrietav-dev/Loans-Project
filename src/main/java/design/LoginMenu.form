@@ -69,12 +69,17 @@
                       <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                              <Component id="textUsser3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                              <Component id="insertUsser3" min="-2" pref="174" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                                      <Component id="textUsser3" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                      <Component id="insertUsser3" min="-2" pref="174" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="textLogin3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="85" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="textLogin3" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
@@ -89,9 +94,9 @@
                                       <Component id="insertPassword3" min="-2" pref="174" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="85" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -126,6 +131,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Authors"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkAuthors3ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="textLogin3">
               <Properties>
@@ -176,6 +184,9 @@
                 <Property name="text" type="java.lang.String" value="Exit"/>
                 <Property name="animacion" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonExit3ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

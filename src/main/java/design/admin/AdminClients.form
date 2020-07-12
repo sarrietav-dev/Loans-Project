@@ -411,7 +411,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/images/info.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Information"/>
+                    <Property name="text" type="java.lang.String" value="Info"/>
                     <Property name="animacion" type="boolean" value="false"/>
                   </Properties>
                   <Events>
@@ -466,9 +466,12 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/images/defaulter.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Defaluters"/>
+                    <Property name="text" type="java.lang.String" value="Defaulters"/>
                     <Property name="animacion" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDefaultersClientsActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="org.edisoncor.gui.button.ButtonIpod" name="buttonClientsLoans">
                   <Properties>
@@ -518,6 +521,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Back"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBackActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

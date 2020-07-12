@@ -5,6 +5,8 @@
  */
 package design.admin;
 
+import design.LoginMenu;
+
 /**
  *
  * @author Administrador
@@ -57,14 +59,29 @@ public class AdminInterface extends javax.swing.JFrame {
         buttonCheckClients.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Ussers.png"))); // NOI18N
         buttonCheckClients.setText("Check Clients");
         buttonCheckClients.setAnimacion(false);
+        buttonCheckClients.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCheckClientsActionPerformed(evt);
+            }
+        });
 
         buttonLoanConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/checkLoanConfig.png"))); // NOI18N
         buttonLoanConfig.setText("Loan config");
         buttonLoanConfig.setAnimacion(false);
+        buttonLoanConfig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLoanConfigActionPerformed(evt);
+            }
+        });
 
         buttonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
         buttonExit.setText("Exit");
         buttonExit.setAnimacion(false);
+        buttonExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);
@@ -153,10 +170,31 @@ public class AdminInterface extends javax.swing.JFrame {
 
     private void buttonCheckEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCheckEmployeesActionPerformed
         // TODO add your handling code here:
-        AdminEmployees adm1 = new AdminEmployees();
-        adm1.setVisible(true);
+        AdminEmployees AdminEmployees1 = new AdminEmployees();
+        AdminEmployees1.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_buttonCheckEmployeesActionPerformed
+
+    private void buttonCheckClientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCheckClientsActionPerformed
+        // TODO add your handling code here:
+        AdminClients AdminClients1 = new AdminClients();
+        AdminClients1.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_buttonCheckClientsActionPerformed
+
+    private void buttonLoanConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoanConfigActionPerformed
+        // TODO add your handling code here:
+        AdminLoans AdminLoans1 = new AdminLoans();
+        AdminLoans1.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_buttonLoanConfigActionPerformed
+
+    private void buttonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExitActionPerformed
+        // TODO add your handling code here:
+        LoginMenu LoginMenu1 = new LoginMenu();
+        this.setVisible(false);
+        LoginMenu1.setVisible(true);
+    }//GEN-LAST:event_buttonExitActionPerformed
 
     /**
      * @param args the command line arguments

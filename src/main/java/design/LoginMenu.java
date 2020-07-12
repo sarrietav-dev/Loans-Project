@@ -5,6 +5,11 @@
  */
 package design;
 
+import design.admin.AdminInterface;
+import design.employee.EmployeeInterface;
+import javax.swing.JOptionPane;
+import logic.databases.EmployeeDatabase;
+
 /**
  *
  * @author Administrador
@@ -17,8 +22,6 @@ public class LoginMenu extends javax.swing.JFrame {
     public LoginMenu() {
         initComponents();
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,6 +49,11 @@ public class LoginMenu extends javax.swing.JFrame {
         panel1.setColorSecundario(new java.awt.Color(255, 255, 255));
 
         checkAuthors3.setText("Authors");
+        checkAuthors3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkAuthors3ActionPerformed(evt);
+            }
+        });
 
         textLogin3.setFont(new java.awt.Font("SimSun", 1, 24)); // NOI18N
         textLogin3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -69,6 +77,11 @@ public class LoginMenu extends javax.swing.JFrame {
         buttonExit3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
         buttonExit3.setText("Exit");
         buttonExit3.setAnimacion(false);
+        buttonExit3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonExit3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelCurves4Layout = new javax.swing.GroupLayout(panelCurves4);
         panelCurves4.setLayout(panelCurves4Layout);
@@ -81,11 +94,14 @@ public class LoginMenu extends javax.swing.JFrame {
                 .addGap(56, 56, 56)
                 .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelCurves4Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(textUsser3)
-                        .addGap(34, 34, 34)
-                        .addComponent(insertUsser3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(textLogin3)
+                        .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelCurves4Layout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addComponent(textUsser3)
+                                .addGap(34, 34, 34)
+                                .addComponent(insertUsser3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(textLogin3))
+                        .addContainerGap(85, Short.MAX_VALUE))
                     .addGroup(panelCurves4Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -96,8 +112,8 @@ public class LoginMenu extends javax.swing.JFrame {
                             .addGroup(panelCurves4Layout.createSequentialGroup()
                                 .addComponent(textPassword3)
                                 .addGap(18, 18, 18)
-                                .addComponent(insertPassword3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(85, Short.MAX_VALUE))
+                                .addComponent(insertPassword3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panelCurves4Layout.setVerticalGroup(
             panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,8 +163,31 @@ public class LoginMenu extends javax.swing.JFrame {
 
     private void buttonLogin3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogin3ActionPerformed
         // TODO add your handling code here:
-
+        if ( "Admin".equals(insertUsser3.getText()) && "1234".equals(insertPassword3.getText()) )
+        {
+            AdminInterface AdminInterface1 = new AdminInterface();
+            this.setVisible(false);
+            AdminInterface1.setVisible(true);
+        }
+        
+        else 
+        {
+            JOptionPane.showMessageDialog(null, "The usser or password doesn't match!", "ERROR!", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_buttonLogin3ActionPerformed
+
+    private void checkAuthors3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAuthors3ActionPerformed
+        // TODO add your handling code here:
+        Authors Authors1 = new Authors();
+        this.setVisible(false);
+        Authors1.setVisible(true);
+    }//GEN-LAST:event_checkAuthors3ActionPerformed
+
+    private void buttonExit3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExit3ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_buttonExit3ActionPerformed
 
     /**
      * @param args the command line arguments

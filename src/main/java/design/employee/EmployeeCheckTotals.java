@@ -5,6 +5,8 @@
  */
 package design.employee;
 
+import design.admin.AdminClients;
+
 /**
  *
  * @author Administrador
@@ -17,6 +19,8 @@ public class EmployeeCheckTotals extends javax.swing.JFrame {
     public EmployeeCheckTotals() {
         initComponents();
     }
+    
+    public static boolean adminOrEmployee;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -163,6 +167,11 @@ public class EmployeeCheckTotals extends javax.swing.JFrame {
         buttonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back.jpg"))); // NOI18N
         buttonBack.setText("Back");
         buttonBack.setAnimacion(false);
+        buttonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelCurves1Layout = new javax.swing.GroupLayout(panelCurves1);
         panelCurves1.setLayout(panelCurves1Layout);
@@ -215,6 +224,23 @@ public class EmployeeCheckTotals extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackActionPerformed
+        // TODO add your handling code here:
+        if (adminOrEmployee == true)
+        {
+            AdminClients AdminClients1 = new AdminClients();
+            this.setVisible(false);
+            AdminClients1.setVisible(true);
+        }
+        
+        else
+        {
+            EmployeeClients EmployeeClients1 = new EmployeeClients();
+            this.setVisible(false);
+            EmployeeClients1.setVisible(true);
+        }
+    }//GEN-LAST:event_buttonBackActionPerformed
 
     /**
      * @param args the command line arguments

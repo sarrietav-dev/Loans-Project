@@ -3,25 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package design.employee;
-
-import design.admin.AdminClients;
-import static design.employee.EmployeeCheckTotals.adminOrEmployee;
+package design.admin;
 
 /**
  *
  * @author Administrador
  */
-public class EmployeeClientsLoans extends javax.swing.JFrame {
+public class AdminCheckEarnings extends javax.swing.JFrame {
 
     /**
-     * Creates new form EmployeeClientsLoans
+     * Creates new form EmployeeCheckEarnings
      */
-    public EmployeeClientsLoans() {
+    public AdminCheckEarnings() {
         initComponents();
     }
-    
-    public static boolean adminOrEmployee;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,10 +28,10 @@ public class EmployeeClientsLoans extends javax.swing.JFrame {
     private void initComponents() {
 
         panel1 = new org.edisoncor.gui.panel.Panel();
-        panelCurves2 = new org.edisoncor.gui.panel.PanelCurves();
+        panelCurves1 = new org.edisoncor.gui.panel.PanelCurves();
         panelImage1 = new org.edisoncor.gui.panel.PanelImage();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableClientsLoans = new javax.swing.JTable();
+        tableEmployeesEarnings = new javax.swing.JTable();
         labelCustom1 = new org.edisoncor.gui.label.LabelCustom();
         buttonBack = new org.edisoncor.gui.button.ButtonIpod();
 
@@ -47,43 +42,41 @@ public class EmployeeClientsLoans extends javax.swing.JFrame {
 
         panelImage1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        tableClientsLoans.setModel(new javax.swing.table.DefaultTableModel(
+        tableEmployeesEarnings.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Client", "Date of assignment", "Amount owed"
+                "Employee", "Earnings"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tableClientsLoans);
+        jScrollPane1.setViewportView(tableEmployeesEarnings);
 
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);
         panelImage1Layout.setHorizontalGroup(
             panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         panelImage1Layout.setVerticalGroup(
             panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImage1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         labelCustom1.setBackground(new java.awt.Color(102, 102, 102));
         labelCustom1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        labelCustom1.setText("Clients with Loans");
+        labelCustom1.setText("Employee's Earnings");
         labelCustom1.setColorDeSegundoBorde(new java.awt.Color(0, 0, 0));
 
         buttonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back.jpg"))); // NOI18N
@@ -95,42 +88,44 @@ public class EmployeeClientsLoans extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout panelCurves2Layout = new javax.swing.GroupLayout(panelCurves2);
-        panelCurves2.setLayout(panelCurves2Layout);
-        panelCurves2Layout.setHorizontalGroup(
-            panelCurves2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCurves2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelCurves1Layout = new javax.swing.GroupLayout(panelCurves1);
+        panelCurves1.setLayout(panelCurves1Layout);
+        panelCurves1Layout.setHorizontalGroup(
+            panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCurves1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelCurves2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelImage1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelCustom1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(labelCustom1, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(panelCurves2Layout.createSequentialGroup()
-                .addGap(197, 197, 197)
-                .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(panelCurves1Layout.createSequentialGroup()
+                .addGap(210, 210, 210)
+                .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        panelCurves2Layout.setVerticalGroup(
-            panelCurves2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCurves2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+        panelCurves1Layout.setVerticalGroup(
+            panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCurves1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(labelCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelImage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13))
         );
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelCurves2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelCurves1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelCurves2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panel1Layout.createSequentialGroup()
+                .addComponent(panelCurves1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -149,19 +144,9 @@ public class EmployeeClientsLoans extends javax.swing.JFrame {
 
     private void buttonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackActionPerformed
         // TODO add your handling code here:
-        if (adminOrEmployee == true)
-        {
-            AdminClients AdminClients1 = new AdminClients();
-            this.setVisible(false);
-            AdminClients1.setVisible(true);
-        }
-        
-        else
-        {
-            EmployeeClients EmployeeClients1 = new EmployeeClients();
-            this.setVisible(false);
-            EmployeeClients1.setVisible(true);
-        }
+        AdminClients AdminClients1 = new AdminClients();
+        this.setVisible(false);
+        AdminClients1.setVisible(true);
     }//GEN-LAST:event_buttonBackActionPerformed
 
     /**
@@ -181,20 +166,21 @@ public class EmployeeClientsLoans extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EmployeeClientsLoans.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminCheckEarnings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EmployeeClientsLoans.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminCheckEarnings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EmployeeClientsLoans.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminCheckEarnings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EmployeeClientsLoans.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminCheckEarnings.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EmployeeClientsLoans().setVisible(true);
+                new AdminCheckEarnings().setVisible(true);
             }
         });
     }
@@ -204,8 +190,8 @@ public class EmployeeClientsLoans extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private org.edisoncor.gui.label.LabelCustom labelCustom1;
     private org.edisoncor.gui.panel.Panel panel1;
-    private org.edisoncor.gui.panel.PanelCurves panelCurves2;
+    private org.edisoncor.gui.panel.PanelCurves panelCurves1;
     private org.edisoncor.gui.panel.PanelImage panelImage1;
-    private javax.swing.JTable tableClientsLoans;
+    private javax.swing.JTable tableEmployeesEarnings;
     // End of variables declaration//GEN-END:variables
 }
