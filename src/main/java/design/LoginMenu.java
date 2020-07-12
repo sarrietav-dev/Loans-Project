@@ -7,14 +7,15 @@ package design;
 
 import design.admin.AdminInterface;
 import design.employee.EmployeeInterface;
+
 import javax.swing.JOptionPane;
+
 import logic.company_members.Employee;
 import logic.company_members.employee_crud.ReadEmployee;
 import logic.databases.EmployeeDatabase;
 import logic.exceptions.LoginIncorrectException;
 
 /**
- *
  * @author Administrador
  */
 public class LoginMenu extends javax.swing.JFrame {
@@ -89,76 +90,76 @@ public class LoginMenu extends javax.swing.JFrame {
         javax.swing.GroupLayout panelCurves4Layout = new javax.swing.GroupLayout(panelCurves4);
         panelCurves4.setLayout(panelCurves4Layout);
         panelCurves4Layout.setHorizontalGroup(
-            panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCurves4Layout.createSequentialGroup()
-                .addComponent(checkAuthors3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(panelCurves4Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCurves4Layout.createSequentialGroup()
-                        .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelCurves4Layout.createSequentialGroup()
-                                .addGap(53, 53, 53)
-                                .addComponent(textUsser3)
-                                .addGap(34, 34, 34)
-                                .addComponent(insertUsser3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(textLogin3))
-                        .addContainerGap(85, Short.MAX_VALUE))
-                    .addGroup(panelCurves4Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(panelCurves4Layout.createSequentialGroup()
-                                .addComponent(buttonLogin3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(70, 70, 70)
-                                .addComponent(buttonExit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelCurves4Layout.createSequentialGroup()
-                                .addComponent(textPassword3)
-                                .addGap(18, 18, 18)
-                                .addComponent(insertPassword3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelCurves4Layout.createSequentialGroup()
+                                .addComponent(checkAuthors3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(panelCurves4Layout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(panelCurves4Layout.createSequentialGroup()
+                                                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(panelCurves4Layout.createSequentialGroup()
+                                                                .addGap(53, 53, 53)
+                                                                .addComponent(textUsser3)
+                                                                .addGap(34, 34, 34)
+                                                                .addComponent(insertUsser3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(textLogin3))
+                                                .addContainerGap(85, Short.MAX_VALUE))
+                                        .addGroup(panelCurves4Layout.createSequentialGroup()
+                                                .addGap(49, 49, 49)
+                                                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(panelCurves4Layout.createSequentialGroup()
+                                                                .addComponent(buttonLogin3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(70, 70, 70)
+                                                                .addComponent(buttonExit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(panelCurves4Layout.createSequentialGroup()
+                                                                .addComponent(textPassword3)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(insertPassword3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panelCurves4Layout.setVerticalGroup(
-            panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCurves4Layout.createSequentialGroup()
-                .addComponent(checkAuthors3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addComponent(textLogin3)
-                .addGap(32, 32, 32)
-                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(insertUsser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textUsser3))
-                .addGap(18, 18, 18)
-                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(insertPassword3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textPassword3))
-                .addGap(27, 27, 27)
-                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonExit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonLogin3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelCurves4Layout.createSequentialGroup()
+                                .addComponent(checkAuthors3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(9, 9, 9)
+                                .addComponent(textLogin3)
+                                .addGap(32, 32, 32)
+                                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(insertUsser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(textUsser3))
+                                .addGap(18, 18, 18)
+                                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(insertPassword3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(textPassword3))
+                                .addGap(27, 27, 27)
+                                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(buttonExit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(buttonLogin3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelCurves4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panelCurves4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelCurves4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panelCurves4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -166,45 +167,36 @@ public class LoginMenu extends javax.swing.JFrame {
 
     private void buttonLogin3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogin3ActionPerformed
         // TODO add your handling code here:
-        
+
         boolean proceed = true;
-                
-        
-        if ( "Admin".equals(insertUsser3.getText()) && "1234".equals(insertPassword3.getText()) )
-        {
+
+
+        if ("Admin".equals(insertUsser3.getText()) && "1234".equals(insertPassword3.getText())) {
             AdminInterface AdminInterface1 = new AdminInterface();
             this.setVisible(false);
             AdminInterface1.setVisible(true);
-        }
-        
-        else if ( "".equals(insertUsser3.getText()) || "".equals(insertPassword3.getText()) )
-        {
+        } else if ("".equals(insertUsser3.getText()) || "".equals(insertPassword3.getText())) {
             proceed = false;
             JOptionPane.showMessageDialog(null, "You must fill all the fields!", "ERROR!", JOptionPane.ERROR_MESSAGE);
+        } else {
+
+            try {
+                Employee employee = ReadEmployee.login(insertUsser3.getText(), insertPassword3.getText());
+                System.out.println(employee);
+            } catch (LoginIncorrectException e) {
+                proceed = false;
+                System.out.print("Usser or password incorrect, throwing exception... ");
+                JOptionPane.showMessageDialog(null, "User or password incorrect!", "ERROR!", JOptionPane.ERROR_MESSAGE);
+            }
+
         }
-        
-        else
-        {
-            
-             try {
-                ReadEmployee.login(insertUsser3.getText(), insertPassword3.getText());
-             }
-             
-             catch(LoginIncorrectException e) {
-                  proceed = false;
-                  System.out.print("Usser or password incorrect, throwing exception... ");
-                  JOptionPane.showMessageDialog(null, "User or password incorrect!", "ERROR!", JOptionPane.ERROR_MESSAGE);
-             }
-             
-        }
-        
-        if (proceed == true)
-        {
+
+        if (proceed == true) {
             EmployeeInterface EmployeeInterface1 = new EmployeeInterface();
             this.setVisible(false);
             EmployeeInterface1.setVisible(true);
         }
-        
+
     }//GEN-LAST:event_buttonLogin3ActionPerformed
 
     private void checkAuthors3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAuthors3ActionPerformed
@@ -226,7 +218,7 @@ public class LoginMenu extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
