@@ -88,6 +88,10 @@ public class Employee implements Serializable {
         currentSalary += amount;
     }
 
+    public boolean areFieldsCorrects(String usr, String password) {
+        return usr.equals(id) && password.equals(this.password);
+    }
+
     public String getId() {
         return id;
     }
