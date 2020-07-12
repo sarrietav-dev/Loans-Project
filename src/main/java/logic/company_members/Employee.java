@@ -27,33 +27,30 @@ public class Employee implements Serializable {
 
     }
 
-    public Employee(String id) {
+    public Employee(String id, String password) {
         this.id = id;
+        this.password = password;
     }
 
-    public Employee(String id, String name, double baseSalary) {
+    public Employee(String id, String password, String name, double baseSalary) {
         this.id = id;
+        this.password = password;
         this.name = name;
         this.baseSalary = baseSalary;
     }
 
-    public Employee(String name, String homePhone, String mobilePhone, String address, double baseSalary) {
+    public Employee(String id, String password, String name, String homePhone, String mobilePhone, String address, double baseSalary) {
+        this.id = id;
+        this.password = password;
         this.name = name;
         this.homePhone = homePhone;
         this.mobilePhone = mobilePhone;
         this.address = address;
         this.baseSalary = baseSalary;
     }
-    
-    public Employee(Employee emp)
-    {
-        this.id = emp.id;
-        this.password = emp.password;
-        this.name = emp.name;
-        this.homePhone = emp.homePhone;
-        this.mobilePhone = emp.mobilePhone;
-        this.address = emp.address;
-        this.baseSalary = emp.baseSalary;
+
+    public Employee(Employee login) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -100,7 +97,7 @@ public class Employee implements Serializable {
     }
 
     public boolean areFieldsCorrects(String usr, String password) {
-        return usr.equals(id) && password.equals(this.password);
+        return usr.equalsIgnoreCase(id) && password.equals(this.password);
     }
 
     public String getId() {

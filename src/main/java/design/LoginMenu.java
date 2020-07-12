@@ -18,7 +18,7 @@ import logic.exceptions.LoginIncorrectException;
  * @author Administrador
  */
 public class LoginMenu extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form Login
      */
@@ -168,10 +168,10 @@ public class LoginMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         boolean proceed = true;
+                
         
         if ( "Admin".equals(insertUsser3.getText()) && "1234".equals(insertPassword3.getText()) )
         {
-            proceed = false;
             AdminInterface AdminInterface1 = new AdminInterface();
             this.setVisible(false);
             AdminInterface1.setVisible(true);
@@ -187,7 +187,7 @@ public class LoginMenu extends javax.swing.JFrame {
         {
             
              try {
-                Employee emp = new Employee(ReadEmployee.login(insertUsser3.getText(), insertPassword3.getText()));
+                ReadEmployee.login(insertUsser3.getText(), insertPassword3.getText());
              }
              
              catch(LoginIncorrectException e) {
@@ -205,9 +205,6 @@ public class LoginMenu extends javax.swing.JFrame {
             EmployeeInterface1.setVisible(true);
         }
         
-        
-       
-                
     }//GEN-LAST:event_buttonLogin3ActionPerformed
 
     private void checkAuthors3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAuthors3ActionPerformed
