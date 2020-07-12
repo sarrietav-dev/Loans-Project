@@ -385,7 +385,9 @@ public class AdminEmployees extends javax.swing.JFrame {
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         // TODO add your handling code here:
-        
+        Employee newEmp = new Employee(insertId.getText(), "1234", insertName.getText(), insertTelephone.getText(), insertCellphone.getText(), insertAddress.getText(), Double.parseDouble(insertBaseSalary.getText()));
+        CreateEmployee.create(newEmp);
+        showEmployees();
     }//GEN-LAST:event_buttonAddActionPerformed
 
     /**
