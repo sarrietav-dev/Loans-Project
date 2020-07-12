@@ -5,17 +5,24 @@
  */
 package design.admin;
 
+import java.util.ArrayList;
+import logic.company_members.Employee;
+import logic.company_members.employee_crud.CreateEmployee;
+import logic.company_members.employee_crud.ReadEmployee;
+
 /**
  *
  * @author Administrador
  */
 public class AdminEmployees extends javax.swing.JFrame {
-
+    
+    ArrayList<Employee> allEmployees = ReadEmployee.getAllEmployees();
     /**
      * Creates new form AddEmployee
      */
     public AdminEmployees() {
         initComponents();
+        showEmployees();
     }
 
     /**
@@ -44,7 +51,7 @@ public class AdminEmployees extends javax.swing.JFrame {
         insertBaseSalary = new javax.swing.JTextField();
         panelImage1 = new org.edisoncor.gui.panel.PanelImage();
         textId = new javax.swing.JLabel();
-        InsertId = new javax.swing.JTextField();
+        insertId = new javax.swing.JTextField();
         panelImage3 = new org.edisoncor.gui.panel.PanelImage();
         buttonAdd = new org.edisoncor.gui.button.ButtonAction();
         buttonEdit = new org.edisoncor.gui.button.ButtonAction();
@@ -124,7 +131,7 @@ public class AdminEmployees extends javax.swing.JFrame {
                             .addComponent(insertCellphone, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(insertTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(insertAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(InsertId, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(insertId, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelImage2Layout.createSequentialGroup()
                         .addComponent(textBaseSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -141,7 +148,7 @@ public class AdminEmployees extends javax.swing.JFrame {
                     .addComponent(panelImage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelImage2Layout.createSequentialGroup()
                         .addGroup(panelImage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(InsertId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(insertId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textId))
                         .addGap(18, 18, 18)
                         .addGroup(panelImage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -169,6 +176,11 @@ public class AdminEmployees extends javax.swing.JFrame {
         panelImage3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         buttonAdd.setText("Add");
+        buttonAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddActionPerformed(evt);
+            }
+        });
 
         buttonEdit.setText("Edit");
 
@@ -217,33 +229,45 @@ public class AdminEmployees extends javax.swing.JFrame {
 
         TableEmployees.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "Telephone", "Cellphone", "Address", "Base salary", "Total Salary"
+                "id", "Name", "Telephone", "Cellphone", "Address", "Base salary", "Total Salary"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
             };
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        TableEmployees.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableEmployeesMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(TableEmployees);
@@ -256,9 +280,7 @@ public class AdminEmployees extends javax.swing.JFrame {
         );
         panelImage4Layout.setVerticalGroup(
             panelImage4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelImage4Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 7, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout panelCurves1Layout = new javax.swing.GroupLayout(panelCurves1);
@@ -298,7 +320,7 @@ public class AdminEmployees extends javax.swing.JFrame {
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
                 .addComponent(panelCurves1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 7, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -315,6 +337,32 @@ public class AdminEmployees extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    private void showEmployees(){
+        
+        String matrix[][] = new String[allEmployees.size()][7];
+        
+            for (int i=0; i<allEmployees.size(); i++)
+            {
+                
+                matrix[i][0] = allEmployees.get(i).getId();
+                matrix[i][1] = allEmployees.get(i).getName();
+                matrix[i][2] = allEmployees.get(i).getHomePhone();
+                matrix[i][3] = allEmployees.get(i).getMobilePhone();
+                matrix[i][3] = allEmployees.get(i).getAddress();
+                matrix[i][5] = String.valueOf(allEmployees.get(i).getBaseSalary());
+                matrix[i][6] = String.valueOf(allEmployees.get(i).getCurrentSalary());
+
+            }
+            
+            TableEmployees.setModel(new javax.swing.table.DefaultTableModel(
+                    matrix,
+                    new String [] { "id", "Name", "Telephone", "Cellphone", "Address", "Base salary", "Total Salary"  }
+                    ));
+        
+    }
+    
     private void insertTelephoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertTelephoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_insertTelephoneActionPerformed
@@ -323,12 +371,22 @@ public class AdminEmployees extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_insertAddressActionPerformed
 
+    
     private void buttonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackActionPerformed
         // TODO add your handling code here:
         AdminInterface AdminInterface1 = new AdminInterface();
         this.setVisible(false);
         AdminInterface1.setVisible(true);
     }//GEN-LAST:event_buttonBackActionPerformed
+
+    private void TableEmployeesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableEmployeesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TableEmployeesMouseClicked
+
+    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_buttonAddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,15 +423,17 @@ public class AdminEmployees extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AdminEmployees().setVisible(true);
             }
+            
+            
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField InsertId;
     private javax.swing.JTable TableEmployees;
     private org.edisoncor.gui.util.BrightPassFilter brightPassFilter1;
     private org.edisoncor.gui.button.ButtonAction buttonAdd;
@@ -383,6 +443,7 @@ public class AdminEmployees extends javax.swing.JFrame {
     private javax.swing.JTextField insertAddress;
     private javax.swing.JTextField insertBaseSalary;
     private javax.swing.JTextField insertCellphone;
+    private javax.swing.JTextField insertId;
     private javax.swing.JTextField insertName;
     private javax.swing.JTextField insertTelephone;
     private javax.swing.JScrollPane jScrollPane1;
