@@ -8,14 +8,17 @@ package design;
 import design.admin.AdminInterface;
 import design.employee.EmployeeInterface;
 import javax.swing.JOptionPane;
+import logic.company_members.Employee;
+import logic.company_members.employee_crud.ReadEmployee;
 import logic.databases.EmployeeDatabase;
+import logic.exceptions.LoginIncorrectException;
 
 /**
  *
  * @author Administrador
  */
 public class LoginMenu extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form Login
      */
@@ -163,18 +166,48 @@ public class LoginMenu extends javax.swing.JFrame {
 
     private void buttonLogin3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogin3ActionPerformed
         // TODO add your handling code here:
+        
+        boolean proceed = true;
+        
         if ( "Admin".equals(insertUsser3.getText()) && "1234".equals(insertPassword3.getText()) )
         {
+            proceed = false;
             AdminInterface AdminInterface1 = new AdminInterface();
             this.setVisible(false);
             AdminInterface1.setVisible(true);
         }
         
-        else 
+        else if ( "".equals(insertUsser3.getText()) || "".equals(insertPassword3.getText()) )
         {
-            JOptionPane.showMessageDialog(null, "The usser or password doesn't match!", "ERROR!", JOptionPane.ERROR_MESSAGE);
+            proceed = false;
+            JOptionPane.showMessageDialog(null, "You must fill all the fields!", "ERROR!", JOptionPane.ERROR_MESSAGE);
         }
         
+        else
+        {
+            
+             try {
+                Employee emp = new Employee(ReadEmployee.login(insertUsser3.getText(), insertPassword3.getText()));
+             }
+             
+             catch(LoginIncorrectException e) {
+                  proceed = false;
+                  System.out.print("Usser or password incorrect, throwing exception... ");
+                  JOptionPane.showMessageDialog(null, "User or password incorrect!", "ERROR!", JOptionPane.ERROR_MESSAGE);
+             }
+             
+        }
+        
+        if (proceed == true)
+        {
+            EmployeeInterface EmployeeInterface1 = new EmployeeInterface();
+            this.setVisible(false);
+            EmployeeInterface1.setVisible(true);
+        }
+        
+        
+       
+                
     }//GEN-LAST:event_buttonLogin3ActionPerformed
 
     private void checkAuthors3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAuthors3ActionPerformed

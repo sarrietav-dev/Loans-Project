@@ -44,6 +44,17 @@ public class Employee implements Serializable {
         this.address = address;
         this.baseSalary = baseSalary;
     }
+    
+    public Employee(Employee emp)
+    {
+        this.id = emp.id;
+        this.password = emp.password;
+        this.name = emp.name;
+        this.homePhone = emp.homePhone;
+        this.mobilePhone = emp.mobilePhone;
+        this.address = emp.address;
+        this.baseSalary = emp.baseSalary;
+    }
 
     /**
      * Pays an installment of a loan.
@@ -86,6 +97,10 @@ public class Employee implements Serializable {
 
     private void sumToSalary(double amount) {
         currentSalary += amount;
+    }
+
+    public boolean areFieldsCorrects(String usr, String password) {
+        return usr.equals(id) && password.equals(this.password);
     }
 
     public String getId() {

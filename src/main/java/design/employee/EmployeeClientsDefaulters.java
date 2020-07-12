@@ -6,7 +6,6 @@
 package design.employee;
 
 import design.admin.AdminClients;
-import static design.employee.EmployeeClientsLoans.adminOrEmployee;
 
 /**
  *
@@ -193,6 +192,7 @@ public class EmployeeClientsDefaulters extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new EmployeeClientsDefaulters().setVisible(true);
             }
