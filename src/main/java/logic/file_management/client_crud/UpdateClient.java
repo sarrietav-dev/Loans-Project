@@ -45,7 +45,6 @@ public class UpdateClient extends CRUD {
      * </ul>
      */
     public static void addLoan(Loan loan, final int CLIENT_ID) {
-        HashMap<Client, ArrayList<Loan>> data = CLIENT_DATABASE.getData();
         Set<Entry<Client, ArrayList<Loan>>> entrySet = data.entrySet();
 
         List<Entry<Client, ArrayList<Loan>>> entryList = entrySet.stream()
@@ -76,5 +75,26 @@ public class UpdateClient extends CRUD {
     private static void setAddLoanOperation(Loan loan, Entry<Client, ArrayList<Loan>> entry) {
         loan.setClient(entry.getKey());
         entry.getValue().add(loan);
+    }
+
+    public static void update(Client client) {
+        Set<Entry<Client, ArrayList<Loan>>> entrySet = data.entrySet();
+
+        for (Entry<Client, ArrayList<Loan>> entry : entrySet) {
+            if (client.equals(entry.getKey())) {
+                replace(entry.getKey(), client);
+                return;
+            }
+        }
+    }
+
+    private static void replace(Client clientOld, Client clientNew) {
+        ArrayList<Loan> loans = data.remove(clientOld);
+        if (!doesClientExist(clientNew)) {
+            data.put(clientNew, loans);
+            CLIENT_DATABASE.updateDataList(data);
+        }
+        else
+            throw new ClientAlreadyExistsException("That ID is taken!");
     }
 }

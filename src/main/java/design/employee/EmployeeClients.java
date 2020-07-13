@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import logic.exceptions.ClientAlreadyExistsException;
 import logic.file_management.client_crud.CreateClient;
 import logic.file_management.client_crud.ReadClient;
+import logic.file_management.client_crud.UpdateClient;
 import logic.loan_classes.Client;
 
 /**
@@ -468,7 +469,7 @@ public class EmployeeClients extends javax.swing.JFrame {
                             .addComponent(panelImage5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panelImage6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(panelImage7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(0, 31, Short.MAX_VALUE))
+                .addGap(0, 34, Short.MAX_VALUE))
         );
         panelCurves1Layout.setVerticalGroup(
             panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -535,7 +536,7 @@ public class EmployeeClients extends javax.swing.JFrame {
     private void buttonClientsLoansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClientsLoansActionPerformed
         // TODO add your handling code here:
         EmployeeClientsLoans EmployeeClientsLoans1 = new EmployeeClientsLoans();
-        EmployeeClientsLoans1.adminOrEmployee = false;
+        EmployeeClientsLoans.adminOrEmployee = false;
         this.setVisible(false);
         EmployeeClientsLoans1.setVisible(true);
     }//GEN-LAST:event_buttonClientsLoansActionPerformed
@@ -543,7 +544,7 @@ public class EmployeeClients extends javax.swing.JFrame {
     private void buttonTotalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTotalsActionPerformed
         // TODO add your handling code here:
         EmployeeCheckTotals EmployeeCheckTotals1 = new EmployeeCheckTotals();
-        EmployeeCheckTotals1.adminOrEmployee = false;
+        EmployeeCheckTotals.adminOrEmployee = false;
         this.setVisible(false);
         EmployeeCheckTotals1.setVisible(true);
     }//GEN-LAST:event_buttonTotalsActionPerformed
@@ -551,7 +552,7 @@ public class EmployeeClients extends javax.swing.JFrame {
     private void buttonDefaulterClientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDefaulterClientsActionPerformed
         // TODO add your handling code here:
         EmployeeClientsDefaulters EmployeeClientsDefaulters1 = new EmployeeClientsDefaulters();
-        EmployeeClientsDefaulters1.adminOrEmployee = false;
+        EmployeeClientsDefaulters.adminOrEmployee = false;
         this.setVisible(false);
         EmployeeClientsDefaulters1.setVisible(true);
     }//GEN-LAST:event_buttonDefaulterClientsActionPerformed
@@ -565,13 +566,59 @@ public class EmployeeClients extends javax.swing.JFrame {
 
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
         // TODO add your handling code here:
+        String errors = new String();
+        int cont = 0;
+        if ("".equals(insertName.getText()) || "".equals(insertPhone.getText()) || "".equals(insertCellphone.getText()) || "".equals(insertAddress.getText()))
+        {
+            errors += "- You must fill all the fields! \n";
+            cont++;
+        }
         
+        try {
+            Integer.parseInt(insertPhone.getText());
+        } catch (NumberFormatException e) {
+            errors += "- You cant use letters for telephones or leave it blank! \n";
+            cont++;
+        }
+        
+        try {
+            Integer.parseInt(insertCellphone.getText());
+        } catch (NumberFormatException e) {
+            errors += "- You cant use letters for cellphones or leave it blank! \n";
+            cont++;
+        }
+        
+        try {
+                  Client editClient = new Client(Integer.valueOf(insertId.getText()), insertName.getText(), insertPhone.getText(), insertCellphone.getText(), insertAddress.getText());        
+        }  catch( NumberFormatException e ) {
+             cont++;
+        }
+        
+        if (cont == 0)
+        {
+            Client editClient = new Client(Integer.valueOf(insertId.getText()), insertName.getText(), insertPhone.getText(), insertCellphone.getText(), insertAddress.getText());
+            UpdateClient.update(editClient);
+            this.showClients();
+            
+        }
+        
+        else
+        {
+            JOptionPane.showMessageDialog(null, errors, "ERROR!", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_buttonEditActionPerformed
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         // TODO add your handling code here:
          String errors = new String();
         int cont = 0;
+        
+        try {
+             Integer.parseInt(insertId.getText());
+         } catch (NumberFormatException e) {
+            errors += "- You cant use letters for id or leave it blank! \n";
+            cont++;
+        }
         
         if ("".equals(insertId.getText()) || "".equals(insertName.getText()) || "".equals(insertPhone.getText()) || "".equals(insertCellphone.getText()) || "".equals(insertAddress.getText()))
         {
@@ -593,21 +640,26 @@ public class EmployeeClients extends javax.swing.JFrame {
             cont++;
         }
         
-        try {
-                  Client newClient = new Client(Integer.valueOf(insertId.getText()), insertName.getText(), insertPhone.getText(), insertCellphone.getText(), insertAddress.getText());
-                  CreateClient.create(newClient);
-                  
-        } catch( ClientAlreadyExistsException e ) {
-             errors += "- That id already exist! \n";
-             cont++;
-        } catch( NumberFormatException e ) {
-             cont++;
-        }
+        
         
         if (cont == 0)
         {
+            try {
+                  Client newClient = new Client(Integer.valueOf(insertId.getText()), insertName.getText(), insertPhone.getText(), insertCellphone.getText(), insertAddress.getText());
+                  CreateClient.create(newClient);
+                 } catch( ClientAlreadyExistsException e ) {
+                      cont++;
+                      errors += "- That id already exist!";
+                      JOptionPane.showMessageDialog(null, errors, "ERROR!", JOptionPane.ERROR_MESSAGE);
+                 } catch( NumberFormatException e ) {
+                 }
+                 if (cont == 0)
+                 {
+                      this.showClients();
+                      paintItWhite();
+                 }
+            
             this.showClients();
-            paintItWhite();
         }
         
         else
