@@ -1,5 +1,6 @@
 package logic.loan_classes;
 
+import logic.company_members.Employee;
 import logic.databases.ClientDatabase;
 import logic.exceptions.DateOutOfLimitException;
 
@@ -26,18 +27,20 @@ public class Dates implements Serializable {
     }
 
     private void setAuthorizationDate(String authorizationDate) {
+        final ClientDatabase CLIENT_DATABASE = ClientDatabase.getInstance();
         Date authDate = DateFormatter.format(authorizationDate);
         if (isAuthDateWithinLimits(authDate))
             this.authorizationDate = authDate;
         else
-            throw new DateOutOfLimitException("Date out of limits! Only until " + ClientDatabase.getLimitOfAuthDate() + " days of the month!");
+            throw new DateOutOfLimitException("Date out of limits! Only until " + CLIENT_DATABASE.getLimitOfAuthDate() + " days of the month!");
     }
 
     private boolean isAuthDateWithinLimits(Date date) {
+        final ClientDatabase CLIENT_DATABASE = ClientDatabase.getInstance();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.get(Calendar.DAY_OF_MONTH);
-        return calendar.get(Calendar.DAY_OF_MONTH) <= ClientDatabase.getLimitOfAuthDate();
+        return calendar.get(Calendar.DAY_OF_MONTH) <= CLIENT_DATABASE.getLimitOfAuthDate();
     }
 
     private void setDeliveryDate() {

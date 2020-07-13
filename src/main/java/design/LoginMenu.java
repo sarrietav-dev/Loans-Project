@@ -10,6 +10,7 @@ import design.employee.EmployeeInterface;
 
 import javax.swing.JOptionPane;
 
+import logic.company_members.Employee;
 import logic.company_members.employee_crud.ReadEmployee;
 import logic.databases.EmployeeDatabase;
 import logic.exceptions.LoginIncorrectException;
@@ -166,17 +167,35 @@ public class LoginMenu extends javax.swing.JFrame {
 
     private void buttonLogin3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogin3ActionPerformed
         // TODO add your handling code here:
+
+        boolean proceed = true;
+
+
         if ("Admin".equals(insertUsser3.getText()) && "1234".equals(insertPassword3.getText())) {
+            proceed = false;
             AdminInterface AdminInterface1 = new AdminInterface();
             this.setVisible(false);
             AdminInterface1.setVisible(true);
+        } else if ("".equals(insertUsser3.getText()) || "".equals(insertPassword3.getText())) {
+            proceed = false;
+            JOptionPane.showMessageDialog(null, "You must fill all the fields!", "ERROR!", JOptionPane.ERROR_MESSAGE);
         } else {
+
             try {
-                ReadEmployee.login(insertUsser3.getText(), insertPassword3.getText());
+                Employee employee = ReadEmployee.login(insertUsser3.getText(), insertPassword3.getText());
+                System.out.println(employee);
             } catch (LoginIncorrectException e) {
+                proceed = false;
                 System.out.print("Usser or password incorrect, throwing exception... ");
                 JOptionPane.showMessageDialog(null, "User or password incorrect!", "ERROR!", JOptionPane.ERROR_MESSAGE);
             }
+
+        }
+
+        if (proceed == true) {
+            EmployeeInterface EmployeeInterface1 = new EmployeeInterface();
+            this.setVisible(false);
+            EmployeeInterface1.setVisible(true);
         }
 
     }//GEN-LAST:event_buttonLogin3ActionPerformed

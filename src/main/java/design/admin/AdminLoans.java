@@ -26,12 +26,15 @@ public class AdminLoans extends javax.swing.JFrame {
         initComponents();
         JFormattedTextField tf = ((JSpinner.DefaultEditor) spinnerAuthorization.getEditor()).getTextField();
         tf.setEditable(false);
+        showData();
         
         
     }
     
     private void showData(){
-        
+        insertValueToLend.setText(String.valueOf(Admin.getMaximumAmountToLend()));
+        insertValuePerClient.setText(String.valueOf(Admin.getMaximumToLendPerClient()));
+        spinnerAuthorization.setValue(Admin.getAuthDate());
     }
 
     /**

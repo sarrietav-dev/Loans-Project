@@ -1,5 +1,7 @@
+  
 package logic.company_members;
 
+import logic.databases.ClientDatabase;
 import logic.exceptions.ClientAlreadyExistsException;
 import logic.exceptions.LoanAlreadyPaidException;
 import logic.file_management.client_crud.CreateClient;
@@ -94,6 +96,21 @@ public class Employee implements Serializable {
 
     public boolean areFieldsCorrects(String usr, String password) {
         return usr.equalsIgnoreCase(id) && password.equals(this.password);
+    }
+
+    public static double getMaximumAmountToLend() {
+        final ClientDatabase CLIENT_DATABASE = ClientDatabase.getInstance();
+        return CLIENT_DATABASE.getMaximumAmountToLend();
+    }
+
+    public static double getMaximumToLendPerClient() {
+        final ClientDatabase CLIENT_DATABASE = ClientDatabase.getInstance();
+        return CLIENT_DATABASE.getMaximumToLendPerClient();
+    }
+
+    public static int getAuthDate() {
+        final ClientDatabase CLIENT_DATABASE = ClientDatabase.getInstance();
+        return CLIENT_DATABASE.getLimitOfAuthDate();
     }
 
     public String getId() {

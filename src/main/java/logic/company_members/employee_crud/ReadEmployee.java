@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 public class ReadEmployee extends CRUD {
     public static boolean doesEmployeeExist(Employee employee) {
-        return employees.stream()
+        return getEmployees().stream()
                 .anyMatch(employee::equals);
     }
 
     public static ArrayList<Employee> getAllEmployees() {
-        return database.getEmployees();
+        return getEmployees();
     }
 
     public static Employee login(String user, String pass) {
