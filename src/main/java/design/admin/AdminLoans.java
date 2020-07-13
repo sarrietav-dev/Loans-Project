@@ -5,9 +5,13 @@
  */
 package design.admin;
 
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import logic.company_members.Admin;
 import logic.loan_classes.Dates;
+import javax.swing.JFormattedTextField;
+import logic.databases.ClientDatabase;
+import java.lang.NumberFormatException;
 
 /**
  *
@@ -20,6 +24,14 @@ public class AdminLoans extends javax.swing.JFrame {
      */
     public AdminLoans() {
         initComponents();
+        JFormattedTextField tf = ((JSpinner.DefaultEditor) spinnerAuthorization.getEditor()).getTextField();
+        tf.setEditable(false);
+        
+        
+    }
+    
+    private void showData(){
+        
     }
 
     /**
@@ -68,9 +80,11 @@ public class AdminLoans extends javax.swing.JFrame {
         textValuePerClient.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         textValuePerClient.setText("Maximum value to lend per client:");
 
-        spinnerAuthorization.setModel(new javax.swing.SpinnerNumberModel(0, 0, 20, 1));
+        spinnerAuthorization.setModel(new javax.swing.SpinnerNumberModel(1, 1, 20, 1));
         spinnerAuthorization.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         spinnerAuthorization.setEnabled(false);
+        spinnerAuthorization.setName(""); // NOI18N
+        spinnerAuthorization.setValue(1);
 
         insertValuePerClient.setEnabled(false);
 
@@ -245,14 +259,59 @@ public class AdminLoans extends javax.swing.JFrame {
 
     private void buttonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmActionPerformed
         // TODO add your handling code here:
-        Admin.changeMaximumAmountToLend(Double.parseDouble(insertValueToLend.getText()));
-        Admin.changeMaximumToLendPerClient(Double.parseDouble(insertValuePerClient.getText()));
-        insertValueToLend.setEnabled(false);
-        insertValuePerClient.setEnabled(false);
-        spinnerAuthorization.setEnabled(false);
-        buttonEdit.setEnabled(true);
-        buttonConfirm.setEnabled(false);
-
+        int cont = 0;
+        String errors = new String();
+        double totalValue = 0, valuePerClient = 0;
+        
+        try {
+            totalValue = Double.parseDouble(insertValueToLend.getText());
+        } catch (NumberFormatException e) {
+            errors += "- You cant use letters for the maximum value to lend or leave it blank! \n";
+            cont++;
+        }
+        
+        try {
+           valuePerClient = Double.parseDouble(insertValuePerClient.getText());
+        } catch (NumberFormatException e) {
+            errors += "- You cant use letters for the maximum value to lend per client or leave it blank! \n";
+            cont++;
+        }
+            
+        try
+        {
+         Admin.changeMaximumAmountToLend(Double.parseDouble(insertValueToLend.getText()));
+         Admin.changeMaximumToLendPerClient(Double.parseDouble(insertValuePerClient.getText()));
+         Admin.changeAuthDate((int) spinnerAuthorization.getValue()); 
+        }
+         catch (NumberFormatException e)
+         {
+            cont++;
+         }
+        
+        
+        if (cont == 0)
+        
+        { 
+            if (totalValue <= valuePerClient) {
+                  errors += "- The value to lend to clients cannot be greater or equal than the total!  \n";
+                  cont++;
+            } 
+            
+            if (cont == 0)
+            {
+                JOptionPane.showMessageDialog(null, "Data updated!", "Success!", JOptionPane.INFORMATION_MESSAGE);
+                insertValueToLend.setEnabled(false);
+                insertValuePerClient.setEnabled(false);
+                spinnerAuthorization.setEnabled(false);
+                buttonEdit.setEnabled(true);
+                buttonConfirm.setEnabled(false);  } 
+            
+            else {  JOptionPane.showMessageDialog(null, errors, "ERROR!", JOptionPane.ERROR_MESSAGE);   }
+            
+        }
+        
+        else {  JOptionPane.showMessageDialog(null, errors, "ERROR!", JOptionPane.ERROR_MESSAGE);   }
+            
     }//GEN-LAST:event_buttonConfirmActionPerformed
 
     /**
