@@ -10,7 +10,7 @@ public class CreateEmployee extends CRUD {
 
     public static void create(Employee employee) {
         if (employees == null)
-            employees = new ArrayList<>();
+            employees = ReadEmployee.getAllEmployees();
         if (ReadEmployee.doesEmployeeExist(employee))
             throw new EmployeeAlreadyExistsException();
         else
@@ -20,7 +20,7 @@ public class CreateEmployee extends CRUD {
 
     public static void create(Employee... employeesArr) {
         try {
-            employees = new ArrayList<>();
+            employees = ReadEmployee.getAllEmployees();
             for (Employee employee : employeesArr)
                 create(employee);
         } catch (EmployeeAlreadyExistsException ignored) {

@@ -16,6 +16,7 @@ public class ClientDatabase {
     private static HashMap<Client, ArrayList<Loan>> data;
     private static double maximumAmountToLend = 999999999;
     private static double maximumToLendPerClient = 100000;
+    private static String limitOfAuthDate = "20";
     private static final File PATH = new File("data" + File.separator +"client-data.dat");
 
     private ClientDatabase() {
@@ -37,6 +38,7 @@ public class ClientDatabase {
             data = (HashMap<Client, ArrayList<Loan>>) objectInputStream.readObject();
             maximumAmountToLend = objectInputStream.readDouble();
             maximumToLendPerClient = objectInputStream.readDouble();
+            limitOfAuthDate = (String) objectInputStream.readObject();
 
             objectInputStream.close();
             fileInputStream.close();
@@ -95,6 +97,11 @@ public class ClientDatabase {
         uploadDataToTheDataBase();
     }
 
+    public void updateLimitDate(String limitOfAuthDate) {
+        ClientDatabase.limitOfAuthDate = limitOfAuthDate;
+        uploadDataToTheDataBase();
+    }
+
     private void uploadDataToTheDataBase() {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(PATH);
@@ -103,6 +110,7 @@ public class ClientDatabase {
             objectOutputStream.writeObject(data);
             objectOutputStream.writeDouble(maximumAmountToLend);
             objectOutputStream.writeDouble(maximumToLendPerClient);
+            objectOutputStream.writeObject(limitOfAuthDate);
 
             objectOutputStream.close();
             fileOutputStream.close();
