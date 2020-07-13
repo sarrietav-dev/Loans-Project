@@ -8,9 +8,12 @@ package design.admin;
 import design.employee.EmployeeCheckTotals;
 import design.employee.EmployeeClientsDefaulters;
 import design.employee.EmployeeClientsLoans;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.table.DefaultTableModel;
 import logic.company_members.Employee;
 import logic.company_members.employee_crud.ReadEmployee;
 import logic.file_management.client_crud.ReadClient;
@@ -28,6 +31,21 @@ public class AdminClients extends javax.swing.JFrame {
     public AdminClients() {
         initComponents();
         showClients();
+        
+        tableClients.addMouseListener(new MouseAdapter(){
+            DefaultTableModel model = new DefaultTableModel(); 
+            
+            @Override
+             public void mouseClicked(MouseEvent e){
+                int i = tableClients.getSelectedRow();
+                insertId.setText(tableClients.getValueAt(i, 0).toString());
+                insertName.setText(tableClients.getValueAt(i, 1).toString());
+                insertPhone.setText(tableClients.getValueAt(i, 2).toString());
+                insertCellphone.setText(tableClients.getValueAt(i, 3).toString());              
+                insertAddress.setText(tableClients.getValueAt(i, 4).toString());
+            }  
+            }); 
+
     }
 
     /**
@@ -426,6 +444,9 @@ public class AdminClients extends javax.swing.JFrame {
                 
                 matrix[i][0] = String.valueOf(allClients[i].getId());
                 matrix[i][1] = allClients[i].getName();
+                matrix[i][2] = allClients[i].getHomePhone();
+                matrix[i][3] = allClients[i].getMobilePhone();
+                matrix[i][4] = allClients[i].getAddress();
 
             }
             
