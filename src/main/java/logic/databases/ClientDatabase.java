@@ -18,7 +18,7 @@ public class ClientDatabase {
     private static double maximumAmountToLend = 999999999;
     private static double maximumToLendPerClient = 100000;
     private static int limitOfAuthDate = 20;
-    private static final File PATH = new File("data" + File.separator +"client-data.dat");
+    private static final File PATH = new File("data" + File.separator + "client-data.dat");
 
     private ClientDatabase() {
         load();
@@ -43,12 +43,10 @@ public class ClientDatabase {
 
             objectInputStream.close();
             fileInputStream.close();
-        }
-        catch (EOFException e) {
+        } catch (EOFException e) {
             updateDataList(new HashMap<>());
             load();
-        }
-        catch (InvalidClassException e) {
+        } catch (InvalidClassException e) {
             try {
                 PrintWriter printWriter = new PrintWriter(PATH);
                 printWriter.print("");
@@ -57,14 +55,14 @@ public class ClientDatabase {
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }
-        }
-        catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
     /**
      * Gets all the data of the database.
+     *
      * @return a copy the clients data.
      */
     public HashMap<Client, ArrayList<Loan>> getData() {
@@ -91,6 +89,7 @@ public class ClientDatabase {
 
     /**
      * Takes a hashmap with all the new data and updates the file where the old data was stored.
+     *
      * @param data The new data of clients.
      */
     public void updateDataList(HashMap<Client, ArrayList<Loan>> data) {
@@ -100,9 +99,10 @@ public class ClientDatabase {
 
     /**
      * Takes an int and sets the limit day to set an auth day
+     *
      * @param limitOfAuthDate
      * @throws DateOutOfLimitException if the date is out of the first 20 days of the month.
-     * @throws NumberFormatException if the number is negative.
+     * @throws NumberFormatException   if the number is negative.
      */
     public void updateLimitDate(int limitOfAuthDate) {
         if (limitOfAuthDate <= 0)
@@ -114,24 +114,24 @@ public class ClientDatabase {
         uploadDataToTheDataBase();
     }
 
-        public static int getLimitOfAuthDate() {
-            return limitOfAuthDate;
-        }
+    public int getLimitOfAuthDate() {
+        return limitOfAuthDate;
+    }
 
-        private void uploadDataToTheDataBase() {
-            try {
-                FileOutputStream fileOutputStream = new FileOutputStream(PATH);
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+    private void uploadDataToTheDataBase() {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(PATH);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
-                objectOutputStream.writeObject(data);
-                objectOutputStream.writeDouble(maximumAmountToLend);
-                objectOutputStream.writeDouble(maximumToLendPerClient);
-                objectOutputStream.writeInt(limitOfAuthDate);
+            objectOutputStream.writeObject(data);
+            objectOutputStream.writeDouble(maximumAmountToLend);
+            objectOutputStream.writeDouble(maximumToLendPerClient);
+            objectOutputStream.writeInt(limitOfAuthDate);
 
-                objectOutputStream.close();
-                fileOutputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            objectOutputStream.close();
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+}
