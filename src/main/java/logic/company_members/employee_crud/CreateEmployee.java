@@ -11,6 +11,7 @@ public class CreateEmployee extends CRUD {
         else
             employees.add(employee);
         database.updateDataList(employees);
+
     }
 
     public static void create(Employee... employeesArr) {
