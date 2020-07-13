@@ -101,10 +101,12 @@ public class ClientDatabase {
     /**
      * Takes an int and sets the limit day to set an auth day
      * @param limitOfAuthDate
+     * @throws DateOutOfLimitException if the date is out of the first 20 days of the month.
+     * @throws NumberFormatException if the number is negative.
      */
     public void updateLimitDate(int limitOfAuthDate) {
         if (limitOfAuthDate <= 0)
-            throw new NumberFormatException("Only a positive number");
+            throw new NumberFormatException("Only positive numbers");
         else if (limitOfAuthDate > 20)
             throw new DateOutOfLimitException("Date out of limits! Only between the first 20 days of the month!");
         else
