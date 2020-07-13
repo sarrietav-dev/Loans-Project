@@ -34,12 +34,12 @@ public class Client implements Serializable {
         return id;
     }
     
-    public String getHomePhone() {
+    public String getHomePhone(){
         return homePhone;
     }
     
-    public String getMobilePhone() {
-        return homePhone;
+    public String getMobilePhone(){
+        return mobilePhone;
     }
     
     public String getAddress(){

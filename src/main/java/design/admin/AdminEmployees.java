@@ -15,6 +15,7 @@ import logic.company_members.employee_crud.ReadEmployee;
 import logic.exceptions.EmployeeAlreadyExistsException;
 import java.lang.NumberFormatException;
 import javax.swing.table.DefaultTableModel;
+import logic.company_members.employee_crud.UpdateEmployee;
 
 /**
  *
@@ -536,13 +537,11 @@ public class AdminEmployees extends javax.swing.JFrame {
             cont++;
         }
         
-         Employee newEmp = new Employee(insertId.getText(), "1234", insertName.getText(), insertTelephone.getText(), insertCellphone.getText(), insertAddress.getText(), Double.parseDouble(insertBaseSalary.getText()));
-         
-        
         if (cont == 0)
         {
+            Employee editEmp = new Employee(insertId.getText(), "1234", insertName.getText(), insertTelephone.getText(), insertCellphone.getText(), insertAddress.getText(), Double.parseDouble(insertBaseSalary.getText()));
+            UpdateEmployee.update(editEmp);
             this.showEmployees();
-            paintItWhite();
         }
         
         else

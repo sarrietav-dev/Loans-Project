@@ -6,6 +6,8 @@
 package design.employee;
 
 import javax.swing.JOptionPane;
+import logic.company_members.Employee;
+import logic.company_members.employee_crud.UpdateEmployee;
 
 /**
  *
@@ -280,8 +282,12 @@ public class EmployeeChangePassword extends javax.swing.JFrame {
         }
         
         if (cont == 0)
+        {   
+            EmployeeUsser.getUsser().setPassword(String.valueOf(insertNewPassword.getPassword()));
+            Employee editEmployee = new Employee(EmployeeUsser.getUsser().getId(), EmployeeUsser.getUsser().getPassword(), EmployeeUsser.getUsser().getName(), EmployeeUsser.getUsser().getHomePhone(), EmployeeUsser.getUsser().getMobilePhone(), EmployeeUsser.getUsser().getAddress(), EmployeeUsser.getUsser().getBaseSalary());
+            UpdateEmployee.update(editEmployee);
             JOptionPane.showMessageDialog(null, "Password updated succesfully!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
-        
+        }
         else 
             JOptionPane.showMessageDialog(null, errors, "ERROR!", JOptionPane.ERROR_MESSAGE);
             
