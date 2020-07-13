@@ -8,7 +8,6 @@ import logic.loan_classes.Client;
 import logic.loan_classes.Loan;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -20,6 +19,7 @@ public class UpdateClient extends CRUD {
 
     /**
      * Add a loan to the database, if the client that it has it's not found on the database, it's create.
+     *
      * @param loan The loan that will be added.
      */
     public static void addLoan(Loan loan) {
@@ -32,17 +32,18 @@ public class UpdateClient extends CRUD {
 
     /**
      * Adds a loan to an specified client.
-     * @param loan The loan that will be stored.
+     *
+     * @param loan      The loan that will be stored.
      * @param CLIENT_ID The ID of the client that owns the loan.
-     * @throws ObjectNotFoundException If the ID doesn't match any existing client.
+     * @throws ObjectNotFoundException     If the ID doesn't match any existing client.
      * @throws CannotAddMoreLoansException If:
-     * <ul>
-     *     <li>The client is has a delayed loan.</li>
-     *     <li>The client exceeds the maximum amount of money to borrow per client</li>
-     *     <li>The loan amount exceeds the maximum amount of money to borrow per client</li>
-     *     <li>The total amount of money borrowed of all clients exceeds the company's total amount
-     *     of available money to borrow.</li>
-     * </ul>
+     *                                     <ul>
+     *                                         <li>The client is has a delayed loan.</li>
+     *                                         <li>The client exceeds the maximum amount of money to borrow per client</li>
+     *                                         <li>The loan amount exceeds the maximum amount of money to borrow per client</li>
+     *                                         <li>The total amount of money borrowed of all clients exceeds the company's total amount
+     *                                         of available money to borrow.</li>
+     *                                     </ul>
      */
     public static void addLoan(Loan loan, final int CLIENT_ID) {
         Set<Entry<Client, ArrayList<Loan>>> entrySet = data.entrySet();
@@ -77,6 +78,11 @@ public class UpdateClient extends CRUD {
         entry.getValue().add(loan);
     }
 
+    /**
+     * Takes a client and updates its values.
+     *
+     * @param client The client that will be changed.
+     */
     public static void update(Client client) {
         Set<Entry<Client, ArrayList<Loan>>> entrySet = data.entrySet();
 
@@ -93,8 +99,7 @@ public class UpdateClient extends CRUD {
         if (!doesClientExist(clientNew)) {
             data.put(clientNew, loans);
             CLIENT_DATABASE.updateDataList(data);
-        }
-        else
+        } else
             throw new ClientAlreadyExistsException("That ID is taken!");
     }
 }
