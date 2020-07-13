@@ -7,12 +7,19 @@ import java.util.ArrayList;
 
 public class ReadEmployee extends CRUD {
     public static boolean doesEmployeeExist(Employee employee) {
-        return getEmployees().stream()
+        return employees.stream()
                 .anyMatch(employee::equals);
     }
 
     public static ArrayList<Employee> getAllEmployees() {
-        return getEmployees();
+        return database.getEmployees();
+    }
+
+    public static Employee login(String user, String pass) {
+        for (Employee employee : database.getEmployees())
+            if (employee.areFieldsCorrects(user, pass))
+                return employee;
+        throw new LoginIncorrectException("User or password incorrect");
     }
 
     public static Employee login(String user, String pass) {

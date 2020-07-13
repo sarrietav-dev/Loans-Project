@@ -7,8 +7,5 @@ import java.util.ArrayList;
 
 public abstract class CRUD {
     protected static final EmployeeDatabase database = EmployeeDatabase.getInstance();
-
-    protected static ArrayList<Employee> getEmployees() {
-        return database.getEmployees();
-    }
+    protected static final ArrayList<Employee> employees = database.getEmployees();
 }

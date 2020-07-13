@@ -1,5 +1,6 @@
 package logic.loan_classes;
 
+import logic.databases.ClientDatabase;
 import logic.exceptions.DateOutOfLimitException;
 
 import java.io.Serializable;
@@ -7,7 +8,7 @@ import java.util.*;
 
 /**
  * Calculates and stores a loan's payment dates of each installment,<br>
- *     the authorization date and the delivery date.
+ * the authorization date and the delivery date.
  */
 public class Dates implements Serializable {
     private Date authorizationDate;
@@ -29,13 +30,14 @@ public class Dates implements Serializable {
         if (isAuthDateWithinLimits(authDate))
             this.authorizationDate = authDate;
         else
-            throw new DateOutOfLimitException("Date out of limits! Only between the first 20 days of the month!");
+            throw new DateOutOfLimitException("Date out of limits! Only until " + ClientDatabase.getLimitOfAuthDate() + " days of the month!");
     }
 
     private boolean isAuthDateWithinLimits(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        return calendar.get(Calendar.DAY_OF_MONTH) <= 20;
+        calendar.get(Calendar.DAY_OF_MONTH);
+        return calendar.get(Calendar.DAY_OF_MONTH) <= ClientDatabase.getLimitOfAuthDate();
     }
 
     private void setDeliveryDate() {
@@ -57,6 +59,7 @@ public class Dates implements Serializable {
 
     /**
      * Shows the payment dates of each installment.
+     *
      * @return A list of dates, in ascending order.
      */
     public List<Date> getDatesSorted() {
@@ -72,8 +75,8 @@ public class Dates implements Serializable {
     @Override
     public String toString() {
         return "Dates{" +
-                "authorizationDate=" + DateFormatter.format(authorizationDate)  +
-                ", deliveryDate=" + DateFormatter.format(deliveryDate)  +
+                "authorizationDate=" + DateFormatter.format(authorizationDate) +
+                ", deliveryDate=" + DateFormatter.format(deliveryDate) +
                 ", paymentDates=" + paymentDatesToString() +
                 '}';
     }
