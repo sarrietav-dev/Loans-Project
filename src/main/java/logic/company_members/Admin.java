@@ -10,6 +10,11 @@ public class Admin {
     }
 
     public static void changeMaximumToLendPerClient(double amount) {
-        CLIENT_DATABASE.setMaximumToLendPerClient(amount);
+	    CLIENT_DATABASE.setMaximumToLendPerClient(amount);
+    }
+
+    public static void changeAuthDate(int date) {
+	    CLIENT_DATABASE.updateLimitDate(date);
     }
 }
+
