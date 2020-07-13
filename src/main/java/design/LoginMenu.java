@@ -7,6 +7,7 @@ package design;
 
 import design.admin.AdminInterface;
 import design.employee.EmployeeInterface;
+import design.employee.EmployeeUsser;
 
 import javax.swing.JOptionPane;
 
@@ -183,7 +184,6 @@ public class LoginMenu extends javax.swing.JFrame {
 
             try {
                 Employee employee = ReadEmployee.login(insertUsser3.getText(), insertPassword3.getText());
-                System.out.println(employee);
             } catch (LoginIncorrectException e) {
                 proceed = false;
                 System.out.print("Usser or password incorrect, throwing exception... ");
@@ -193,9 +193,12 @@ public class LoginMenu extends javax.swing.JFrame {
         }
 
         if (proceed == true) {
+            Employee employee = ReadEmployee.login(insertUsser3.getText(), insertPassword3.getText());
             EmployeeInterface EmployeeInterface1 = new EmployeeInterface();
+            EmployeeUsser.setUsser(employee);
             this.setVisible(false);
             EmployeeInterface1.setVisible(true);
+            
         }
 
     }//GEN-LAST:event_buttonLogin3ActionPerformed

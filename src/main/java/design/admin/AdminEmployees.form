@@ -288,7 +288,7 @@
                           <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                           <Component id="buttonEdit" min="-2" pref="87" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="buttonCancelEdit" min="-2" pref="87" max="-2" attributes="0"/>
+                          <Component id="buttonDeselect" min="-2" pref="87" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                           <Component id="buttonBack" min="-2" pref="87" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -302,7 +302,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="buttonAdd" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="buttonEdit" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="buttonCancelEdit" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonDeselect" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="buttonBack" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
@@ -328,13 +328,13 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEditActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonCancelEdit">
+                <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonDeselect">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Cancel edit"/>
+                    <Property name="text" type="java.lang.String" value="Deselect"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCancelEditActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDeselectActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonBack">

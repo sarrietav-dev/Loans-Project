@@ -249,11 +249,13 @@
                 <Component class="javax.swing.JTextField" name="checkMaxPerClient">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="checkMaxLend">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="textInterest">
@@ -283,16 +285,19 @@
                 <Component class="javax.swing.JTextField" name="checkBorrowed">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="checkInterest">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="checkAvailable">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
               </SubComponents>
