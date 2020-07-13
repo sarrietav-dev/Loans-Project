@@ -36,6 +36,12 @@ public class AdminEmployees extends javax.swing.JFrame {
             
             @Override
              public void mouseClicked(MouseEvent e){
+                 
+                buttonEdit.setEnabled(true);
+                buttonCancelEdit.setEnabled(true);
+                buttonAdd.setEnabled(false);
+                insertId.setEnabled(false);
+                 
                 int i = TableEmployees.getSelectedRow();
                 insertId.setText(TableEmployees.getValueAt(i, 0).toString());
                 insertName.setText(TableEmployees.getValueAt(i, 1).toString());
@@ -43,10 +49,8 @@ public class AdminEmployees extends javax.swing.JFrame {
                 insertCellphone.setText(TableEmployees.getValueAt(i, 3).toString());              
                 insertAddress.setText(TableEmployees.getValueAt(i, 4).toString());
                 insertBaseSalary.setText(TableEmployees.getValueAt(i, 5).toString());
-                buttonEdit.setEnabled(true);
-                buttonCancelEdit.setEnabled(true);
-                buttonAdd.setEnabled(false);
-                insertId.setEnabled(false);
+                
+                
             }  
             });        
     }
