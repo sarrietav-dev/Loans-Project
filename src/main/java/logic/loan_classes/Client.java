@@ -33,6 +33,18 @@ public class Client implements Serializable {
     public int getId() {
         return id;
     }
+    
+    public String getHomePhone() {
+        return homePhone;
+    }
+    
+    public String getMobilePhone() {
+        return homePhone;
+    }
+    
+    public String getAddress(){
+        return address;
+    }
 
     @Override
     public boolean equals(Object o) {

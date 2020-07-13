@@ -141,7 +141,7 @@
                                       <Component id="insertCellphone" min="-2" pref="155" max="-2" attributes="0"/>
                                       <Component id="insertTelephone" min="-2" pref="155" max="-2" attributes="0"/>
                                       <Component id="insertAddress" alignment="1" min="-2" pref="155" max="-2" attributes="0"/>
-                                      <Component id="InsertId" min="-2" pref="155" max="-2" attributes="0"/>
+                                      <Component id="insertId" min="-2" pref="155" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
@@ -164,7 +164,7 @@
                               <Component id="panelImage1" min="-2" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="InsertId" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="insertId" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="textId" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -266,7 +266,7 @@
                     <Property name="text" type="java.lang.String" value="ID: "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="InsertId">
+                <Component class="javax.swing.JTextField" name="insertId">
                 </Component>
               </SubComponents>
             </Container>
@@ -285,10 +285,10 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="buttonAdd" min="-2" pref="87" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                           <Component id="buttonEdit" min="-2" pref="87" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="buttonDelete" min="-2" pref="87" max="-2" attributes="0"/>
+                          <Component id="buttonCancelEdit" min="-2" pref="87" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                           <Component id="buttonBack" min="-2" pref="87" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -302,7 +302,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="buttonAdd" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="buttonEdit" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="buttonDelete" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonCancelEdit" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="buttonBack" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
@@ -315,16 +315,27 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Add"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAddActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonEdit">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Edit"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEditActionPerformed"/>
+                  </Events>
                 </Component>
-                <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonDelete">
+                <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonCancelEdit">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Delete"/>
+                    <Property name="text" type="java.lang.String" value="Cancel edit"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCancelEditActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonBack">
                   <Properties>
@@ -392,7 +403,7 @@
                     <Component class="javax.swing.JTable" name="TableEmployees">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="6" rowCount="16">
+                          <Table columnCount="6" rowCount="30">
                             <Column editable="false" title="Name" type="java.lang.Object"/>
                             <Column editable="false" title="Telephone" type="java.lang.Object"/>
                             <Column editable="false" title="Cellphone" type="java.lang.Object"/>

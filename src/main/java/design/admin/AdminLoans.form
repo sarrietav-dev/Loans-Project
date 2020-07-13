@@ -201,12 +201,12 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="insertValuePerClient">
                   <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="insertValueToLend">
                   <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -258,6 +258,9 @@
                     <Property name="animacion" type="boolean" value="false"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonConfirmActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="org.edisoncor.gui.button.ButtonIpod" name="buttonEdit">
                   <Properties>
@@ -267,6 +270,9 @@
                     <Property name="text" type="java.lang.String" value="Edit"/>
                     <Property name="animacion" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEditActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="org.edisoncor.gui.button.ButtonIpod" name="buttonBack">
                   <Properties>

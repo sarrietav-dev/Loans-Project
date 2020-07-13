@@ -172,6 +172,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
 
         if ("Admin".equals(insertUsser3.getText()) && "1234".equals(insertPassword3.getText())) {
+            proceed = false;
             AdminInterface AdminInterface1 = new AdminInterface();
             this.setVisible(false);
             AdminInterface1.setVisible(true);

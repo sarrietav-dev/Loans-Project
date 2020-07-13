@@ -8,6 +8,13 @@ package design.admin;
 import design.employee.EmployeeCheckTotals;
 import design.employee.EmployeeClientsDefaulters;
 import design.employee.EmployeeClientsLoans;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import logic.company_members.Employee;
+import logic.company_members.employee_crud.ReadEmployee;
+import logic.file_management.client_crud.ReadClient;
+import logic.loan_classes.Client;
 
 /**
  *
@@ -20,6 +27,7 @@ public class AdminClients extends javax.swing.JFrame {
      */
     public AdminClients() {
         initComponents();
+        showClients();
     }
 
     /**
@@ -360,7 +368,7 @@ public class AdminClients extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(textCheckClients, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
-                .addGroup(panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelCurves1Layout.createSequentialGroup()
                         .addComponent(panelImage5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -400,6 +408,34 @@ public class AdminClients extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     private void showClients(){
+        
+        Set <Client> allClients1 = new HashSet<Client>();
+        allClients1 = ReadClient.getAllClients();
+        
+        int n = allClients1.size();
+        
+        Client allClients[] = new Client[n];
+        allClients = allClients1.toArray(allClients);
+                
+        
+        String matrix[][] = new String[allClients.length][5];
+        
+            for (int i=0; i<allClients.length; i++)
+            {
+                
+                matrix[i][0] = String.valueOf(allClients[i].getId());
+                matrix[i][1] = allClients[i].getName();
+
+            }
+            
+            tableClients.setModel(new javax.swing.table.DefaultTableModel(
+                    matrix,
+                    new String [] { "id", "Name", "Telephone", "Cellphone", "Address"  }
+                    ));
+        
+    }
+    
     private void insertNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_insertNameActionPerformed

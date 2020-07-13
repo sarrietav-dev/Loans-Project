@@ -5,6 +5,10 @@
  */
 package design.admin;
 
+import javax.swing.JSpinner;
+import logic.company_members.Admin;
+import logic.loan_classes.Dates;
+
 /**
  *
  * @author Administrador
@@ -68,9 +72,9 @@ public class AdminLoans extends javax.swing.JFrame {
         spinnerAuthorization.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         spinnerAuthorization.setEnabled(false);
 
-        insertValuePerClient.setEditable(false);
+        insertValuePerClient.setEnabled(false);
 
-        insertValueToLend.setEditable(false);
+        insertValueToLend.setEnabled(false);
 
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);
@@ -120,10 +124,20 @@ public class AdminLoans extends javax.swing.JFrame {
         buttonConfirm.setText("Confirm");
         buttonConfirm.setAnimacion(false);
         buttonConfirm.setEnabled(false);
+        buttonConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonConfirmActionPerformed(evt);
+            }
+        });
 
         buttonEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
         buttonEdit.setText("Edit");
         buttonEdit.setAnimacion(false);
+        buttonEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditActionPerformed(evt);
+            }
+        });
 
         buttonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back.jpg"))); // NOI18N
         buttonBack.setText("Back");
@@ -219,6 +233,28 @@ public class AdminLoans extends javax.swing.JFrame {
         AdminInterface1.setVisible(true);
     }//GEN-LAST:event_buttonBackActionPerformed
 
+    private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
+        // TODO add your handling code here:
+        insertValueToLend.setEnabled(true);
+        insertValuePerClient.setEnabled(true);
+        spinnerAuthorization.setEnabled(true);
+        buttonEdit.setEnabled(false);
+        buttonConfirm.setEnabled(true);
+        
+    }//GEN-LAST:event_buttonEditActionPerformed
+
+    private void buttonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmActionPerformed
+        // TODO add your handling code here:
+        Admin.changeMaximumAmountToLend(Double.parseDouble(insertValueToLend.getText()));
+        Admin.changeMaximumToLendPerClient(Double.parseDouble(insertValuePerClient.getText()));
+        insertValueToLend.setEnabled(false);
+        insertValuePerClient.setEnabled(false);
+        spinnerAuthorization.setEnabled(false);
+        buttonEdit.setEnabled(true);
+        buttonConfirm.setEnabled(false);
+
+    }//GEN-LAST:event_buttonConfirmActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -272,4 +308,5 @@ public class AdminLoans extends javax.swing.JFrame {
     private javax.swing.JLabel textValuePerClient;
     private javax.swing.JLabel textValueToLend;
     // End of variables declaration//GEN-END:variables
+
 }
