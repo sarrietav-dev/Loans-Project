@@ -16,7 +16,7 @@ public class Client implements Serializable {
     private String address;
     private ArrayList<Loan> loans;
 
-    private Client() {
+    Client() {
 
     }
 
