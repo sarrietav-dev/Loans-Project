@@ -8,6 +8,9 @@ import java.util.ArrayList;
 public class CreateEmployee extends CRUD {
     private static ArrayList<Employee> employees;
     public static void create(Employee employee) {
+        if (employees == null) {
+            employees = new ArrayList<>();
+        }
         if (ReadEmployee.doesEmployeeExist(employee))
             throw new EmployeeAlreadyExistsException();
         else

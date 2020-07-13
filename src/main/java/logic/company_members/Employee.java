@@ -49,10 +49,6 @@ public class Employee implements Serializable {
         this.baseSalary = baseSalary;
     }
 
-    public Employee(Employee login) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     /**
      * Pays an installment of a loan.
      * @param LOAN_ID The id of the loan that will be paid.
