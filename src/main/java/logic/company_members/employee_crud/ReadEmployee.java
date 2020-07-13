@@ -16,13 +16,6 @@ public class ReadEmployee extends CRUD {
     }
 
     public static Employee login(String user, String pass) {
-        for (Employee employee : database.getEmployees())
-            if (employee.areFieldsCorrects(user, pass))
-                return employee;
-        throw new LoginIncorrectException("User or password incorrect");
-    }
-
-    public static Employee login(String user, String pass) {
         for (Employee employee : getAllEmployees())
             if (employee.areFieldsCorrects(user, pass))
                 return employee;
