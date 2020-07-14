@@ -440,6 +440,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Add a loan"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAddLoanActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonCancelLoan">
                   <Properties>

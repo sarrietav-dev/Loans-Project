@@ -71,10 +71,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="textAddLoans" pref="490" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="panelImage2" alignment="0" max="32767" attributes="0"/>
-                              <Component id="panelImage1" alignment="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="panelImage2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="panelImage1" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -139,8 +137,8 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="checkId" max="32767" attributes="0"/>
-                              <Component id="jDateChooser1" pref="156" max="32767" attributes="0"/>
+                              <Component id="insertAmount" max="32767" attributes="0"/>
+                              <Component id="insertAuthorization" pref="156" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                           <Component id="panelImage3" min="-2" max="-2" attributes="0"/>
@@ -159,11 +157,11 @@
                           <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="textAmount" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="checkId" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="insertAmount" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jDateChooser1" max="32767" attributes="0"/>
+                              <Component id="insertAuthorization" max="32767" attributes="0"/>
                               <Component id="textAuthorizationDate" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
@@ -200,10 +198,7 @@
                     <Property name="text" type="java.lang.String" value="Amount:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="checkId">
-                  <Properties>
-                    <Property name="editable" type="boolean" value="false"/>
-                  </Properties>
+                <Component class="javax.swing.JTextField" name="insertAmount">
                 </Component>
                 <Component class="javax.swing.JLabel" name="textAuthorizationDate">
                   <Properties>
@@ -213,7 +208,10 @@
                     <Property name="text" type="java.lang.String" value="Authorization date:"/>
                   </Properties>
                 </Component>
-                <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+                <Component class="com.toedter.calendar.JDateChooser" name="insertAuthorization">
+                  <Properties>
+                    <Property name="dateFormatString" type="java.lang.String" value="yyyy/MM/dd"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

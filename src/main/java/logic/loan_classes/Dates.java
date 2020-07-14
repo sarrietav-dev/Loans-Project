@@ -70,6 +70,14 @@ public class Dates implements Serializable {
         datesSorted.sort(Date::compareTo);
         return datesSorted;
     }
+    
+    public Date getAuthorizationDate(){
+        return this.authorizationDate;
+    }
+    
+    public Date getDeliveryDate(){
+        return this.deliveryDate;
+    }
 
     HashMap<Date, PaymentStatus> getPaymentDates() {
         return paymentDates;

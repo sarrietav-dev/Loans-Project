@@ -5,6 +5,12 @@
  */
 package design.employee;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
+import logic.file_management.loan_crud.CreateLoan;
+import logic.loan_classes.Loan;
+
 /**
  *
  * @author Administrador
@@ -33,9 +39,9 @@ public class EmployeeAddLoan extends javax.swing.JFrame {
         panelImage1 = new org.edisoncor.gui.panel.PanelImage();
         panelImage3 = new org.edisoncor.gui.panel.PanelImage();
         textAmount = new javax.swing.JLabel();
-        checkId = new javax.swing.JTextField();
+        insertAmount = new javax.swing.JTextField();
         textAuthorizationDate = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        insertAuthorization = new com.toedter.calendar.JDateChooser();
         panelImage2 = new org.edisoncor.gui.panel.PanelImage();
         buttonAdd = new org.edisoncor.gui.button.ButtonAction();
         buttonBack = new org.edisoncor.gui.button.ButtonAction();
@@ -69,10 +75,10 @@ public class EmployeeAddLoan extends javax.swing.JFrame {
         textAmount.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         textAmount.setText("Amount:");
 
-        checkId.setEditable(false);
-
         textAuthorizationDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         textAuthorizationDate.setText("Authorization date:");
+
+        insertAuthorization.setDateFormatString("yyyy/MM/dd");
 
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);
@@ -87,8 +93,8 @@ public class EmployeeAddLoan extends javax.swing.JFrame {
                     .addComponent(textAuthorizationDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(checkId)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
+                    .addComponent(insertAmount)
+                    .addComponent(insertAuthorization, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
                 .addGap(39, 39, 39)
                 .addComponent(panelImage3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
@@ -103,10 +109,10 @@ public class EmployeeAddLoan extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(insertAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(insertAuthorization, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(textAuthorizationDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(21, 21, 21))
         );
@@ -156,9 +162,8 @@ public class EmployeeAddLoan extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(textAddLoans, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
-                    .addGroup(panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(panelImage2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panelImage1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(panelImage2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelImage1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelCurves1Layout.setVerticalGroup(
@@ -202,6 +207,9 @@ public class EmployeeAddLoan extends javax.swing.JFrame {
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         // TODO add your handling code here:
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Loan clientLoan = new Loan( Double.valueOf(insertAmount.getText()), String.valueOf(df.format(insertAuthorization.getDate())));
+        CreateLoan.create(clientLoan, EmployeeSelectedClient.getSelectedClient().getId());
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void buttonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackActionPerformed
@@ -250,8 +258,8 @@ public class EmployeeAddLoan extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonAction buttonAdd;
     private org.edisoncor.gui.button.ButtonAction buttonBack;
-    private javax.swing.JTextField checkId;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JTextField insertAmount;
+    private com.toedter.calendar.JDateChooser insertAuthorization;
     private org.edisoncor.gui.panel.Panel panel1;
     private org.edisoncor.gui.panel.PanelCurves panelCurves1;
     private org.edisoncor.gui.panel.PanelImage panelImage1;
