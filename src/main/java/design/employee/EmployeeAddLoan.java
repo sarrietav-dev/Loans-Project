@@ -5,9 +5,12 @@
  */
 package design.employee;
 
+import com.toedter.calendar.JTextFieldDateEditor;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import logic.exceptions.CannotAddMoreLoansException;
+import logic.exceptions.DateOutOfLimitException;
 import logic.file_management.loan_crud.CreateLoan;
 import logic.loan_classes.Loan;
 
@@ -22,6 +25,8 @@ public class EmployeeAddLoan extends javax.swing.JFrame {
      */
     public EmployeeAddLoan() {
         initComponents();
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) insertAuthorization.getDateEditor();
+        editor.setEditable(false);
     }
 
     /**
@@ -207,9 +212,55 @@ public class EmployeeAddLoan extends javax.swing.JFrame {
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         // TODO add your handling code here:
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        Loan clientLoan = new Loan( Double.valueOf(insertAmount.getText()), String.valueOf(df.format(insertAuthorization.getDate())));
-        CreateLoan.create(clientLoan, EmployeeSelectedClient.getSelectedClient().getId());
+        int cont = 0;
+        String errors = "";
+        
+        if ("".equals(insertAmount.getText()) || "".equals(String.valueOf(insertAuthorization.getDate())) )
+        {
+            cont++;
+            errors += "- You must fill all the fields! \n";
+        }
+        
+        try {
+            Double.parseDouble(insertAmount.getText());
+        } catch (NumberFormatException e) {
+            errors += "- You cant use letters for an Amount of money or leave it blank! \n";
+            cont++;
+        }
+        
+        if (cont == 0)
+        {   
+            try {
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            Loan clientLoan = new Loan( Double.valueOf(insertAmount.getText()), String.valueOf(df.format(insertAuthorization.getDate())));
+            CreateLoan.create(clientLoan, EmployeeSelectedClient.getSelectedClient().getId());
+            }
+            catch (CannotAddMoreLoansException e){
+                errors += e.getMessage();
+                cont++;
+            }
+            catch (DateOutOfLimitException e){
+                errors += e.getMessage();
+                cont++;
+            }
+            
+            if (cont == 0)
+            {
+                JOptionPane.showMessageDialog(null, "The Loan was succesfully added!", "SUCCESS!", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+            else {
+                JOptionPane.showMessageDialog(null, errors, "ERROR!", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+        
+        else
+        {
+            JOptionPane.showMessageDialog(null, errors, "ERROR!", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
     }//GEN-LAST:event_buttonAddActionPerformed
 
     private void buttonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackActionPerformed

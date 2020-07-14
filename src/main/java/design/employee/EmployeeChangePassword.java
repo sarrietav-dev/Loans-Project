@@ -22,7 +22,11 @@ public class EmployeeChangePassword extends javax.swing.JFrame {
         initComponents();
     }
     
-    
+    private void paintItWhite(){
+        insertPassword.setText("");
+        insertNewPassword.setText("");
+        insertConfirmPassword.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
