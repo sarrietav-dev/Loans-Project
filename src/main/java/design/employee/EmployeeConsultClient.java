@@ -5,7 +5,9 @@
  */
 package design.employee;
 
-import static design.employee.EmployeeClients.theClient;
+import java.util.ArrayList;
+import logic.file_management.client_crud.ReadClient;
+import logic.loan_classes.Loan;
 
 /**
  *
@@ -19,14 +21,36 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
     public EmployeeConsultClient() {
         initComponents();
         showTheClient();
+        showLoans();
     }
     
     private void showTheClient(){
-        checkId.setText(Integer.toString(theClient.getId()));
-        checkName.setText(theClient.getName());
-        checkPhone.setText(theClient.getHomePhone());
-        checkCellphone.setText(theClient.getMobilePhone());
-        checkAddress.setText(theClient.getAddress());
+        checkId.setText(Integer.toString(EmployeeSelectedClient.getSelectedClient().getId()));
+        checkName.setText(EmployeeSelectedClient.getSelectedClient().getName());
+        checkPhone.setText(EmployeeSelectedClient.getSelectedClient().getHomePhone());
+        checkCellphone.setText(EmployeeSelectedClient.getSelectedClient().getMobilePhone());
+        checkAddress.setText(EmployeeSelectedClient.getSelectedClient().getAddress());
+    }
+    
+    private void showLoans(){
+        ArrayList<Loan> allLoans = ReadClient.getLoans(EmployeeSelectedClient.getSelectedClient().getId());
+        
+        String matrix[][] = new String[allLoans.size()][6];
+        
+            for (int i=0; i<allLoans.size(); i++)
+            {
+                matrix[i][0] = String.valueOf(allLoans.get(i).getLoanNumber());
+                matrix[i][1] = allLoans.get(i).getClient().getName();
+                matrix[i][2] = String.valueOf(allLoans.get(i).getAmount());
+                matrix[i][3] = String.valueOf(allLoans.get(i).getDates().getAuthorizationDate());
+                matrix[i][4] = String.valueOf(allLoans.get(i).getDates().getDeliveryDate());
+                matrix[i][5] = "test";
+            }
+            
+            tableLoans.setModel(new javax.swing.table.DefaultTableModel(
+                    matrix,
+                    new String [] { "# of Loan", "Applicant", "Value", "Date of Authorization", "Delivery date", "Debts"  }
+                    ));
     }
 
     /**
@@ -245,6 +269,11 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
         buttonPayLoan.setText("Pay a loan");
 
         buttonAddLoan.setText("Add a loan");
+        buttonAddLoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddLoanActionPerformed(evt);
+            }
+        });
 
         buttonCancelLoan.setText("Cancel a loan");
 
@@ -349,6 +378,13 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
         this.setVisible(false);
         EmployeeClients1.setVisible(true);
     }//GEN-LAST:event_buttonBackActionPerformed
+
+    private void buttonAddLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddLoanActionPerformed
+        // TODO add your handling code here:
+        EmployeeAddLoan EmployeeAddLoan1 = new EmployeeAddLoan();
+        this.setVisible(false);
+        EmployeeAddLoan1.setVisible(true);
+    }//GEN-LAST:event_buttonAddLoanActionPerformed
 
     /**
      * @param args the command line arguments

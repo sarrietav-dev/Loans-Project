@@ -15,6 +15,6 @@ public abstract class CRUD {
 
 
     public static Set<Map.Entry<Client, ArrayList<Loan>>> getAllData() {
-        return CLIENT_DATABASE.getData().entrySet();
+        return data.entrySet();
     }
 }

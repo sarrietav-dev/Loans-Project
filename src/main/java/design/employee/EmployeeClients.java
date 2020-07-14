@@ -22,8 +22,7 @@ import logic.loan_classes.Client;
  * @author Administrador
  */
 public class EmployeeClients extends javax.swing.JFrame {
-    
-    protected static Client theClient;
+   
 
     /**
      * Creates new form EmployeeInterface
@@ -51,7 +50,7 @@ public class EmployeeClients extends javax.swing.JFrame {
                 insertCellphone.setText(tableClients.getValueAt(i, 3).toString());              
                 insertAddress.setText(tableClients.getValueAt(i, 4).toString());
                 
-                theClient = new Client(Integer.valueOf( (String) tableClients.getValueAt(i, 0)), tableClients.getValueAt(i, 1).toString(), tableClients.getValueAt(i, 2).toString(), tableClients.getValueAt(i, 3).toString(), tableClients.getValueAt(i, 4).toString());
+                EmployeeSelectedClient.setSelectedClientClient(new Client(Integer.valueOf( (String) tableClients.getValueAt(i, 0)), tableClients.getValueAt(i, 1).toString(), tableClients.getValueAt(i, 2).toString(), tableClients.getValueAt(i, 3).toString(), tableClients.getValueAt(i, 4).toString())); 
             }  
             }); 
         

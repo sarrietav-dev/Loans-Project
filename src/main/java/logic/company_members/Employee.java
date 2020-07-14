@@ -125,6 +125,10 @@ public class Employee implements Serializable {
 		return password;
 	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -148,10 +152,6 @@ public class Employee implements Serializable {
 	public double getCurrentSalary() {
 		return currentSalary;
 	}
-        
-        public void setPassword(String password){
-            this.password = password;
-        }
 
 	@Override
 	public boolean equals(Object o) {
