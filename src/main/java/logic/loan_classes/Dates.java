@@ -29,10 +29,14 @@ public class Dates implements Serializable {
     private void setAuthorizationDate(String authorizationDate) {
         final ClientDatabase CLIENT_DATABASE = ClientDatabase.getInstance();
         Date authDate = DateFormatter.format(authorizationDate);
-        if (isAuthDateWithinLimits(authDate))
+        if (isAuthDateWithinLimits(authDate) && isAuthDateAfterToday(authDate))
             this.authorizationDate = authDate;
         else
             throw new DateOutOfLimitException("Date out of limits! Only until " + CLIENT_DATABASE.getLimitOfAuthDate() + " days of the month!");
+    }
+
+    private boolean isAuthDateAfterToday(Date date) {
+	    return date.after(new Date());
     }
 
     private boolean isAuthDateWithinLimits(Date date) {
