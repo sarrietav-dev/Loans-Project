@@ -97,6 +97,7 @@ public class UpdateClient extends CRUD {
     private static void replace(Client clientOld, Client clientNew) {
         ArrayList<Loan> loans = data.remove(clientOld);
         if (!doesClientExist(clientNew)) {
+            clientNew.setLoans(loans);
             data.put(clientNew, loans);
             CLIENT_DATABASE.updateDataList(data);
         } else
