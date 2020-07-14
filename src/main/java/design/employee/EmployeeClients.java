@@ -22,6 +22,8 @@ import logic.loan_classes.Client;
  * @author Administrador
  */
 public class EmployeeClients extends javax.swing.JFrame {
+    
+    protected static Client theClient;
 
     /**
      * Creates new form EmployeeInterface
@@ -48,6 +50,8 @@ public class EmployeeClients extends javax.swing.JFrame {
                 insertPhone.setText(tableClients.getValueAt(i, 2).toString());
                 insertCellphone.setText(tableClients.getValueAt(i, 3).toString());              
                 insertAddress.setText(tableClients.getValueAt(i, 4).toString());
+                
+                theClient = new Client(Integer.valueOf( (String) tableClients.getValueAt(i, 0)), tableClients.getValueAt(i, 1).toString(), tableClients.getValueAt(i, 2).toString(), tableClients.getValueAt(i, 3).toString(), tableClients.getValueAt(i, 4).toString());
             }  
             }); 
         
@@ -253,6 +257,11 @@ public class EmployeeClients extends javax.swing.JFrame {
 
         buttonConsult.setText("Consult");
         buttonConsult.setEnabled(false);
+        buttonConsult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonConsultActionPerformed(evt);
+            }
+        });
 
         buttonEdit.setText("Edit");
         buttonEdit.setEnabled(false);
@@ -327,9 +336,16 @@ public class EmployeeClients extends javax.swing.JFrame {
                 "ID", "Name", "Telephone", "Cellphone", "Address"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -677,6 +693,13 @@ public class EmployeeClients extends javax.swing.JFrame {
         insertId.setEnabled(true);
         paintItWhite();
     }//GEN-LAST:event_buttonDeselectActionPerformed
+
+    private void buttonConsultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConsultActionPerformed
+        // TODO add your handling code here:
+        EmployeeConsultClient EmployeeConsultClient1 = new EmployeeConsultClient();
+        this.setVisible(false);
+        EmployeeConsultClient1.setVisible(true);
+    }//GEN-LAST:event_buttonConsultActionPerformed
 
     /**
      * @param args the command line arguments

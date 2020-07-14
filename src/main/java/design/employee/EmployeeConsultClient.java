@@ -5,6 +5,8 @@
  */
 package design.employee;
 
+import static design.employee.EmployeeClients.theClient;
+
 /**
  *
  * @author Administrador
@@ -16,6 +18,15 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
      */
     public EmployeeConsultClient() {
         initComponents();
+        showTheClient();
+    }
+    
+    private void showTheClient(){
+        checkId.setText(Integer.toString(theClient.getId()));
+        checkName.setText(theClient.getName());
+        checkPhone.setText(theClient.getHomePhone());
+        checkCellphone.setText(theClient.getMobilePhone());
+        checkAddress.setText(theClient.getAddress());
     }
 
     /**
@@ -225,6 +236,11 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
         panelImage3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         buttonBack.setText("Back");
+        buttonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonBackActionPerformed(evt);
+            }
+        });
 
         buttonPayLoan.setText("Pay a loan");
 
@@ -326,6 +342,13 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
     private void checkNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_checkNameActionPerformed
+
+    private void buttonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackActionPerformed
+        // TODO add your handling code here:
+        EmployeeClients EmployeeClients1 = new EmployeeClients();
+        this.setVisible(false);
+        EmployeeClients1.setVisible(true);
+    }//GEN-LAST:event_buttonBackActionPerformed
 
     /**
      * @param args the command line arguments
