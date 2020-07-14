@@ -6,6 +6,10 @@
 package design.employee;
 
 import design.admin.AdminClients;
+import javax.swing.JFormattedTextField;
+import javax.swing.JSpinner;
+import logic.company_members.Admin;
+import logic.company_members.Employee;
 
 /**
  *
@@ -18,9 +22,17 @@ public class EmployeeCheckTotals extends javax.swing.JFrame {
      */
     public EmployeeCheckTotals() {
         initComponents();
+        checkAuthorization.setEditor(new JSpinner.DefaultEditor(checkAuthorization));
+        CheckTotals();
     }
     
     public static boolean adminOrEmployee;
+    
+    private void CheckTotals(){
+        checkMaxLend.setText(String.valueOf(Employee.getMaximumAmountToLend()));
+        checkMaxPerClient.setText(String.valueOf(Employee.getMaximumToLendPerClient()));
+        checkAuthorization.setValue(Employee.getAuthDate());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -78,8 +90,10 @@ public class EmployeeCheckTotals extends javax.swing.JFrame {
         checkAuthorization.setEnabled(false);
 
         checkMaxPerClient.setEditable(false);
+        checkMaxPerClient.setEnabled(false);
 
         checkMaxLend.setEditable(false);
+        checkMaxLend.setEnabled(false);
 
         textInterest.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         textInterest.setText("Total interest collected:");
@@ -91,10 +105,13 @@ public class EmployeeCheckTotals extends javax.swing.JFrame {
         textAvailable.setText("Total available to lend:");
 
         checkBorrowed.setEditable(false);
+        checkBorrowed.setEnabled(false);
 
         checkInterest.setEditable(false);
+        checkInterest.setEnabled(false);
 
         checkAvailable.setEditable(false);
+        checkAvailable.setEnabled(false);
 
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);

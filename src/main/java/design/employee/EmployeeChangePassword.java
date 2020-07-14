@@ -5,6 +5,10 @@
  */
 package design.employee;
 
+import javax.swing.JOptionPane;
+import logic.company_members.Employee;
+import logic.company_members.employee_crud.UpdateEmployee;
+
 /**
  *
  * @author Administrador
@@ -17,6 +21,8 @@ public class EmployeeChangePassword extends javax.swing.JFrame {
     public EmployeeChangePassword() {
         initComponents();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,20 +65,26 @@ public class EmployeeChangePassword extends javax.swing.JFrame {
         textPassword.setText("Password:");
 
         checkPassword.setText("Show Passwords");
+        checkPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkPasswordActionPerformed(evt);
+            }
+        });
 
         textConfirmPassword.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         textConfirmPassword.setText("Confirm Password: ");
 
-        insertNewPassword.setEditable(false);
-
-        insertConfirmPassword.setEditable(false);
         insertConfirmPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insertConfirmPasswordActionPerformed(evt);
             }
         });
 
-        insertPassword.setEditable(false);
+        insertPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insertPasswordActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);
@@ -124,6 +136,11 @@ public class EmployeeChangePassword extends javax.swing.JFrame {
         buttonConfirm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirm.png"))); // NOI18N
         buttonConfirm.setText("Confirm");
         buttonConfirm.setAnimacion(false);
+        buttonConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonConfirmActionPerformed(evt);
+            }
+        });
 
         buttonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back.jpg"))); // NOI18N
         buttonBack.setText("Back");
@@ -168,7 +185,7 @@ public class EmployeeChangePassword extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textConfigLoans, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(panelImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, Short.MAX_VALUE)
                     .addComponent(panelImage2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -223,6 +240,58 @@ public class EmployeeChangePassword extends javax.swing.JFrame {
         this.setVisible(false);
         EmployeeConfigAccount1.setVisible(true);
     }//GEN-LAST:event_buttonBackActionPerformed
+
+    private void insertPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_insertPasswordActionPerformed
+
+    private void checkPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkPasswordActionPerformed
+        // TODO add your handling code here:
+        if (checkPassword.isSelected())
+        {    insertPassword.setEchoChar((char)0);
+             insertNewPassword.setEchoChar((char)0);
+             insertConfirmPassword.setEchoChar((char)0);
+        }
+        else 
+        {
+            insertPassword.setEchoChar('*');
+            insertNewPassword.setEchoChar('*');
+            insertConfirmPassword.setEchoChar('*');
+        }
+    }//GEN-LAST:event_checkPasswordActionPerformed
+
+    private void buttonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmActionPerformed
+        // TODO add your handling code here:
+        int cont = 0;
+        String errors = new String();
+        
+        if ("".equals(String.valueOf(insertPassword.getPassword())) || "".equals(String.valueOf(insertNewPassword.getPassword())) || "".equals(String.valueOf(insertNewPassword.getPassword())))
+        {
+            errors += "- You must fill all the fields! \n";
+            cont++;
+        }
+        
+        if ( !String.valueOf(insertPassword.getPassword()).equals(EmployeeUsser.getUsser().getPassword())  ) {
+            errors += "- The password isn't correct! \n";
+            cont++;
+        } 
+        
+        if (!String.valueOf(insertNewPassword.getPassword()).equals(String.valueOf(insertConfirmPassword.getPassword()))){
+            errors += "- The new password isn't equal to the Confirm password! \n";
+            cont++;
+        }
+        
+        if (cont == 0)
+        {   
+            EmployeeUsser.getUsser().setPassword(String.valueOf(insertNewPassword.getPassword()));
+            Employee editEmployee = new Employee(EmployeeUsser.getUsser().getId(), EmployeeUsser.getUsser().getPassword(), EmployeeUsser.getUsser().getName(), EmployeeUsser.getUsser().getHomePhone(), EmployeeUsser.getUsser().getMobilePhone(), EmployeeUsser.getUsser().getAddress(), EmployeeUsser.getUsser().getBaseSalary());
+            UpdateEmployee.update(editEmployee);
+            JOptionPane.showMessageDialog(null, "Password updated succesfully!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else 
+            JOptionPane.showMessageDialog(null, errors, "ERROR!", JOptionPane.ERROR_MESSAGE);
+            
+    }//GEN-LAST:event_buttonConfirmActionPerformed
 
     /**
      * @param args the command line arguments

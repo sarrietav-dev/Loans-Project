@@ -14,7 +14,9 @@ import logic.company_members.employee_crud.CreateEmployee;
 import logic.company_members.employee_crud.ReadEmployee;
 import logic.exceptions.EmployeeAlreadyExistsException;
 import java.lang.NumberFormatException;
+import java.lang.String;
 import javax.swing.table.DefaultTableModel;
+import logic.company_members.employee_crud.UpdateEmployee;
 
 /**
  *
@@ -22,6 +24,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AdminEmployees extends javax.swing.JFrame {
     
+    private static int passwordId;
+    private static String allPasswords[];
     
     /**
      * Creates new form AddEmployee
@@ -38,11 +42,12 @@ public class AdminEmployees extends javax.swing.JFrame {
              public void mouseClicked(MouseEvent e){
                  
                 buttonEdit.setEnabled(true);
-                buttonCancelEdit.setEnabled(true);
+                buttonDeselect.setEnabled(true);
                 buttonAdd.setEnabled(false);
                 insertId.setEnabled(false);
                  
                 int i = TableEmployees.getSelectedRow();
+                passwordId = i;
                 insertId.setText(TableEmployees.getValueAt(i, 0).toString());
                 insertName.setText(TableEmployees.getValueAt(i, 1).toString());
                 insertTelephone.setText(TableEmployees.getValueAt(i, 2).toString());
@@ -86,7 +91,7 @@ public class AdminEmployees extends javax.swing.JFrame {
         panelImage3 = new org.edisoncor.gui.panel.PanelImage();
         buttonAdd = new org.edisoncor.gui.button.ButtonAction();
         buttonEdit = new org.edisoncor.gui.button.ButtonAction();
-        buttonCancelEdit = new org.edisoncor.gui.button.ButtonAction();
+        buttonDeselect = new org.edisoncor.gui.button.ButtonAction();
         buttonBack = new org.edisoncor.gui.button.ButtonAction();
         textManageEmployees = new org.edisoncor.gui.label.LabelCustom();
         panelImage4 = new org.edisoncor.gui.panel.PanelImage();
@@ -221,11 +226,11 @@ public class AdminEmployees extends javax.swing.JFrame {
             }
         });
 
-        buttonCancelEdit.setText("Cancel edit");
-        buttonCancelEdit.setEnabled(false);
-        buttonCancelEdit.addActionListener(new java.awt.event.ActionListener() {
+        buttonDeselect.setText("Deselect");
+        buttonDeselect.setEnabled(false);
+        buttonDeselect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCancelEditActionPerformed(evt);
+                buttonDeselectActionPerformed(evt);
             }
         });
 
@@ -246,7 +251,7 @@ public class AdminEmployees extends javax.swing.JFrame {
                 .addGap(61, 61, 61)
                 .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonCancelEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonDeselect, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61)
                 .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -258,7 +263,7 @@ public class AdminEmployees extends javax.swing.JFrame {
                 .addGroup(panelImage3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonCancelEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonDeselect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -397,6 +402,9 @@ public class AdminEmployees extends javax.swing.JFrame {
     private void showEmployees(){
         
         ArrayList<Employee> allEmployees = ReadEmployee.getAllEmployees();
+        
+        String passwords[] = new String[allEmployees.size()];
+        
         String matrix[][] = new String[allEmployees.size()][7];
         
             for (int i=0; i<allEmployees.size(); i++)
@@ -409,8 +417,11 @@ public class AdminEmployees extends javax.swing.JFrame {
                 matrix[i][4] = allEmployees.get(i).getAddress();
                 matrix[i][5] = String.valueOf(allEmployees.get(i).getBaseSalary());
                 matrix[i][6] = String.valueOf(allEmployees.get(i).getCurrentSalary());
+                passwords[i] = allEmployees.get(i).getPassword();
 
             }
+            
+            allPasswords = passwords;
             
             TableEmployees.setModel(new javax.swing.table.DefaultTableModel(
                     matrix,
@@ -451,16 +462,23 @@ public class AdminEmployees extends javax.swing.JFrame {
         }
         
         try {
+            Integer.parseInt(insertId.getText());
+        } catch (NumberFormatException e) {
+            errors += "- You cant use letters for Ids or leave it blank! \n";
+            cont++;
+        }
+        
+        try {
             Integer.parseInt(insertTelephone.getText());
         } catch (NumberFormatException e) {
-            errors += "- You cant use letters for telephones or leave it blank! \n";
+            errors += "- You cant use letters for Telephones or leave it blank! \n";
             cont++;
         }
         
         try {
             Integer.parseInt(insertCellphone.getText());
         } catch (NumberFormatException e) {
-            errors += "- You cant use letters for cellphones or leave it blank! \n";
+            errors += "- You cant use letters for Cellphones or leave it blank! \n";
             cont++;
         }
         
@@ -494,14 +512,14 @@ public class AdminEmployees extends javax.swing.JFrame {
 
     }//GEN-LAST:event_buttonAddActionPerformed
 
-    private void buttonCancelEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelEditActionPerformed
+    private void buttonDeselectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeselectActionPerformed
         // TODO add your handling code here:
         buttonEdit.setEnabled(false);
-        buttonCancelEdit.setEnabled(false);
+        buttonDeselect.setEnabled(false);
         buttonAdd.setEnabled(true);
         insertId.setEnabled(true);
         paintItWhite();
-    }//GEN-LAST:event_buttonCancelEditActionPerformed
+    }//GEN-LAST:event_buttonDeselectActionPerformed
 
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
         // TODO add your handling code here:
@@ -536,13 +554,11 @@ public class AdminEmployees extends javax.swing.JFrame {
             cont++;
         }
         
-         Employee newEmp = new Employee(insertId.getText(), "1234", insertName.getText(), insertTelephone.getText(), insertCellphone.getText(), insertAddress.getText(), Double.parseDouble(insertBaseSalary.getText()));
-         
-        
         if (cont == 0)
         {
+            Employee editEmp = new Employee(insertId.getText(), allPasswords[passwordId], insertName.getText(), insertTelephone.getText(), insertCellphone.getText(), insertAddress.getText(), Double.parseDouble(insertBaseSalary.getText()));
+            UpdateEmployee.update(editEmp);
             this.showEmployees();
-            paintItWhite();
         }
         
         else
@@ -601,7 +617,7 @@ public class AdminEmployees extends javax.swing.JFrame {
     private org.edisoncor.gui.util.BrightPassFilter brightPassFilter1;
     private org.edisoncor.gui.button.ButtonAction buttonAdd;
     private org.edisoncor.gui.button.ButtonAction buttonBack;
-    private org.edisoncor.gui.button.ButtonAction buttonCancelEdit;
+    private org.edisoncor.gui.button.ButtonAction buttonDeselect;
     private org.edisoncor.gui.button.ButtonAction buttonEdit;
     private javax.swing.JTextField insertAddress;
     private javax.swing.JTextField insertBaseSalary;

@@ -82,7 +82,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="29" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="34" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -93,23 +93,23 @@
                       <Component id="labelCustom1" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="panelImage2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="panelImage3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <Component id="panelImage5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                               <Component id="panelImage7" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                              <Component id="panelImage6" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="panelImage2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="panelImage3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="panelImage4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="panelImage6" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="panelImage4" alignment="1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -155,7 +155,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                          <Component id="insertI" min="-2" pref="155" max="-2" attributes="0"/>
+                                          <Component id="insertId" min="-2" pref="155" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -173,10 +173,10 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="15" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="insertI" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="insertId" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -203,7 +203,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="panelImage1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -214,7 +214,7 @@
                     <Property name="text" type="java.lang.String" value="ID:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="insertI">
+                <Component class="javax.swing.JTextField" name="insertId">
                 </Component>
                 <Component class="javax.swing.JLabel" name="textName">
                   <Properties>
@@ -290,13 +290,13 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="buttonAdd" min="-2" pref="87" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                          <Component id="buttonEdit" min="-2" pref="97" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="buttonEdit" min="-2" pref="87" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                          <Component id="buttonDeselect" min="-2" pref="87" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                           <Component id="buttonConsult" min="-2" pref="87" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                          <Component id="buttonDelete" min="-2" pref="87" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -307,8 +307,8 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="buttonAdd" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="buttonConsult" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="buttonDelete" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="buttonEdit" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonEdit" alignment="3" max="32767" attributes="0"/>
+                              <Component id="buttonDeselect" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -320,21 +320,36 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Add"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAddActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonConsult">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Consult"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
-                </Component>
-                <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonDelete">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Delete"/>
-                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonConsultActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonEdit">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Edit"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEditActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonDeselect">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Deselect"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDeselectActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -392,11 +407,11 @@
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="5" rowCount="16">
-                            <Column editable="false" title="ID" type="java.lang.Object"/>
-                            <Column editable="false" title="Name" type="java.lang.Object"/>
-                            <Column editable="false" title="Telephone" type="java.lang.Object"/>
-                            <Column editable="false" title="Cellphone" type="java.lang.Object"/>
-                            <Column editable="false" title="Address" type="java.lang.Object"/>
+                            <Column editable="false" title="ID" type="java.lang.String"/>
+                            <Column editable="false" title="Name" type="java.lang.String"/>
+                            <Column editable="false" title="Telephone" type="java.lang.String"/>
+                            <Column editable="false" title="Cellphone" type="java.lang.String"/>
+                            <Column editable="false" title="Address" type="java.lang.String"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -554,7 +569,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/images/info.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Info"/>
+                    <Property name="text" type="java.lang.String" value="About loans"/>
                     <Property name="animacion" type="boolean" value="false"/>
                   </Properties>
                   <Events>

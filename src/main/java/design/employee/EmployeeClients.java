@@ -5,17 +5,94 @@
  */
 package design.employee;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import logic.exceptions.ClientAlreadyExistsException;
+import logic.file_management.client_crud.CreateClient;
+import logic.file_management.client_crud.ReadClient;
+import logic.file_management.client_crud.UpdateClient;
+import logic.loan_classes.Client;
+
 /**
  *
  * @author Administrador
  */
 public class EmployeeClients extends javax.swing.JFrame {
+    
+    protected static Client theClient;
 
     /**
      * Creates new form EmployeeInterface
      */
     public EmployeeClients() {
         initComponents();
+        showClients();
+        
+        tableClients.addMouseListener(new MouseAdapter(){
+            DefaultTableModel model = new DefaultTableModel(); 
+            
+            @Override
+             public void mouseClicked(MouseEvent e){
+                int i = tableClients.getSelectedRow();
+                
+                buttonEdit.setEnabled(true);
+                buttonDeselect.setEnabled(true);
+                buttonAdd.setEnabled(false);
+                buttonConsult.setEnabled(true);
+                insertId.setEnabled(false);
+                
+                insertId.setText(tableClients.getValueAt(i, 0).toString());
+                insertName.setText(tableClients.getValueAt(i, 1).toString());
+                insertPhone.setText(tableClients.getValueAt(i, 2).toString());
+                insertCellphone.setText(tableClients.getValueAt(i, 3).toString());              
+                insertAddress.setText(tableClients.getValueAt(i, 4).toString());
+                
+                theClient = new Client(Integer.valueOf( (String) tableClients.getValueAt(i, 0)), tableClients.getValueAt(i, 1).toString(), tableClients.getValueAt(i, 2).toString(), tableClients.getValueAt(i, 3).toString(), tableClients.getValueAt(i, 4).toString());
+            }  
+            }); 
+        
+    }
+    
+    private void paintItWhite()
+    {
+        insertId.setText("");
+        insertName.setText("");
+        insertPhone.setText("");
+        insertCellphone.setText("");
+        insertAddress.setText("");
+    }
+    
+    private void showClients(){
+        Set <Client> allClients1 = new HashSet<Client>();
+        allClients1 = ReadClient.getAllClients();
+        
+        int n = allClients1.size();
+        
+        Client allClients[] = new Client[n];
+        allClients = allClients1.toArray(allClients);
+                
+        
+        String matrix[][] = new String[allClients.length][5];
+        
+            for (int i=0; i<allClients.length; i++)
+            {
+                
+                matrix[i][0] = String.valueOf(allClients[i].getId());
+                matrix[i][1] = allClients[i].getName();
+                matrix[i][2] = allClients[i].getHomePhone();
+                matrix[i][3] = allClients[i].getMobilePhone();
+                matrix[i][4] = allClients[i].getAddress();
+
+            }
+            
+            tableClients.setModel(new javax.swing.table.DefaultTableModel(
+                    matrix,
+                    new String [] { "id", "Name", "Telephone", "Cellphone", "Address"  }
+                    ));
     }
 
     /**
@@ -31,7 +108,7 @@ public class EmployeeClients extends javax.swing.JFrame {
         panelCurves1 = new org.edisoncor.gui.panel.PanelCurves();
         panelImage2 = new org.edisoncor.gui.panel.PanelImage();
         jLabel1 = new javax.swing.JLabel();
-        insertI = new javax.swing.JTextField();
+        insertId = new javax.swing.JTextField();
         textName = new javax.swing.JLabel();
         insertName = new javax.swing.JTextField();
         textCellphone = new javax.swing.JLabel();
@@ -44,8 +121,8 @@ public class EmployeeClients extends javax.swing.JFrame {
         panelImage3 = new org.edisoncor.gui.panel.PanelImage();
         buttonAdd = new org.edisoncor.gui.button.ButtonAction();
         buttonConsult = new org.edisoncor.gui.button.ButtonAction();
-        buttonDelete = new org.edisoncor.gui.button.ButtonAction();
         buttonEdit = new org.edisoncor.gui.button.ButtonAction();
+        buttonDeselect = new org.edisoncor.gui.button.ButtonAction();
         labelCustom1 = new org.edisoncor.gui.label.LabelCustom();
         panelImage4 = new org.edisoncor.gui.panel.PanelImage();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -131,7 +208,7 @@ public class EmployeeClients extends javax.swing.JFrame {
                         .addGroup(panelImage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelImage2Layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
-                                .addComponent(insertI, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(insertId, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelImage2Layout.createSequentialGroup()
                                 .addGap(27, 27, 27)
                                 .addComponent(insertName, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -142,10 +219,10 @@ public class EmployeeClients extends javax.swing.JFrame {
         panelImage2Layout.setVerticalGroup(
             panelImage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImage2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(panelImage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(insertI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(insertId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(panelImage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textName)
@@ -166,18 +243,41 @@ public class EmployeeClients extends javax.swing.JFrame {
             .addGroup(panelImage2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelImage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         panelImage3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         buttonAdd.setText("Add");
+        buttonAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddActionPerformed(evt);
+            }
+        });
 
         buttonConsult.setText("Consult");
-
-        buttonDelete.setText("Delete");
+        buttonConsult.setEnabled(false);
+        buttonConsult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonConsultActionPerformed(evt);
+            }
+        });
 
         buttonEdit.setText("Edit");
+        buttonEdit.setEnabled(false);
+        buttonEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditActionPerformed(evt);
+            }
+        });
+
+        buttonDeselect.setText("Deselect");
+        buttonDeselect.setEnabled(false);
+        buttonDeselect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeselectActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelImage3Layout = new javax.swing.GroupLayout(panelImage3);
         panelImage3.setLayout(panelImage3Layout);
@@ -186,13 +286,13 @@ public class EmployeeClients extends javax.swing.JFrame {
             .addGroup(panelImage3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addComponent(buttonDeselect, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
                 .addComponent(buttonConsult, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(21, 21, 21))
         );
         panelImage3Layout.setVerticalGroup(
             panelImage3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,8 +301,8 @@ public class EmployeeClients extends javax.swing.JFrame {
                 .addGroup(panelImage3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonConsult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttonEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonDeselect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -236,9 +336,16 @@ public class EmployeeClients extends javax.swing.JFrame {
                 "ID", "Name", "Telephone", "Cellphone", "Address"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -309,7 +416,7 @@ public class EmployeeClients extends javax.swing.JFrame {
         panelImage5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Information"));
 
         buttonTotals.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/info.png"))); // NOI18N
-        buttonTotals.setText("Info");
+        buttonTotals.setText("About loans");
         buttonTotals.setAnimacion(false);
         buttonTotals.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -378,7 +485,7 @@ public class EmployeeClients extends javax.swing.JFrame {
                             .addComponent(panelImage5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panelImage6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(panelImage7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(0, 29, Short.MAX_VALUE))
+                .addGap(0, 34, Short.MAX_VALUE))
         );
         panelCurves1Layout.setVerticalGroup(
             panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -388,18 +495,19 @@ public class EmployeeClients extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelCurves1Layout.createSequentialGroup()
-                        .addComponent(panelImage2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelImage3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelCurves1Layout.createSequentialGroup()
                         .addComponent(panelImage5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21)
-                        .addComponent(panelImage7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelImage6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelImage4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(panelImage7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)
+                        .addComponent(panelImage6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelCurves1Layout.createSequentialGroup()
+                        .addComponent(panelImage2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelImage3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelImage4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))))
         );
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
@@ -444,7 +552,7 @@ public class EmployeeClients extends javax.swing.JFrame {
     private void buttonClientsLoansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClientsLoansActionPerformed
         // TODO add your handling code here:
         EmployeeClientsLoans EmployeeClientsLoans1 = new EmployeeClientsLoans();
-        EmployeeClientsLoans1.adminOrEmployee = false;
+        EmployeeClientsLoans.adminOrEmployee = false;
         this.setVisible(false);
         EmployeeClientsLoans1.setVisible(true);
     }//GEN-LAST:event_buttonClientsLoansActionPerformed
@@ -452,7 +560,7 @@ public class EmployeeClients extends javax.swing.JFrame {
     private void buttonTotalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTotalsActionPerformed
         // TODO add your handling code here:
         EmployeeCheckTotals EmployeeCheckTotals1 = new EmployeeCheckTotals();
-        EmployeeCheckTotals1.adminOrEmployee = false;
+        EmployeeCheckTotals.adminOrEmployee = false;
         this.setVisible(false);
         EmployeeCheckTotals1.setVisible(true);
     }//GEN-LAST:event_buttonTotalsActionPerformed
@@ -460,7 +568,7 @@ public class EmployeeClients extends javax.swing.JFrame {
     private void buttonDefaulterClientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDefaulterClientsActionPerformed
         // TODO add your handling code here:
         EmployeeClientsDefaulters EmployeeClientsDefaulters1 = new EmployeeClientsDefaulters();
-        EmployeeClientsDefaulters1.adminOrEmployee = false;
+        EmployeeClientsDefaulters.adminOrEmployee = false;
         this.setVisible(false);
         EmployeeClientsDefaulters1.setVisible(true);
     }//GEN-LAST:event_buttonDefaulterClientsActionPerformed
@@ -471,6 +579,127 @@ public class EmployeeClients extends javax.swing.JFrame {
         this.setVisible(false);
         EmployeeInterface1.setVisible(true);
     }//GEN-LAST:event_buttonBackActionPerformed
+
+    private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
+        // TODO add your handling code here:
+        String errors = new String();
+        int cont = 0;
+        if ("".equals(insertName.getText()) || "".equals(insertPhone.getText()) || "".equals(insertCellphone.getText()) || "".equals(insertAddress.getText()))
+        {
+            errors += "- You must fill all the fields! \n";
+            cont++;
+        }
+        
+        try {
+            Integer.parseInt(insertPhone.getText());
+        } catch (NumberFormatException e) {
+            errors += "- You cant use letters for telephones or leave it blank! \n";
+            cont++;
+        }
+        
+        try {
+            Integer.parseInt(insertCellphone.getText());
+        } catch (NumberFormatException e) {
+            errors += "- You cant use letters for cellphones or leave it blank! \n";
+            cont++;
+        }
+        
+        try {
+                  Client editClient = new Client(Integer.valueOf(insertId.getText()), insertName.getText(), insertPhone.getText(), insertCellphone.getText(), insertAddress.getText());        
+        }  catch( NumberFormatException e ) {
+             cont++;
+        }
+        
+        if (cont == 0)
+        {
+            Client editClient = new Client(Integer.valueOf(insertId.getText()), insertName.getText(), insertPhone.getText(), insertCellphone.getText(), insertAddress.getText());
+            UpdateClient.update(editClient);
+            this.showClients();
+            
+        }
+        
+        else
+        {
+            JOptionPane.showMessageDialog(null, errors, "ERROR!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_buttonEditActionPerformed
+
+    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
+        // TODO add your handling code here:
+         String errors = new String();
+        int cont = 0;
+        
+        try {
+             Integer.parseInt(insertId.getText());
+         } catch (NumberFormatException e) {
+            errors += "- You cant use letters for id or leave it blank! \n";
+            cont++;
+        }
+        
+        if ("".equals(insertId.getText()) || "".equals(insertName.getText()) || "".equals(insertPhone.getText()) || "".equals(insertCellphone.getText()) || "".equals(insertAddress.getText()))
+        {
+            errors += "- You must fill all the fields! \n";
+            cont++;
+        }
+        
+        try {
+            Integer.parseInt(insertPhone.getText());
+        } catch (NumberFormatException e) {
+            errors += "- You cant use letters for telephones or leave it blank! \n";
+            cont++;
+        }
+        
+        try {
+            Integer.parseInt(insertCellphone.getText());
+        } catch (NumberFormatException e) {
+            errors += "- You cant use letters for cellphones or leave it blank! \n";
+            cont++;
+        }
+        
+        
+        
+        if (cont == 0)
+        {
+            try {
+                  Client newClient = new Client(Integer.valueOf(insertId.getText()), insertName.getText(), insertPhone.getText(), insertCellphone.getText(), insertAddress.getText());
+                  CreateClient.create(newClient);
+                 } catch( ClientAlreadyExistsException e ) {
+                      cont++;
+                      errors += "- That id already exist!";
+                      JOptionPane.showMessageDialog(null, errors, "ERROR!", JOptionPane.ERROR_MESSAGE);
+                 } catch( NumberFormatException e ) {
+                 }
+                 if (cont == 0)
+                 {
+                      this.showClients();
+                      paintItWhite();
+                 }
+            
+            this.showClients();
+        }
+        
+        else
+        {
+            JOptionPane.showMessageDialog(null, errors, "ERROR!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_buttonAddActionPerformed
+
+    private void buttonDeselectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeselectActionPerformed
+        // TODO add your handling code here:
+        buttonEdit.setEnabled(false);
+        buttonDeselect.setEnabled(false);
+        buttonAdd.setEnabled(true);
+        buttonConsult.setEnabled(false);
+        insertId.setEnabled(true);
+        paintItWhite();
+    }//GEN-LAST:event_buttonDeselectActionPerformed
+
+    private void buttonConsultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConsultActionPerformed
+        // TODO add your handling code here:
+        EmployeeConsultClient EmployeeConsultClient1 = new EmployeeConsultClient();
+        this.setVisible(false);
+        EmployeeConsultClient1.setVisible(true);
+    }//GEN-LAST:event_buttonConsultActionPerformed
 
     /**
      * @param args the command line arguments
@@ -514,12 +743,12 @@ public class EmployeeClients extends javax.swing.JFrame {
     private org.edisoncor.gui.button.ButtonIpod buttonClientsLoans;
     private org.edisoncor.gui.button.ButtonAction buttonConsult;
     private org.edisoncor.gui.button.ButtonIpod buttonDefaulterClients;
-    private org.edisoncor.gui.button.ButtonAction buttonDelete;
+    private org.edisoncor.gui.button.ButtonAction buttonDeselect;
     private org.edisoncor.gui.button.ButtonAction buttonEdit;
     private org.edisoncor.gui.button.ButtonIpod buttonTotals;
     private javax.swing.JTextField insertAddress;
     private javax.swing.JTextField insertCellphone;
-    private javax.swing.JTextField insertI;
+    private javax.swing.JTextField insertId;
     private javax.swing.JTextField insertName;
     private javax.swing.JTextField insertPhone;
     private javax.swing.JLabel jLabel1;

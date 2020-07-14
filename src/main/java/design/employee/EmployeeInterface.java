@@ -6,6 +6,7 @@
 package design.employee;
 
 import design.LoginMenu;
+import logic.company_members.Employee;
 
 /**
  *
@@ -16,6 +17,7 @@ public class EmployeeInterface extends javax.swing.JFrame {
     /**
      * Creates new form EmployeeInterface
      */
+    
     public EmployeeInterface() {
         initComponents();
     }
