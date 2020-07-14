@@ -47,6 +47,7 @@ public class LoginMenu extends javax.swing.JFrame {
         insertPassword3 = new javax.swing.JPasswordField();
         buttonLogin3 = new org.edisoncor.gui.button.ButtonIpod();
         buttonExit3 = new org.edisoncor.gui.button.ButtonIpod();
+        checkPassword = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,89 +89,115 @@ public class LoginMenu extends javax.swing.JFrame {
             }
         });
 
+        checkPassword.setText("Show password");
+        checkPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkPasswordActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelCurves4Layout = new javax.swing.GroupLayout(panelCurves4);
         panelCurves4.setLayout(panelCurves4Layout);
         panelCurves4Layout.setHorizontalGroup(
-                panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelCurves4Layout.createSequentialGroup()
-                                .addComponent(checkAuthors3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(panelCurves4Layout.createSequentialGroup()
-                                .addGap(56, 56, 56)
-                                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(panelCurves4Layout.createSequentialGroup()
-                                                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(panelCurves4Layout.createSequentialGroup()
-                                                                .addGap(53, 53, 53)
-                                                                .addComponent(textUsser3)
-                                                                .addGap(34, 34, 34)
-                                                                .addComponent(insertUsser3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addComponent(textLogin3))
-                                                .addContainerGap(85, Short.MAX_VALUE))
-                                        .addGroup(panelCurves4Layout.createSequentialGroup()
-                                                .addGap(49, 49, 49)
-                                                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addGroup(panelCurves4Layout.createSequentialGroup()
-                                                                .addComponent(buttonLogin3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(70, 70, 70)
-                                                                .addComponent(buttonExit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(panelCurves4Layout.createSequentialGroup()
-                                                                .addComponent(textPassword3)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(insertPassword3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCurves4Layout.createSequentialGroup()
+                .addComponent(checkAuthors3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(panelCurves4Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelCurves4Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(textUsser3)
+                        .addGap(34, 34, 34)
+                        .addComponent(insertUsser3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textLogin3)
+                    .addGroup(panelCurves4Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(textPassword3)
+                        .addGap(18, 18, 18)
+                        .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(checkPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                            .addComponent(insertPassword3))))
+                .addContainerGap(85, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCurves4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonLogin3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(105, 105, 105)
+                .addComponent(buttonExit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(118, 118, 118))
         );
         panelCurves4Layout.setVerticalGroup(
-                panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelCurves4Layout.createSequentialGroup()
-                                .addComponent(checkAuthors3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(9, 9, 9)
-                                .addComponent(textLogin3)
-                                .addGap(32, 32, 32)
-                                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(insertUsser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(textUsser3))
-                                .addGap(18, 18, 18)
-                                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(insertPassword3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(textPassword3))
-                                .addGap(27, 27, 27)
-                                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(buttonExit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(buttonLogin3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(25, Short.MAX_VALUE))
+            panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCurves4Layout.createSequentialGroup()
+                .addComponent(checkAuthors3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addComponent(textLogin3)
+                .addGap(32, 32, 32)
+                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(insertUsser3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textUsser3))
+                .addGap(18, 18, 18)
+                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(insertPassword3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textPassword3))
+                .addGap(18, 18, 18)
+                .addComponent(checkPassword)
+                .addGap(18, 18, 18)
+                .addGroup(panelCurves4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonExit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonLogin3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
-                panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(panelCurves4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelCurves4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panel1Layout.setVerticalGroup(
-                panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(panelCurves4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel1Layout.createSequentialGroup()
+                .addComponent(panelCurves4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void checkPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkPasswordActionPerformed
+        // TODO add your handling code here:
+        if (checkPassword.isSelected())
+        {    insertPassword3.setEchoChar((char)0);
+        }
+        else
+        {
+            insertPassword3.setEchoChar('*');
+
+        }
+    }//GEN-LAST:event_checkPasswordActionPerformed
+
+    private void buttonExit3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExit3ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_buttonExit3ActionPerformed
+
     private void buttonLogin3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogin3ActionPerformed
         // TODO add your handling code here:
 
         boolean proceed = true;
-
 
         if ("Admin".equals(insertUsser3.getText()) && "1234".equals(insertPassword3.getText())) {
             proceed = false;
@@ -198,9 +225,8 @@ public class LoginMenu extends javax.swing.JFrame {
             EmployeeUsser.setUsser(employee);
             this.setVisible(false);
             EmployeeInterface1.setVisible(true);
-            
-        }
 
+        }
     }//GEN-LAST:event_buttonLogin3ActionPerformed
 
     private void checkAuthors3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAuthors3ActionPerformed
@@ -209,11 +235,6 @@ public class LoginMenu extends javax.swing.JFrame {
         this.setVisible(false);
         Authors1.setVisible(true);
     }//GEN-LAST:event_checkAuthors3ActionPerformed
-
-    private void buttonExit3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExit3ActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_buttonExit3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,42 +273,16 @@ public class LoginMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.edisoncor.gui.button.ButtonIpod buttonExit;
-    private org.edisoncor.gui.button.ButtonIpod buttonExit1;
-    private org.edisoncor.gui.button.ButtonIpod buttonExit2;
     private org.edisoncor.gui.button.ButtonIpod buttonExit3;
-    private org.edisoncor.gui.button.ButtonIpod buttonLogin;
-    private org.edisoncor.gui.button.ButtonIpod buttonLogin1;
-    private org.edisoncor.gui.button.ButtonIpod buttonLogin2;
     private org.edisoncor.gui.button.ButtonIpod buttonLogin3;
-    private org.edisoncor.gui.button.ButtonIpod checkAuthors;
-    private org.edisoncor.gui.button.ButtonIpod checkAuthors1;
-    private org.edisoncor.gui.button.ButtonIpod checkAuthors2;
     private org.edisoncor.gui.button.ButtonIpod checkAuthors3;
-    private javax.swing.JPasswordField insertPassword;
-    private javax.swing.JPasswordField insertPassword1;
-    private javax.swing.JPasswordField insertPassword2;
+    private javax.swing.JCheckBox checkPassword;
     private javax.swing.JPasswordField insertPassword3;
-    private javax.swing.JTextField insertUsser;
-    private javax.swing.JTextField insertUsser1;
-    private javax.swing.JTextField insertUsser2;
     private javax.swing.JTextField insertUsser3;
     private org.edisoncor.gui.panel.Panel panel1;
-    private org.edisoncor.gui.panel.PanelCurves panelCurves1;
-    private org.edisoncor.gui.panel.PanelCurves panelCurves2;
-    private org.edisoncor.gui.panel.PanelCurves panelCurves3;
     private org.edisoncor.gui.panel.PanelCurves panelCurves4;
-    private javax.swing.JLabel textLogin;
-    private javax.swing.JLabel textLogin1;
-    private javax.swing.JLabel textLogin2;
     private javax.swing.JLabel textLogin3;
-    private javax.swing.JLabel textPassword;
-    private javax.swing.JLabel textPassword1;
-    private javax.swing.JLabel textPassword2;
     private javax.swing.JLabel textPassword3;
-    private javax.swing.JLabel textUsser;
-    private javax.swing.JLabel textUsser1;
-    private javax.swing.JLabel textUsser2;
     private javax.swing.JLabel textUsser3;
     // End of variables declaration//GEN-END:variables
 }

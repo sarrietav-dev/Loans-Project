@@ -5,7 +5,12 @@
  */
 package design.employee;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import logic.file_management.client_crud.ReadClient;
 import logic.loan_classes.Loan;
 
@@ -15,6 +20,8 @@ import logic.loan_classes.Loan;
  */
 public class EmployeeConsultClient extends javax.swing.JFrame {
 
+    protected static int selectedLoanId;
+    
     /**
      * Creates new form EmployeeConsultClient
      */
@@ -22,6 +29,16 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
         initComponents();
         showTheClient();
         showLoans();
+        
+        tableLoans.addMouseListener(new MouseAdapter(){
+            DefaultTableModel model = new DefaultTableModel(); 
+            
+            @Override
+             public void mouseClicked(MouseEvent e){
+                int i = tableLoans.getSelectedRow();
+                selectedLoanId = Integer.valueOf(tableLoans.getValueAt(i, 0).toString());
+            }  
+            }); 
     }
     
     private void showTheClient(){
@@ -34,22 +51,22 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
     
     private void showLoans(){
         ArrayList<Loan> allLoans = ReadClient.getLoans(EmployeeSelectedClient.getSelectedClient().getId());
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         
-        String matrix[][] = new String[allLoans.size()][6];
+        String matrix[][] = new String[allLoans.size()][5];
         
             for (int i=0; i<allLoans.size(); i++)
             {
                 matrix[i][0] = String.valueOf(allLoans.get(i).getLoanNumber());
                 matrix[i][1] = allLoans.get(i).getClient().getName();
                 matrix[i][2] = String.valueOf(allLoans.get(i).getAmount());
-                matrix[i][3] = String.valueOf(allLoans.get(i).getDates().getAuthorizationDate());
-                matrix[i][4] = String.valueOf(allLoans.get(i).getDates().getDeliveryDate());
-                matrix[i][5] = "test";
+                matrix[i][3] = String.valueOf(df.format(allLoans.get(i).getDates().getAuthorizationDate()));
+                matrix[i][4] = String.valueOf(df.format(allLoans.get(i).getDates().getDeliveryDate()));
             }
             
             tableLoans.setModel(new javax.swing.table.DefaultTableModel(
                     matrix,
-                    new String [] { "# of Loan", "Applicant", "Value", "Date of Authorization", "Delivery date", "Debts"  }
+                    new String [] { "# of Loan", "Applicant", "Value", "Date of Authorization", "Delivery date" }
                     ));
     }
 
@@ -85,6 +102,7 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
         buttonPayLoan = new org.edisoncor.gui.button.ButtonAction();
         buttonAddLoan = new org.edisoncor.gui.button.ButtonAction();
         buttonCancelLoan = new org.edisoncor.gui.button.ButtonAction();
+        buttonCheckLoan = new org.edisoncor.gui.button.ButtonAction();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,35 +113,37 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
 
         tableLoans.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "# of Loan", "Applicant", "Value", "Date of autorization", "Delivery date", "Dues"
+                "# of Loan", "Applicant", "Value", "Date of autorization", "Delivery date"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tableLoans.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tableLoans.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableLoans);
 
         javax.swing.GroupLayout panelImage4Layout = new javax.swing.GroupLayout(panelImage4);
@@ -173,7 +193,7 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
         panelImage1.setLayout(panelImage1Layout);
         panelImage1Layout.setHorizontalGroup(
             panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 190, Short.MAX_VALUE)
+            .addGap(0, 214, Short.MAX_VALUE)
         );
         panelImage1Layout.setVerticalGroup(
             panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,9 +237,9 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImage2Layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
                                 .addComponent(checkId, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(48, 48, 48)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(panelImage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap())
         );
         panelImage2Layout.setVerticalGroup(
             panelImage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,7 +247,7 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelImage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelImage2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 13, Short.MAX_VALUE)
                         .addGroup(panelImage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textId)
                             .addComponent(checkId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -267,6 +287,11 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
         });
 
         buttonPayLoan.setText("Pay a loan");
+        buttonPayLoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPayLoanActionPerformed(evt);
+            }
+        });
 
         buttonAddLoan.setText("Add a loan");
         buttonAddLoan.addActionListener(new java.awt.event.ActionListener() {
@@ -277,6 +302,13 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
 
         buttonCancelLoan.setText("Cancel a loan");
 
+        buttonCheckLoan.setText("Check Loan");
+        buttonCheckLoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCheckLoanActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelImage3Layout = new javax.swing.GroupLayout(panelImage3);
         panelImage3.setLayout(panelImage3Layout);
         panelImage3Layout.setHorizontalGroup(
@@ -284,24 +316,27 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
             .addGroup(panelImage3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelImage3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonCancelLoan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, Short.MAX_VALUE)
-                    .addComponent(buttonPayLoan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(buttonAddLoan, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(buttonCancelLoan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                    .addComponent(buttonPayLoan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonAddLoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonCheckLoan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelImage3Layout.setVerticalGroup(
             panelImage3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImage3Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonAddLoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonCheckLoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
                 .addComponent(buttonPayLoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonCancelLoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGap(7, 7, 7))
         );
 
         javax.swing.GroupLayout panelCurves2Layout = new javax.swing.GroupLayout(panelCurves2);
@@ -314,7 +349,7 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
                     .addComponent(labelCustom1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelCurves2Layout.createSequentialGroup()
                         .addComponent(panelImage2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panelImage3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(panelImage4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -325,9 +360,9 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(labelCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelCurves2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelImage3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelImage2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(panelCurves2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelImage3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelImage2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelImage4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -337,7 +372,9 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelCurves2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(panel1Layout.createSequentialGroup()
+                .addComponent(panelCurves2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,6 +423,17 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
         EmployeeAddLoan1.setVisible(true);
     }//GEN-LAST:event_buttonAddLoanActionPerformed
 
+    private void buttonPayLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPayLoanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonPayLoanActionPerformed
+
+    private void buttonCheckLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCheckLoanActionPerformed
+        // TODO add your handling code here:
+        EmployeeClientCheckLoan EmployeeClientCheckLoan1 = new EmployeeClientCheckLoan();
+        this.setVisible(false);
+        EmployeeClientCheckLoan1.setVisible(true);
+    }//GEN-LAST:event_buttonCheckLoanActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -425,6 +473,7 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
     private org.edisoncor.gui.button.ButtonAction buttonAddLoan;
     private org.edisoncor.gui.button.ButtonAction buttonBack;
     private org.edisoncor.gui.button.ButtonAction buttonCancelLoan;
+    private org.edisoncor.gui.button.ButtonAction buttonCheckLoan;
     private org.edisoncor.gui.button.ButtonAction buttonPayLoan;
     private javax.swing.JTextField checkAddress;
     private javax.swing.JTextField checkCellphone;

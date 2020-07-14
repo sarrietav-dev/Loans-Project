@@ -66,8 +66,7 @@ public class EmployeeClients extends javax.swing.JFrame {
     }
     
     private void showClients(){
-        Set <Client> allClients1 = new HashSet<Client>();
-        allClients1 = ReadClient.getAllClients();
+        Set <Client> allClients1 = ReadClient.getAllClients();
         
         int n = allClients1.size();
         
