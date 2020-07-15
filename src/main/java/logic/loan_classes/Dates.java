@@ -79,7 +79,7 @@ public class Dates implements Serializable {
         return this.deliveryDate;
     }
 
-    HashMap<Date, PaymentStatus> getPaymentDates() {
+    public HashMap<Date, PaymentStatus> getPaymentDates() {
         return paymentDates;
     }
 

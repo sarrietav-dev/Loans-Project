@@ -5,17 +5,17 @@
  */
 package design.employee;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.HashSet;
-import java.util.Set;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import logic.exceptions.ClientAlreadyExistsException;
 import logic.file_management.client_crud.CreateClient;
 import logic.file_management.client_crud.ReadClient;
 import logic.file_management.client_crud.UpdateClient;
 import logic.loan_classes.Client;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Set;
 
 /**
  *
