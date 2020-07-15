@@ -199,7 +199,9 @@ public class EmployeePayLoan extends javax.swing.JFrame {
     private void buttonPayInstallmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPayInstallmentActionPerformed
         // TODO add your handling code here:
         
-        if ("".equals(String.valueOf(insertPayment.getDate())))
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) insertPayment.getDateEditor();
+        
+        if ("".equals(String.valueOf(editor.getText())))
         {
             JOptionPane.showMessageDialog(null, "- You must fill the Date field!", "ERROR!", JOptionPane.ERROR_MESSAGE);
         }
@@ -207,12 +209,8 @@ public class EmployeePayLoan extends javax.swing.JFrame {
         else {
         
         paymentDate = insertPayment.getDate();
-        PaymentManager PaymentManager1 = new PaymentManager(loanChecked,paymentDate);
-        PaymentManager1.pay();
-        InformationPack informationPack1 = new InformationPack(loanChecked, paymentDate, EmployeeUsser.getUsser(), PaymentManager1.getMoneyToCapital(), PaymentManager1.getMoneyToInterests());
-        Receipt Receipt1 = new Receipt(informationPack1);
-        Receipt1.generateReceipt();
-        System.out.println(Receipt1.getReceiptPath());
+        EmployeeUsser.getUsser().payAnInstallment(loanChecked.getLoanNumber(), paymentDate);
+        JOptionPane.showMessageDialog(null, "Installment successfully repaid!", "ERROR!", JOptionPane.INFORMATION_MESSAGE);
         
         }
     }//GEN-LAST:event_buttonPayInstallmentActionPerformed
@@ -220,7 +218,9 @@ public class EmployeePayLoan extends javax.swing.JFrame {
     private void buttonPayLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPayLoanActionPerformed
         // TODO add your handling code here:
         
-        if ("".equals(String.valueOf(insertPayment.getDate())))
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) insertPayment.getDateEditor();
+        
+        if ("".equals(String.valueOf(editor.getText())))
         {
             JOptionPane.showMessageDialog(null, "- You must fill the Date field!", "ERROR!", JOptionPane.ERROR_MESSAGE);
         }

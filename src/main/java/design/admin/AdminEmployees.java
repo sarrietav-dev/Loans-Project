@@ -35,7 +35,7 @@ public class AdminEmployees extends javax.swing.JFrame {
         
          showEmployees();
         
-        TableEmployees.addMouseListener(new MouseAdapter(){
+        tableEmployees.addMouseListener(new MouseAdapter(){
             DefaultTableModel model = new DefaultTableModel(); 
             
             @Override
@@ -46,14 +46,14 @@ public class AdminEmployees extends javax.swing.JFrame {
                 buttonAdd.setEnabled(false);
                 insertId.setEnabled(false);
                  
-                int i = TableEmployees.getSelectedRow();
+                int i = tableEmployees.getSelectedRow();
                 passwordId = i;
-                insertId.setText(TableEmployees.getValueAt(i, 0).toString());
-                insertName.setText(TableEmployees.getValueAt(i, 1).toString());
-                insertTelephone.setText(TableEmployees.getValueAt(i, 2).toString());
-                insertCellphone.setText(TableEmployees.getValueAt(i, 3).toString());              
-                insertAddress.setText(TableEmployees.getValueAt(i, 4).toString());
-                insertBaseSalary.setText(TableEmployees.getValueAt(i, 5).toString());
+                insertId.setText(tableEmployees.getValueAt(i, 0).toString());
+                insertName.setText(tableEmployees.getValueAt(i, 1).toString());
+                insertTelephone.setText(tableEmployees.getValueAt(i, 2).toString());
+                insertCellphone.setText(tableEmployees.getValueAt(i, 3).toString());              
+                insertAddress.setText(tableEmployees.getValueAt(i, 4).toString());
+                insertBaseSalary.setText(tableEmployees.getValueAt(i, 5).toString());
                 
                 
             }  
@@ -96,7 +96,7 @@ public class AdminEmployees extends javax.swing.JFrame {
         textManageEmployees = new org.edisoncor.gui.label.LabelCustom();
         panelImage4 = new org.edisoncor.gui.panel.PanelImage();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TableEmployees = new javax.swing.JTable();
+        tableEmployees = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -275,7 +275,7 @@ public class AdminEmployees extends javax.swing.JFrame {
 
         panelImage4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Employees", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
-        TableEmployees.setModel(new javax.swing.table.DefaultTableModel(
+        tableEmployees.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -320,7 +320,7 @@ public class AdminEmployees extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(TableEmployees);
+        jScrollPane1.setViewportView(tableEmployees);
 
         javax.swing.GroupLayout panelImage4Layout = new javax.swing.GroupLayout(panelImage4);
         panelImage4.setLayout(panelImage4Layout);
@@ -433,7 +433,7 @@ public class AdminEmployees extends javax.swing.JFrame {
             }
         };
             
-            TableEmployees.setModel(tableModel);
+            tableEmployees.setModel(tableModel);
         
     }
     
@@ -500,7 +500,7 @@ public class AdminEmployees extends javax.swing.JFrame {
                   Employee newEmp = new Employee(insertId.getText(), "1234", insertName.getText(), insertTelephone.getText(), insertCellphone.getText(), insertAddress.getText(), Double.parseDouble(insertBaseSalary.getText()));
                   CreateEmployee.create(newEmp);
         } catch( EmployeeAlreadyExistsException e ) {
-             errors += "- That id already exist! \n";
+             errors += e.getMessage();
              cont++;
         } catch( NumberFormatException e ) {
              cont++;
@@ -620,7 +620,6 @@ public class AdminEmployees extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TableEmployees;
     private org.edisoncor.gui.util.BrightPassFilter brightPassFilter1;
     private org.edisoncor.gui.button.ButtonAction buttonAdd;
     private org.edisoncor.gui.button.ButtonAction buttonBack;
@@ -640,6 +639,7 @@ public class AdminEmployees extends javax.swing.JFrame {
     private org.edisoncor.gui.panel.PanelImage panelImage2;
     private org.edisoncor.gui.panel.PanelImage panelImage3;
     private org.edisoncor.gui.panel.PanelImage panelImage4;
+    private javax.swing.JTable tableEmployees;
     private javax.swing.JLabel textAddress;
     private javax.swing.JLabel textBaseSalary;
     private javax.swing.JLabel textCellphone;

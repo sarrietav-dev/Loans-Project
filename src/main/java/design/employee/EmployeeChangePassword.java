@@ -290,6 +290,7 @@ public class EmployeeChangePassword extends javax.swing.JFrame {
             EmployeeUsser.getUsser().setPassword(String.valueOf(insertNewPassword.getPassword()));
             Employee editEmployee = new Employee(EmployeeUsser.getUsser().getId(), EmployeeUsser.getUsser().getPassword(), EmployeeUsser.getUsser().getName(), EmployeeUsser.getUsser().getHomePhone(), EmployeeUsser.getUsser().getMobilePhone(), EmployeeUsser.getUsser().getAddress(), EmployeeUsser.getUsser().getBaseSalary());
             UpdateEmployee.update(editEmployee);
+            paintItWhite();
             JOptionPane.showMessageDialog(null, "Password updated succesfully!", "Succes!", JOptionPane.INFORMATION_MESSAGE);
         }
         else 

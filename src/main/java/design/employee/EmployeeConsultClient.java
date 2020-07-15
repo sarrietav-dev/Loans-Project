@@ -107,7 +107,6 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
         panelImage3 = new org.edisoncor.gui.panel.PanelImage();
         buttonBack = new org.edisoncor.gui.button.ButtonAction();
         buttonAddLoan = new org.edisoncor.gui.button.ButtonAction();
-        buttonCancelLoan = new org.edisoncor.gui.button.ButtonAction();
         buttonCheckLoan = new org.edisoncor.gui.button.ButtonAction();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -299,8 +298,6 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
             }
         });
 
-        buttonCancelLoan.setText("Cancel a loan");
-
         buttonCheckLoan.setText("Check Loan");
         buttonCheckLoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -315,8 +312,7 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
             .addGroup(panelImage3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelImage3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonCancelLoan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                    .addComponent(buttonBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonBack, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
                     .addComponent(buttonAddLoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonCheckLoan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -326,11 +322,9 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImage3Layout.createSequentialGroup()
                 .addContainerGap(22, Short.MAX_VALUE)
                 .addComponent(buttonAddLoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(42, 42, 42)
                 .addComponent(buttonCheckLoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(buttonCancelLoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(47, 47, 47)
                 .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -464,7 +458,6 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonAction buttonAddLoan;
     private org.edisoncor.gui.button.ButtonAction buttonBack;
-    private org.edisoncor.gui.button.ButtonAction buttonCancelLoan;
     private org.edisoncor.gui.button.ButtonAction buttonCheckLoan;
     private javax.swing.JTextField checkAddress;
     private javax.swing.JTextField checkCellphone;

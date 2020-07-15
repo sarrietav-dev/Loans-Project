@@ -213,7 +213,7 @@ public class LoginMenu extends javax.swing.JFrame {
             } catch (LoginIncorrectException e) {
                 proceed = false;
                 System.out.print("Usser or password incorrect, throwing exception... ");
-                JOptionPane.showMessageDialog(null, "User or password incorrect!", "ERROR!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR!", JOptionPane.ERROR_MESSAGE);
             }
 
         }

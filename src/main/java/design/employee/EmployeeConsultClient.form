@@ -397,8 +397,7 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="buttonCancelLoan" alignment="1" pref="162" max="32767" attributes="0"/>
-                              <Component id="buttonBack" alignment="0" max="32767" attributes="0"/>
+                              <Component id="buttonBack" alignment="0" pref="162" max="32767" attributes="0"/>
                               <Component id="buttonAddLoan" alignment="0" max="32767" attributes="0"/>
                               <Component id="buttonCheckLoan" alignment="1" max="32767" attributes="0"/>
                           </Group>
@@ -411,11 +410,9 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace pref="22" max="32767" attributes="0"/>
                           <Component id="buttonAddLoan" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                           <Component id="buttonCheckLoan" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="buttonCancelLoan" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                           <Component id="buttonBack" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       </Group>
@@ -438,11 +435,6 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAddLoanActionPerformed"/>
                   </Events>
-                </Component>
-                <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonCancelLoan">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Cancel a loan"/>
-                  </Properties>
                 </Component>
                 <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonCheckLoan">
                   <Properties>
