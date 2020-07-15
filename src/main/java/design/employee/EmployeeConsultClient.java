@@ -64,10 +64,17 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
                 matrix[i][4] = String.valueOf(df.format(allLoans.get(i).getDates().getDeliveryDate()));
             }
             
-            tableLoans.setModel(new javax.swing.table.DefaultTableModel(
+            DefaultTableModel tableModel = new DefaultTableModel(
                     matrix,
-                    new String [] { "# of Loan", "Applicant", "Value", "Date of Authorization", "Delivery date" }
-                    ));
+                    new String [] { "# of Loan", "Applicant", "Value", "Date of Authorization", "Delivery date" }) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {       
+            return false; 
+            }
+        };
+            
+            tableLoans.setModel(tableModel);
     }
 
     /**

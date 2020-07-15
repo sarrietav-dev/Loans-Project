@@ -87,10 +87,17 @@ public class EmployeeClients extends javax.swing.JFrame {
 
             }
             
-            tableClients.setModel(new javax.swing.table.DefaultTableModel(
+            DefaultTableModel tableModel = new DefaultTableModel(
                     matrix,
-                    new String [] { "id", "Name", "Telephone", "Cellphone", "Address"  }
-                    ));
+                    new String [] { "id", "Name", "Telephone", "Cellphone", "Address"  }) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {       
+            return false; 
+            }
+        };
+            
+        tableClients.setModel(tableModel);
     }
 
     /**

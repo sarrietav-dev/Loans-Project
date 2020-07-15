@@ -6,8 +6,14 @@
 package design.employee;
 
 import design.admin.AdminClients;
-import static design.employee.EmployeeCheckTotals.adminOrEmployee;
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Set;
+import javax.swing.table.DefaultTableModel;
+import logic.file_management.client_crud.ReadClient;
+import logic.loan_classes.Client;
+import logic.loan_classes.Loan;
 /**
  *
  * @author Administrador
@@ -19,10 +25,52 @@ public class EmployeeClientsLoans extends javax.swing.JFrame {
      */
     public EmployeeClientsLoans() {
         initComponents();
+        showClientsWithLoans();
     }
     
     public static boolean adminOrEmployee;
 
+    private void showClientsWithLoans(){
+        Set <Client> allClients1 = ReadClient.getAllClients();
+        
+        Client allClients[] = new Client[allClients1.size()];
+        allClients = allClients1.toArray(allClients);
+        
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        ArrayList<Loan> allClientsLoans = new ArrayList();
+        
+        for (Client allClient : allClients) {
+            for (int k = 0; k < ReadClient.getLoans(allClient.getId()).size(); k++) {
+                allClientsLoans.add(ReadClient.getLoans(allClient).get(k));
+            }
+        }
+        
+        String matrix[][] = new String[ allClientsLoans.size()][4];
+        
+            for (int i=0; i<allClientsLoans.size(); i++)
+            {
+                
+                matrix[i][0] = String.valueOf(allClientsLoans.get(i).getClient().getId());
+                matrix[i][1] = allClientsLoans.get(i).getClient().getName();
+                matrix[i][2] = String.valueOf(df.format(allClientsLoans.get(i).getDates().getDeliveryDate()));
+                matrix[i][3] = String.valueOf(allClientsLoans.get(i).getAmount());
+
+            }
+            
+            DefaultTableModel tableModel = new DefaultTableModel(
+                    matrix,
+                    new String [] { "Id of Client", "Client", "Date of Assignment", "Amount Owed"  }) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {       
+            return false; 
+            }
+        };
+            
+            tableClientsLoans.setModel(tableModel);
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,17 +97,17 @@ public class EmployeeClientsLoans extends javax.swing.JFrame {
 
         tableClientsLoans.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Client", "Date of assignment", "Amount owed"
+                "Id of client", "Client", "Date of assignment", "Amount owed"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -67,6 +115,12 @@ public class EmployeeClientsLoans extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tableClientsLoans);
+        if (tableClientsLoans.getColumnModel().getColumnCount() > 0) {
+            tableClientsLoans.getColumnModel().getColumn(0).setResizable(false);
+            tableClientsLoans.getColumnModel().getColumn(1).setResizable(false);
+            tableClientsLoans.getColumnModel().getColumn(2).setResizable(false);
+            tableClientsLoans.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);
