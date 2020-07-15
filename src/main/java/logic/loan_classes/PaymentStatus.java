@@ -18,6 +18,10 @@ public class PaymentStatus implements Serializable {
         isPaid = false;
     }
 
+    public Date getPaymentDate() {
+	    return paymentDate;
+    }
+
     public void pay(Date paymentDate) {
         isPaid = true;
         this.paymentDate = paymentDate;

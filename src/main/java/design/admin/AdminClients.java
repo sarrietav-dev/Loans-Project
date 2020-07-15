@@ -450,11 +450,19 @@ public class AdminClients extends javax.swing.JFrame {
 
             }
             
-            tableClients.setModel(new javax.swing.table.DefaultTableModel(
+            
+            DefaultTableModel tableModel = new DefaultTableModel(
                     matrix,
-                    new String [] { "id", "Name", "Telephone", "Cellphone", "Address"  }
-                    ));
-        
+                    new String [] { "id", "Name", "Telephone", "Cellphone", "Address"  }) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {       
+            return false; 
+            }
+        };
+            
+        tableClients.setModel(tableModel);
+            
     }
     
     private void insertNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertNameActionPerformed

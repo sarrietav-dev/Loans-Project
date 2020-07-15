@@ -423,10 +423,17 @@ public class AdminEmployees extends javax.swing.JFrame {
             
             allPasswords = passwords;
             
-            TableEmployees.setModel(new javax.swing.table.DefaultTableModel(
+            DefaultTableModel tableModel = new DefaultTableModel(
                     matrix,
-                    new String [] { "id", "Name", "Telephone", "Cellphone", "Address", "Base salary", "Total Salary"  }
-                    ));
+                    new String [] { "id", "Name", "Telephone", "Cellphone", "Address", "Base salary", "Total Salary"  }) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {       
+            return false; 
+            }
+        };
+            
+            TableEmployees.setModel(tableModel);
         
     }
     

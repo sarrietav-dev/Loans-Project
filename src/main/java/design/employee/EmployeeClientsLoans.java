@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Set;
+import javax.swing.table.DefaultTableModel;
 import logic.file_management.client_crud.ReadClient;
 import logic.loan_classes.Client;
 import logic.loan_classes.Loan;
@@ -56,10 +57,17 @@ public class EmployeeClientsLoans extends javax.swing.JFrame {
 
             }
             
-             tableClientsLoans.setModel(new javax.swing.table.DefaultTableModel(
+            DefaultTableModel tableModel = new DefaultTableModel(
                     matrix,
-                    new String [] { "Id of Client", "Client", "Date of Assignment", "Amount Owed"  }
-                    ));
+                    new String [] { "Id of Client", "Client", "Date of Assignment", "Amount Owed"  }) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {       
+            return false; 
+            }
+        };
+            
+            tableClientsLoans.setModel(tableModel);
     }
 
     
@@ -107,6 +115,12 @@ public class EmployeeClientsLoans extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tableClientsLoans);
+        if (tableClientsLoans.getColumnModel().getColumnCount() > 0) {
+            tableClientsLoans.getColumnModel().getColumn(0).setResizable(false);
+            tableClientsLoans.getColumnModel().getColumn(1).setResizable(false);
+            tableClientsLoans.getColumnModel().getColumn(2).setResizable(false);
+            tableClientsLoans.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);

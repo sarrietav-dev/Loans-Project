@@ -6,6 +6,7 @@
 package design.employee;
 
 import static design.employee.EmployeeConsultClient.selectedLoanId;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,6 +14,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.swing.table.DefaultTableModel;
+
 import logic.file_management.loan_crud.ReadLoan;
 import logic.loan_classes.Client;
 import logic.loan_classes.Dates;
@@ -20,7 +23,6 @@ import logic.loan_classes.Loan;
 import logic.loan_classes.PaymentStatus;
 
 /**
- *
  * @author Administrador
  */
 public class EmployeeClientCheckLoan extends javax.swing.JFrame {
@@ -32,36 +34,47 @@ public class EmployeeClientCheckLoan extends javax.swing.JFrame {
         initComponents();
         showInstallments();
     }
-    
-    private void showInstallments(){
-        
+
+    private void showInstallments() {
+
         Loan selectedLoan = ReadLoan.getLoan(selectedLoanId);
         List<Date> allDates = selectedLoan.getDates().getDatesSorted();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        
-        HashMap<Date,PaymentStatus> allPayments = selectedLoan.getDates().getPaymentDates();
-        
+
+        HashMap<Date, PaymentStatus> allPayments = selectedLoan.getDates().getPaymentDates();
+
         Object[] allPaymentDates = allPayments.keySet().toArray();
         Object[] allPaymentStatus = allPayments.values().toArray();
-        
-        
-        String matrix[][] = new String[allDates.size()][3];
-        
-            for (int i=0; i<allDates.size(); i++)
-            {
-                
-                matrix[i][0] = String.valueOf(df.format(allDates.get(i)));
-                matrix[i][1] = String.valueOf(df.format(allPaymentDates[i]));
-                matrix[i][2] = String.valueOf(allPaymentStatus[i]);
 
-            }
-            
-            tableInstallments.setModel(new javax.swing.table.DefaultTableModel(
-                    matrix,
-                    new String [] { "Date of Installment", "Day of Payment", "Installment paid"  }
-                    ));
-    }
+        final int EXPECTED_DATE = 0;
+        final int ACTUAL_DATE = 1;
+        final int IS_PAID = 2;
+
+        String[][] matrix = new String[allDates.size()][3];
+
+        for (int i = 0; i < allDates.size(); i++) {
+            PaymentStatus paymentStatus = allPayments.get(allDates.get(i));
+
+            matrix[i][EXPECTED_DATE] = df.format(allDates.get(i));
+            matrix[i][ACTUAL_DATE] = (paymentStatus.getPaymentDate() == null ? "HAS NOT PAID" : df.format(paymentStatus.getPaymentDate()));
+            matrix[i][IS_PAID] = (!paymentStatus.isNotPaid() ? "YES" : "NO");
+
+        }
         
+        DefaultTableModel tableModel = new DefaultTableModel(
+                    matrix,
+                    new String [] {"Date of Installment", "Day of Payment", "Installment paid"}) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {       
+            return false; 
+            }
+        };
+            
+        tableInstallments.setModel(tableModel);
+
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -93,29 +106,29 @@ public class EmployeeClientCheckLoan extends javax.swing.JFrame {
         panelImage1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         tableInstallments.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Date of Installment", "Date of payment", "Installment paid"
-            }
+                new Object[][]{
+                        {null, null, null},
+                        {null, null, null},
+                        {null, null, null},
+                        {null, null, null}
+                },
+                new String[]{
+                        "Date of Installment", "Date of payment", "Installment paid"
+                }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            final Class[] types = new Class[]{
+                    java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
+            final boolean[] canEdit = new boolean[]{
+                    false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
         jScrollPane1.setViewportView(tableInstallments);
@@ -123,14 +136,14 @@ public class EmployeeClientCheckLoan extends javax.swing.JFrame {
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);
         panelImage1Layout.setHorizontalGroup(
-            panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
+                panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
         );
         panelImage1Layout.setVerticalGroup(
-            panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImage1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImage1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         buttonBack2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back.jpg"))); // NOI18N
@@ -145,56 +158,56 @@ public class EmployeeClientCheckLoan extends javax.swing.JFrame {
         javax.swing.GroupLayout panelCurves1Layout = new javax.swing.GroupLayout(panelCurves1);
         panelCurves1.setLayout(panelCurves1Layout);
         panelCurves1Layout.setHorizontalGroup(
-            panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCurves1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelCustom1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(panelCurves1Layout.createSequentialGroup()
-                .addGap(156, 156, 156)
-                .addComponent(buttonBack2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelCurves1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(panelImage1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelCurves1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(labelCustom1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                                .addContainerGap())
+                        .addGroup(panelCurves1Layout.createSequentialGroup()
+                                .addGap(156, 156, 156)
+                                .addComponent(buttonBack2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panelCurves1Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(panelImage1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addContainerGap()))
         );
         panelCurves1Layout.setVerticalGroup(
-            panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelCurves1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 317, Short.MAX_VALUE)
-                .addComponent(buttonBack2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
-            .addGroup(panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelCurves1Layout.createSequentialGroup()
-                    .addGap(60, 60, 60)
-                    .addComponent(panelImage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(130, Short.MAX_VALUE)))
+                panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelCurves1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(labelCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 317, Short.MAX_VALUE)
+                                .addComponent(buttonBack2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(19, 19, 19))
+                        .addGroup(panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panelCurves1Layout.createSequentialGroup()
+                                        .addGap(60, 60, 60)
+                                        .addComponent(panelImage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap(130, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelCurves1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panelCurves1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelCurves1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panelCurves1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -210,11 +223,11 @@ public class EmployeeClientCheckLoan extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

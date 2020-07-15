@@ -7,6 +7,7 @@ package design.employee;
 
 import design.admin.AdminClients;
 import java.util.Set;
+import javax.swing.table.DefaultTableModel;
 import logic.file_management.client_crud.ReadClient;
 import logic.loan_classes.Client;
 
@@ -41,10 +42,18 @@ public class EmployeeClientsDefaulters extends javax.swing.JFrame {
 
             }
             
-            tableDefaulterClients.setModel(new javax.swing.table.DefaultTableModel(
+            DefaultTableModel tableModel = new DefaultTableModel(
                     matrix,
-                    new String [] { "Id", "Name"  }
-                    ));
+                    new String [] { "Id", "Name"  }) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {       
+            return false; 
+            }
+        };
+            
+            tableDefaulterClients.setModel(tableModel);
+           
     }
 
     /**
