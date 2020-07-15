@@ -17,7 +17,9 @@ import java.util.Date;
 public class Receipt {
 	private final InformationPack info;
 
-	private String path = "pdf_files"+ File.separator +"receipts" + File.separator;
+	private String  filePath = "pdf_files"+ File.separator +"receipts" + File.separator;
+	private File path;
+
 	private final Document document;
 
 	private static final Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
@@ -28,12 +30,18 @@ public class Receipt {
 	public Receipt(InformationPack info) {
 		this.info = info;
 		document = new Document();
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss:aa");
+		String fileName = "receipt-" + info.getLoan().getLoanNumber() + "-" + dateFormat.format(new Date()) + ".pdf";
+		path = new File(filePath + fileName); 
 	}
 
 	public void generateReceipt() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss:aa");
 
-		path += "receipt-" + info.getLoan().getLoanNumber() + "-" + dateFormat.format(new Date()) + ".pdf"; try { writer = PdfWriter.getInstance(document, new FileOutputStream(path)); document.open();
+		try {
+			writer = PdfWriter.getInstance(document, new FileOutputStream(path));
+			document.open();
+
 			addImage();
 			addTitle();
 			addContent();
@@ -105,6 +113,6 @@ public class Receipt {
 	public String getReceiptPath() {
 		if (writer == null)
 			throw new IllegalOperationException("The receipt has not been generated yet");
-		return path;
+		return path.getAbsolutePath();
 	}
 }
