@@ -43,7 +43,7 @@ public class PaymentManager {
     private void setAllInstallmentsPaid() {
         for (Date paymentDate : loanDates.getDatesSorted())
             if (loanDates.getPaymentDates().get(paymentDate).isNotPaid())
-                loanDates.getPaymentDates().get(paymentDate).pay(paymentDate);
+                loanDates.getPaymentDates().get(paymentDate).pay(this.paymentDate);
     }
 
     /**

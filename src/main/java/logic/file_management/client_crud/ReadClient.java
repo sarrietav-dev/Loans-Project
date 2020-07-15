@@ -18,7 +18,7 @@ public class ReadClient extends CRUD {
 
     public static boolean doesClientExist(Client client) {
         return data.keySet().stream()
-                .anyMatch(client::equals);
+            .anyMatch(client::equals);
     }
 
     public static double totalAmountBorrowed(Client client) {
@@ -31,30 +31,36 @@ public class ReadClient extends CRUD {
         return sum;
     }
 
+    public static double getInterestsCollected() {
+        return getAllClients().stream()
+                .flatMap(client -> data.get(client).stream())
+                .mapToDouble(Loan::getInterestsCollected).sum();
+    }
+
     public static boolean hasAnyLoanDelayed(Client client) {
         return data.get(client).stream()
-                .anyMatch(ReadLoan::isLoanDelayed);
+            .anyMatch(ReadLoan::isLoanDelayed);
     }
 
     public static double getAllBorrowedMoney() {
         return CLIENT_DATABASE.getData().keySet().stream()
-                .mapToDouble(ReadClient::totalAmountBorrowed).sum();
+            .mapToDouble(ReadClient::totalAmountBorrowed).sum();
     }
 
     public static Set<Client> getDelayedClients() {
         return getAllClients().stream()
-                .filter(ReadClient::hasAnyLoanDelayed)
-                .collect(Collectors.toSet());
+            .filter(ReadClient::hasAnyLoanDelayed)
+            .collect(Collectors.toSet());
     }
 
     public static ArrayList<Loan> getLoans(Client client) {
-	    return data.get(client);
+        return data.get(client);
     }
 
     public static ArrayList<Loan> getLoans(final int CLIENT_ID) {
-	    for (Client client : getAllClients())
-	        if (client.getId() == CLIENT_ID)
-	            return data.get(client);
+        for (Client client : getAllClients())
+            if (client.getId() == CLIENT_ID)
+                return data.get(client);
         throw new ObjectNotFoundException("Client not found!");
     }
 }
