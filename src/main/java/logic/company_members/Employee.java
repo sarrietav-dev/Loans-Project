@@ -8,6 +8,7 @@ import logic.file_management.loan_crud.CreateLoan;
 import logic.loan_classes.Client;
 import logic.loan_classes.Loan;
 import logic.loan_management.PaymentMethods;
+import logic.pdf.Receipt;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -58,7 +59,9 @@ public class Employee implements Serializable {
 	 * @throws LoanAlreadyPaidException If the loan was already paid (Each installment was paid).
 	 */
 	public void payAnInstallment(final int LOAN_ID, final Date DATE_OF_PAYMENT) {
-		lastReceiptPath = PaymentMethods.payInstallment(this, LOAN_ID, DATE_OF_PAYMENT).getReceiptPath();
+		Receipt receipt = PaymentMethods.payInstallment(this, LOAN_ID, DATE_OF_PAYMENT);
+		receipt.generateReceipt();
+		lastReceiptPath = receipt.getReceiptPath();
 	}
 
 	/**
@@ -68,7 +71,9 @@ public class Employee implements Serializable {
 	 * @throws LoanAlreadyPaidException If the loan was already paid (Each installment was paid).
 	 */
 	public void payALoan(final int LOAN_ID, final Date DATE_OF_PAYMENT) {
-		lastReceiptPath = PaymentMethods.payLoan(this, LOAN_ID, DATE_OF_PAYMENT).getReceiptPath();
+		Receipt receipt = PaymentMethods.payInstallment(this, LOAN_ID, DATE_OF_PAYMENT);
+		receipt.generateReceipt();
+		lastReceiptPath = receipt.getReceiptPath();
 	}
 
 	public String getLastReceiptPath() {
