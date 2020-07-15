@@ -86,6 +86,10 @@ public class Loan implements Serializable {
         setPaid();
     }
 
+    public double getInterestsCollected() {
+        return interestCollected;
+    }
+
     public double getBalance() {
         return balance;
     }
