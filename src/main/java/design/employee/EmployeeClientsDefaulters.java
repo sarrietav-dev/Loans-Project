@@ -6,6 +6,9 @@
 package design.employee;
 
 import design.admin.AdminClients;
+import java.util.Set;
+import logic.file_management.client_crud.ReadClient;
+import logic.loan_classes.Client;
 
 /**
  *
@@ -18,9 +21,31 @@ public class EmployeeClientsDefaulters extends javax.swing.JFrame {
      */
     public EmployeeClientsDefaulters() {
         initComponents();
+        showDefaulters();
     }
     
     public static boolean adminOrEmployee;
+    
+    private void showDefaulters(){
+         Set <Client> allDefaulters1 = ReadClient.getDelayedClients();
+         
+         Client allDefaulters[] = new Client[allDefaulters1.size()];
+         allDefaulters = allDefaulters1.toArray(allDefaulters);
+         
+         String matrix[][] = new String[allDefaulters1.size()][2];
+        
+            for (int i=0; i<allDefaulters1.size(); i++)
+            {
+                matrix[i][0] = String.valueOf(allDefaulters[i].getId());
+                matrix[i][1] = allDefaulters[i].getName();
+
+            }
+            
+            tableDefaulterClients.setModel(new javax.swing.table.DefaultTableModel(
+                    matrix,
+                    new String [] { "Id", "Name"  }
+                    ));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,17 +73,17 @@ public class EmployeeClientsDefaulters extends javax.swing.JFrame {
 
         tableDefaulterClients.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Client", "Date of assignment", "Amount owed"
+                "Id", "Name"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

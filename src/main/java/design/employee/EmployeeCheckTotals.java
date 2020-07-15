@@ -6,10 +6,9 @@
 package design.employee;
 
 import design.admin.AdminClients;
-import javax.swing.JFormattedTextField;
 import javax.swing.JSpinner;
-import logic.company_members.Admin;
 import logic.company_members.Employee;
+import logic.file_management.client_crud.ReadClient;
 
 /**
  *
@@ -32,6 +31,8 @@ public class EmployeeCheckTotals extends javax.swing.JFrame {
         checkMaxLend.setText(String.valueOf(Employee.getMaximumAmountToLend()));
         checkMaxPerClient.setText(String.valueOf(Employee.getMaximumToLendPerClient()));
         checkAuthorization.setValue(Employee.getAuthDate());
+        checkBorrowed.setText(String.valueOf(ReadClient.getAllBorrowedMoney()));
+        checkAvailable.setText(String.valueOf(Employee.getMaximumAmountToLend() - ReadClient.getAllBorrowedMoney()));
     }
 
     /**
