@@ -31,6 +31,7 @@ public class PaymentMethods {
 
 		paymentManager = new PaymentManager(loan, DATE_OF_PAYMENT);
 		paymentManager.pay();
+		EMPLOYEE.sumToSalary(paymentManager.getMoneyToEmployee());
 
 		InformationPack pack = new InformationPack(loan, DATE_OF_PAYMENT, EMPLOYEE, paymentManager.getMoneyToCapital(),
 				paymentManager.getMoneyToInterests());
@@ -51,6 +52,7 @@ public class PaymentMethods {
 			throw new LoanAlreadyPaidException();
 		paymentManager = new PaymentManager(loan, DATE_OF_PAYMENT);
 		paymentManager.payAll();
+		EMPLOYEE.sumToSalary(paymentManager.getMoneyToEmployee());
 
 		InformationPack pack = new InformationPack(loan, DATE_OF_PAYMENT, EMPLOYEE, paymentManager.getMoneyToCapital(),
 				paymentManager.getMoneyToInterests());
