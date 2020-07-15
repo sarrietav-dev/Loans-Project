@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Date;
 
 class PaymentMethodsTest {
-    private final int LOAN_ID = 2064682115;
+    private final int LOAN_ID = 127720688;
     private final Loan loan = ReadLoan.getLoan(LOAN_ID);
     private final Employee employee = new Employee();
 

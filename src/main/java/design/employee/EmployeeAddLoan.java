@@ -235,11 +235,7 @@ public class EmployeeAddLoan extends javax.swing.JFrame {
             Loan clientLoan = new Loan( Double.valueOf(insertAmount.getText()), String.valueOf(df.format(insertAuthorization.getDate())));
             CreateLoan.create(clientLoan, EmployeeSelectedClient.getSelectedClient().getId());
             }
-            catch (CannotAddMoreLoansException e){
-                errors += e.getMessage();
-                cont++;
-            }
-            catch (DateOutOfLimitException e){
+            catch (CannotAddMoreLoansException | DateOutOfLimitException e){
                 errors += e.getMessage();
                 cont++;
             }

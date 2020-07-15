@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 
 import logic.company_members.Employee;
 import logic.company_members.employee_crud.ReadEmployee;
-import logic.databases.EmployeeDatabase;
 import logic.exceptions.LoginIncorrectException;
 
 /**
@@ -266,6 +265,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new LoginMenu().setVisible(true);
             }
