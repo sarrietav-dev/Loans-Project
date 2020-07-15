@@ -5,6 +5,8 @@
  */
 package design.employee;
 
+import java.util.Set;
+import logic.file_management.client_crud.ReadClient;
 import logic.loan_classes.Client;
 
 /**
@@ -12,7 +14,7 @@ import logic.loan_classes.Client;
  * @author Administrador
  */
 public class EmployeeSelectedClient {
-    
+
     private static Client theClient;
     
     public static void setSelectedClientClient(Client theClient)

@@ -5,6 +5,11 @@
  */
 package design.admin;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import logic.company_members.Employee;
+import logic.company_members.employee_crud.ReadEmployee;
+
 /**
  *
  * @author Administrador
@@ -16,6 +21,34 @@ public class AdminCheckEarnings extends javax.swing.JFrame {
      */
     public AdminCheckEarnings() {
         initComponents();
+        checkEarnings();
+    }
+    
+    void checkEarnings(){
+        ArrayList<Employee> allEmployees = ReadEmployee.getAllEmployees();
+        
+        String matrix[][] = new String[allEmployees.size()][3];
+        
+            for (int i=0; i<allEmployees.size(); i++)
+            {
+                
+                matrix[i][0] = allEmployees.get(i).getId();
+                matrix[i][1] = allEmployees.get(i).getName();
+                matrix[i][2] = String.valueOf(allEmployees.get(i).getCurrentSalary() - allEmployees.get(i).getBaseSalary());
+
+            }
+            
+            DefaultTableModel tableModel = new DefaultTableModel(
+                    matrix,
+                    new String [] { "Id", "Employee", "Earnings"  }) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {       
+            return false; 
+            }
+        };
+            
+            tableEmployeesEarnings.setModel(tableModel);
     }
 
     /**
@@ -44,17 +77,17 @@ public class AdminCheckEarnings extends javax.swing.JFrame {
 
         tableEmployeesEarnings.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Employee", "Earnings"
+                "Id", "Employee", "Earnings"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
