@@ -37,6 +37,7 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
              public void mouseClicked(MouseEvent e){
                 int i = tableLoans.getSelectedRow();
                 selectedLoanId = Integer.valueOf(tableLoans.getValueAt(i, 0).toString());
+                buttonCheckLoan.setEnabled(true);
             }  
             }); 
     }
@@ -299,6 +300,7 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
         });
 
         buttonCheckLoan.setText("Check Loan");
+        buttonCheckLoan.setEnabled(false);
         buttonCheckLoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCheckLoanActionPerformed(evt);

@@ -18,10 +18,6 @@ public class PaymentStatus implements Serializable {
         isPaid = false;
     }
 
-    public Date getPaymentDate() {
-	    return paymentDate;
-    }
-
     public void pay(Date paymentDate) {
         isPaid = true;
         this.paymentDate = paymentDate;
@@ -29,6 +25,10 @@ public class PaymentStatus implements Serializable {
 
     public boolean isNotPaid() {
         return !isPaid;
+    }
+    
+    public Date getPaymentDate() {
+	    return paymentDate;
     }
 
     @Override

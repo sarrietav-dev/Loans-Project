@@ -8,9 +8,9 @@ public class PaymentManager {
     private final Loan loan;
     private final Dates loanDates;
     private final Date paymentDate;
-
     private double moneyToCapital;
     private double moneyToInterests;
+    private double moneyToEmployee;
 
     public PaymentManager(Loan loan, Date paymentDate) {
         this.loan = loan;
@@ -43,7 +43,7 @@ public class PaymentManager {
     private void setAllInstallmentsPaid() {
         for (Date paymentDate : loanDates.getDatesSorted())
             if (loanDates.getPaymentDates().get(paymentDate).isNotPaid())
-                loanDates.getPaymentDates().get(paymentDate).pay(paymentDate);
+                loanDates.getPaymentDates().get(paymentDate).pay(this.paymentDate);
     }
 
     /**
@@ -71,29 +71,30 @@ public class PaymentManager {
 
     private DistributeMoneyInterface getDistributeMoney(DISTRIBUTE_MONEY_OPTION option) {
         switch (option) {
-            case PAY -> {
+            case PAY:
                 return () -> {
                     double interests = getInterests();
 
-                    moneyToInterests = interests;
+                    moneyToInterests = (interests - (loan.getBalance() * 0.01));
                     moneyToCapital = loan.getInstallmentsPrice() - interests;
+                    moneyToEmployee = loan.getBalance() * 0.01;
 
                     loan.sumToCapital(moneyToCapital);
                     loan.sumToInterests(moneyToInterests);
                 };
-            }
-            case PAY_ALL -> {
+            case PAY_ALL:
                 return () -> {
                     int notPaidInstallments = getNotPaidInstallments();
 
                     moneyToCapital = loan.getInstallmentsPrice() * notPaidInstallments;
-                    moneyToInterests = moneyToCapital * 0.05;
+                    moneyToInterests = moneyToCapital * 0.04;
+                    moneyToEmployee = moneyToCapital * 0.01;
 
                     loan.sumToInterests(moneyToInterests);
                     loan.sumToCapital(moneyToCapital);
                 };
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + option);
+            default:
+                throw new IllegalStateException("Unexpected value: " + option);
         }
     }
 
@@ -123,6 +124,10 @@ public class PaymentManager {
             if (loanDates.getPaymentDates().get(paymentDate).isNotPaid())
                 notPaidInstallmentsCounter++;
         return notPaidInstallmentsCounter;
+    }
+
+    public double getMoneyToEmployee() {
+        return moneyToEmployee;
     }
 
     private enum DISTRIBUTE_MONEY_OPTION {

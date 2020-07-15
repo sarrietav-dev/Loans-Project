@@ -91,8 +91,9 @@ public class AdminEmployees extends javax.swing.JFrame {
         panelImage3 = new org.edisoncor.gui.panel.PanelImage();
         buttonAdd = new org.edisoncor.gui.button.ButtonAction();
         buttonEdit = new org.edisoncor.gui.button.ButtonAction();
-        buttonDeselect = new org.edisoncor.gui.button.ButtonAction();
+        buttonCheckEarnings = new org.edisoncor.gui.button.ButtonAction();
         buttonBack = new org.edisoncor.gui.button.ButtonAction();
+        buttonDeselect = new org.edisoncor.gui.button.ButtonAction();
         textManageEmployees = new org.edisoncor.gui.label.LabelCustom();
         panelImage4 = new org.edisoncor.gui.panel.PanelImage();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -226,11 +227,10 @@ public class AdminEmployees extends javax.swing.JFrame {
             }
         });
 
-        buttonDeselect.setText("Deselect");
-        buttonDeselect.setEnabled(false);
-        buttonDeselect.addActionListener(new java.awt.event.ActionListener() {
+        buttonCheckEarnings.setText("Check Earnings");
+        buttonCheckEarnings.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonDeselectActionPerformed(evt);
+                buttonCheckEarningsActionPerformed(evt);
             }
         });
 
@@ -241,6 +241,14 @@ public class AdminEmployees extends javax.swing.JFrame {
             }
         });
 
+        buttonDeselect.setText("Deselect");
+        buttonDeselect.setEnabled(false);
+        buttonDeselect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeselectActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelImage3Layout = new javax.swing.GroupLayout(panelImage3);
         panelImage3.setLayout(panelImage3Layout);
         panelImage3Layout.setHorizontalGroup(
@@ -248,11 +256,13 @@ public class AdminEmployees extends javax.swing.JFrame {
             .addGroup(panelImage3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
+                .addGap(18, 18, 18)
                 .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(buttonCheckEarnings, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(buttonDeselect, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
+                .addGap(18, 18, 18)
                 .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -263,8 +273,9 @@ public class AdminEmployees extends javax.swing.JFrame {
                 .addGroup(panelImage3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonDeselect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttonCheckEarnings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonDeselect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -320,6 +331,7 @@ public class AdminEmployees extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableEmployees.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableEmployees);
 
         javax.swing.GroupLayout panelImage4Layout = new javax.swing.GroupLayout(panelImage4);
@@ -519,14 +531,12 @@ public class AdminEmployees extends javax.swing.JFrame {
 
     }//GEN-LAST:event_buttonAddActionPerformed
 
-    private void buttonDeselectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeselectActionPerformed
+    private void buttonCheckEarningsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCheckEarningsActionPerformed
         // TODO add your handling code here:
-        buttonEdit.setEnabled(false);
-        buttonDeselect.setEnabled(false);
-        buttonAdd.setEnabled(true);
-        insertId.setEnabled(true);
-        paintItWhite();
-    }//GEN-LAST:event_buttonDeselectActionPerformed
+        AdminCheckEarnings AdminCheckEarnings1 = new AdminCheckEarnings();
+        this.setVisible(false);
+        AdminCheckEarnings1.setVisible(true);
+    }//GEN-LAST:event_buttonCheckEarningsActionPerformed
 
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
         // TODO add your handling code here:
@@ -573,6 +583,15 @@ public class AdminEmployees extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, errors, "ERROR!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_buttonEditActionPerformed
+
+    private void buttonDeselectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeselectActionPerformed
+        // TODO add your handling code here:
+        buttonEdit.setEnabled(false);
+        buttonCheckEarnings.setEnabled(false);
+        buttonAdd.setEnabled(true);
+        insertId.setEnabled(true);
+        paintItWhite();
+    }//GEN-LAST:event_buttonDeselectActionPerformed
 
     /**
      * @param args the command line arguments
@@ -623,6 +642,7 @@ public class AdminEmployees extends javax.swing.JFrame {
     private org.edisoncor.gui.util.BrightPassFilter brightPassFilter1;
     private org.edisoncor.gui.button.ButtonAction buttonAdd;
     private org.edisoncor.gui.button.ButtonAction buttonBack;
+    private org.edisoncor.gui.button.ButtonAction buttonCheckEarnings;
     private org.edisoncor.gui.button.ButtonAction buttonDeselect;
     private org.edisoncor.gui.button.ButtonAction buttonEdit;
     private javax.swing.JTextField insertAddress;

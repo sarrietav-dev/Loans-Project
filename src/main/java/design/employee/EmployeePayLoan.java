@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import logic.exceptions.LoanAlreadyPaidException;
 import logic.file_management.loan_crud.ReadLoan;
 import logic.loan_classes.Loan;
 import logic.loan_classes.PaymentManager;
@@ -199,6 +200,8 @@ public class EmployeePayLoan extends javax.swing.JFrame {
     private void buttonPayInstallmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPayInstallmentActionPerformed
         // TODO add your handling code here:
         
+        int cont=0;
+        
         JTextFieldDateEditor editor = (JTextFieldDateEditor) insertPayment.getDateEditor();
         
         if ("".equals(String.valueOf(editor.getText())))
@@ -208,32 +211,66 @@ public class EmployeePayLoan extends javax.swing.JFrame {
         
         else {
         
+            try{
         paymentDate = insertPayment.getDate();
         EmployeeUsser.getUsser().payAnInstallment(loanChecked.getLoanNumber(), paymentDate);
-        JOptionPane.showMessageDialog(null, "Installment successfully repaid!", "ERROR!", JOptionPane.INFORMATION_MESSAGE);
-        
+            }
+        catch (LoanAlreadyPaidException e){
+                cont++;
+                JOptionPane.showMessageDialog(null, "- Loan already paid!", "ERROR!", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            if (cont==0)
+            {
+                paymentDate = insertPayment.getDate();
+                EmployeeUsser.getUsser().payAnInstallment(loanChecked.getLoanNumber(), paymentDate);
+                JOptionPane.showMessageDialog(null, "Installment successfully repaid!", "ERROR!", JOptionPane.INFORMATION_MESSAGE);
+            }
+
         }
     }//GEN-LAST:event_buttonPayInstallmentActionPerformed
 
     private void buttonPayLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPayLoanActionPerformed
         // TODO add your handling code here:
-        
         JTextFieldDateEditor editor = (JTextFieldDateEditor) insertPayment.getDateEditor();
+        
+        int cont = 0;
         
         if ("".equals(String.valueOf(editor.getText())))
         {
             JOptionPane.showMessageDialog(null, "- You must fill the Date field!", "ERROR!", JOptionPane.ERROR_MESSAGE);
+            cont++;
         }
         
         else
         {
+            
+            try{
         paymentDate = insertPayment.getDate();
         PaymentManager PaymentManager1 = new PaymentManager(loanChecked,paymentDate);
         PaymentManager1.payAll();
-        InformationPack informationPack1 = new InformationPack(loanChecked, paymentDate, EmployeeUsser.getUsser(), PaymentManager1.getMoneyToCapital(), PaymentManager1.getMoneyToInterests());
-        Receipt Receipt1 = new Receipt(informationPack1);
-        Receipt1.generateReceipt();
-        System.out.println(Receipt1.getReceiptPath());
+        
+            }
+            catch (LoanAlreadyPaidException e){
+                cont++;
+                JOptionPane.showMessageDialog(null, "Loan already paid!", "ERROR!", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            if (cont == 0)
+            {
+                paymentDate = insertPayment.getDate();
+                PaymentManager PaymentManager1 = new PaymentManager(loanChecked,paymentDate);
+                PaymentManager1.payAll();
+                InformationPack informationPack1 = new InformationPack(loanChecked, paymentDate, EmployeeUsser.getUsser(), PaymentManager1.getMoneyToCapital(), PaymentManager1.getMoneyToInterests());
+                Receipt Receipt1 = new Receipt(informationPack1);
+                JOptionPane.showMessageDialog(null, "Loan successfully repaid!", "ERROR!", JOptionPane.INFORMATION_MESSAGE);
+                Receipt1.generateReceipt();
+                System.out.println(Receipt1.getReceiptPath());
+            }
+          
+        
+        
+        
         }
     }//GEN-LAST:event_buttonPayLoanActionPerformed
 

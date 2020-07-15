@@ -354,6 +354,7 @@ public class EmployeeClients extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableClients.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableClients);
 
         javax.swing.GroupLayout panelImage4Layout = new javax.swing.GroupLayout(panelImage4);
