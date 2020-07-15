@@ -31,7 +31,7 @@ public class Receipt {
 		this.info = info;
 		document = new Document();
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss:aa");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH_mm_ss_aa");
 		String fileName = "receipt-" + info.getLoan().getLoanNumber() + "-" + dateFormat.format(new Date()) + ".pdf";
 		path = new File(filePath + fileName); 
 	}
