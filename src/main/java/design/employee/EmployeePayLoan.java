@@ -227,7 +227,8 @@ public class EmployeePayLoan extends javax.swing.JFrame {
         
         else
         {
-        EmployeeUsser.getUsser().payALoan(loanChecked.getLoanNumber(), paymentDate);
+        PaymentManager PaymentManager1 = new PaymentManager(loanChecked, paymentDate);
+        PaymentManager1.payAll();
         JOptionPane.showMessageDialog(null, "Loan successfully repaid!", "ERROR!", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_buttonPayLoanActionPerformed
