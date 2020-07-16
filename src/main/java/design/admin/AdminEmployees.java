@@ -108,7 +108,7 @@ public class AdminEmployees extends javax.swing.JFrame {
 
         textName.setText("Name:");
 
-        textTelephone.setText("Telephone:");
+        textTelephone.setText("Phone:");
 
         insertTelephone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

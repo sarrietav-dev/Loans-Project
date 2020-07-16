@@ -224,7 +224,8 @@ public class EmployeePayLoan extends javax.swing.JFrame {
             {
                 paymentDate = insertPayment.getDate();
                 EmployeeUsser.getUsser().payAnInstallment(loanChecked.getLoanNumber(), paymentDate);
-                JOptionPane.showMessageDialog(null, "Installment successfully repaid!", "ERROR!", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Installment successfully repaid!", "SUCCESS!", JOptionPane.INFORMATION_MESSAGE);
+
             }
 
         }
@@ -263,9 +264,8 @@ public class EmployeePayLoan extends javax.swing.JFrame {
                 PaymentManager1.payAll();
                 InformationPack informationPack1 = new InformationPack(loanChecked, paymentDate, EmployeeUsser.getUsser(), PaymentManager1.getMoneyToCapital(), PaymentManager1.getMoneyToInterests());
                 Receipt Receipt1 = new Receipt(informationPack1);
-                JOptionPane.showMessageDialog(null, "Loan successfully repaid!", "ERROR!", JOptionPane.INFORMATION_MESSAGE);
                 Receipt1.generateReceipt();
-                System.out.println(Receipt1.getReceiptPath());
+                JOptionPane.showMessageDialog(null, "Loan successfully repaid! ", "SUCCESS!", JOptionPane.INFORMATION_MESSAGE); 
             }
           
         
