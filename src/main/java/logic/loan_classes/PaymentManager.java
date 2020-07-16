@@ -22,7 +22,7 @@ public class PaymentManager {
      * It sets the last unpaid installment to paid, and calculates the money distributions.
      */
     public void pay() {
-        getDistributeMoney(DISTRIBUTE_MONEY_OPTION.PAY).distributeMoney();
+        getDistributeMoney(DistributeMoneyOption.PAY).distributeMoney();
         setInstallmentPaid();
         UpdateLoan.update(loan);
     }
@@ -35,7 +35,7 @@ public class PaymentManager {
      * It pays all the loan's installment, but charges only the ones which were unpaid.
      */
     public void payAll() {
-        getDistributeMoney(DISTRIBUTE_MONEY_OPTION.PAY_ALL).distributeMoney();
+        getDistributeMoney(DistributeMoneyOption.PAY_ALL).distributeMoney();
         setAllInstallmentsPaid();
         UpdateLoan.update(loan);
     }
@@ -69,7 +69,7 @@ public class PaymentManager {
         return moneyToCapital;
     }
 
-    private DistributeMoneyInterface getDistributeMoney(DISTRIBUTE_MONEY_OPTION option) {
+    private DistributeMoneyInterface getDistributeMoney(DistributeMoneyOption option) {
         switch (option) {
             case PAY:
                 return () -> {
@@ -130,7 +130,7 @@ public class PaymentManager {
         return moneyToEmployee;
     }
 
-    private enum DISTRIBUTE_MONEY_OPTION {
+    private enum DistributeMoneyOption {
         PAY,
         PAY_ALL
     }
