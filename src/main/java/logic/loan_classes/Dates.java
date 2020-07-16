@@ -1,6 +1,5 @@
 package logic.loan_classes;
 
-import logic.company_members.Employee;
 import logic.databases.ClientDatabase;
 import logic.exceptions.DateOutOfLimitException;
 

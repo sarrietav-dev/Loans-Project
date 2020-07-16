@@ -1,12 +1,7 @@
 package logic.company_members;
 
 import logic.databases.ClientDatabase;
-import logic.exceptions.ClientAlreadyExistsException;
 import logic.exceptions.LoanAlreadyPaidException;
-import logic.file_management.client_crud.CreateClient;
-import logic.file_management.loan_crud.CreateLoan;
-import logic.loan_classes.Client;
-import logic.loan_classes.Loan;
 import logic.loan_management.PaymentMethods;
 import logic.pdf.Receipt;
 
@@ -81,25 +76,7 @@ public class Employee implements Serializable {
 		return lastReceiptPath;
 	}
 
-	/**
-	 * Adds a client to the database.
-	 * @param client A client object to be added to the database.
-	 * @throws ClientAlreadyExistsException if the client ID matches other client ID in the database.
-	 * */
-	public void addAClient(Client client) {
-		CreateClient.create(client);
-	}
-
-	/**
-	 * Creates a loan and assigns it to a Client. The employee earns 1% of the total amount borrowed from the loan.
-	 * @param loan The loan that will be created.
-	 * @param CLIENT_ID The client ID where the load will be assigned.
-	 */
-	public void addALoan(Loan loan, final int CLIENT_ID) {
-		CreateLoan.create(loan, CLIENT_ID);
-	}
-
-	public void sumToSalary(double amount) {
+    public void sumToSalary(double amount) {
 		currentSalary += amount;
 	}
 

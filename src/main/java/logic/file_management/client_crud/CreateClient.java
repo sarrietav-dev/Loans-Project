@@ -18,7 +18,7 @@ public class CreateClient extends ClientLoanCRUD {
 	 * @throws ClientAlreadyExistsException if the ID exists in the database.
 	 */
 	public static void create(Client client) {
-		if (!doesClientExist(client))
+		if (doesClientExist(client))
 			createClient(client);
 		else
 			throw new ClientAlreadyExistsException("That ID is taken!");
@@ -41,7 +41,7 @@ public class CreateClient extends ClientLoanCRUD {
 	private static void createClient(Client client) {
 		ArrayList<Loan> loans = new ArrayList<>();
 		data.put(client, loans);
-		client.setLoans(loans);
+		client.setLoans();
 		CLIENT_DATABASE.updateDataList(data);
 	}
 }

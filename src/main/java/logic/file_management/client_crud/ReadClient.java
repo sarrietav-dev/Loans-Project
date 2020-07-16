@@ -17,7 +17,7 @@ public class ReadClient extends ClientLoanCRUD {
 
     public static boolean doesClientExist(Client client) {
         return data.keySet().stream()
-            .anyMatch(client::equals);
+                .noneMatch(client::equals);
     }
 
     public static double totalAmountBorrowed(Client client) {

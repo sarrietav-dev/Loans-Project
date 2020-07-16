@@ -1,7 +1,6 @@
 package logic.loan_classes;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -14,7 +13,6 @@ public class Client implements Serializable {
     private String homePhone;
     private String mobilePhone;
     private String address;
-    private ArrayList<Loan> loans;
 
     Client() {
 
@@ -28,8 +26,7 @@ public class Client implements Serializable {
         this.address = address;
     }
 
-    public void setLoans(ArrayList<Loan> loans) {
-        this.loans = loans;
+    public void setLoans() {
     }
 
     public String getName() {
@@ -50,10 +47,6 @@ public class Client implements Serializable {
 
     public String getAddress() {
         return address;
-    }
-
-    private  ArrayList<Loan> getLoans() {
-        return loans;
     }
 
     @Override
