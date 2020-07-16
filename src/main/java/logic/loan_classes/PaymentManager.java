@@ -70,32 +70,28 @@ public class PaymentManager {
     }
 
     private DistributeMoneyInterface getDistributeMoney(DISTRIBUTE_MONEY_OPTION option) {
-        switch (option) {
-            case PAY:
-                return () -> {
-                    double interests = getInterests();
+        return switch (option) {
+            case PAY -> () -> {
+                double interests = getInterests();
 
-                    moneyToInterests = (interests - (loan.getBalance() * 0.01));
-                    moneyToCapital = loan.getInstallmentsPrice() - interests;
-                    moneyToEmployee = loan.getBalance() * 0.01;
+                moneyToInterests = (interests - (loan.getBalance() * 0.01));
+                moneyToCapital = loan.getInstallmentsPrice() - interests;
+                moneyToEmployee = loan.getBalance() * 0.01;
 
-                    loan.sumToCapital(moneyToCapital);
-                    loan.sumToInterests(moneyToInterests);
-                };
-            case PAY_ALL:
-                return () -> {
-                    int notPaidInstallments = getNotPaidInstallments();
+                loan.sumToCapital(moneyToCapital);
+                loan.sumToInterests(moneyToInterests);
+            };
+            case PAY_ALL -> () -> {
+                int notPaidInstallments = getNotPaidInstallments();
 
-                    moneyToCapital = loan.getInstallmentsPrice() * notPaidInstallments;
-                    moneyToInterests = moneyToCapital * 0.04;
-                    moneyToEmployee = moneyToCapital * 0.01;
+                moneyToCapital = loan.getInstallmentsPrice() * notPaidInstallments;
+                moneyToInterests = moneyToCapital * 0.04;
+                moneyToEmployee = moneyToCapital * 0.01;
 
-                    loan.sumToInterests(moneyToInterests);
-                    loan.sumToCapital(moneyToCapital);
-                };
-            default:
-                throw new IllegalStateException("Unexpected value: " + option);
-        }
+                loan.sumToInterests(moneyToInterests);
+                loan.sumToCapital(moneyToCapital);
+            };
+        };
     }
 
     private double getInterests() {

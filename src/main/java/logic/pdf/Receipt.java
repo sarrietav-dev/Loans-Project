@@ -17,7 +17,6 @@ import java.util.Date;
 public class Receipt {
 	private final InformationPack info;
 
-	private final String  filePath = "pdf_files"+ File.separator +"receipts" + File.separator;
 	private final File path;
 
 	private final Document document;
@@ -33,7 +32,8 @@ public class Receipt {
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH_mm_ss_aa");
 		String fileName = "receipt-" + info.getLoan().getLoanNumber() + "-" + dateFormat.format(new Date()) + ".pdf";
-		path = new File(filePath + fileName); 
+		String filePath = "pdf_files" + File.separator + "receipts" + File.separator;
+		path = new File(filePath + fileName);
 	}
 
 	public void generateReceipt() {

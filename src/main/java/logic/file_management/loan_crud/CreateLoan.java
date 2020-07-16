@@ -4,7 +4,6 @@ import logic.file_management.ClientLoanCRUD;
 import logic.file_management.client_crud.UpdateClient;
 import logic.loan_classes.Loan;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class CreateLoan extends ClientLoanCRUD {
@@ -30,17 +29,6 @@ public class CreateLoan extends ClientLoanCRUD {
     public static void create(Loan loan, final int CLIENT_ID) {
         loan.setLoanNumber(setID());
         UpdateClient.addLoan(loan, CLIENT_ID);
-    }
-
-    /**
-     * Creates and adds a series of loans to the database.
-     * @param loans The loans that will be added.
-     */
-    public static void create(Loan... loans) {
-        Arrays.stream(loans).forEach(loan -> {
-            loan.setLoanNumber(setID());
-            UpdateClient.addLoan(loan);
-        });
     }
 
     private static int setID() {
