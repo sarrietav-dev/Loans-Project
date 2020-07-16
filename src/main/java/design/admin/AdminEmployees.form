@@ -209,7 +209,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="textTelephone">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Telephone:"/>
+                    <Property name="text" type="java.lang.String" value="Phone:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="insertTelephone">
