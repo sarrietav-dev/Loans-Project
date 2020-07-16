@@ -1,13 +1,13 @@
 package logic.file_management.loan_crud;
 
-import logic.file_management.CRUD;
+import logic.file_management.ClientLoanCRUD;
 import logic.file_management.client_crud.UpdateClient;
 import logic.loan_classes.Loan;
 
 import java.util.Arrays;
 import java.util.Random;
 
-public class CreateLoan extends CRUD {
+public class CreateLoan extends ClientLoanCRUD {
 
     /**
      * Creates a loan and adds it to the database. Also, it sets an unique ID for the loan.

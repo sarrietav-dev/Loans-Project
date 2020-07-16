@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class CRUD {
+public abstract class ClientLoanCRUD {
     protected static final ClientDatabase CLIENT_DATABASE = ClientDatabase.getInstance();
     protected static final HashMap<Client, ArrayList<Loan>> data = CLIENT_DATABASE.getData();
 

@@ -5,7 +5,7 @@ import logic.exceptions.LoginIncorrectException;
 
 import java.util.ArrayList;
 
-public class ReadEmployee extends CRUD {
+public class ReadEmployee extends EmployeeCRUD {
     public static boolean doesEmployeeExist(Employee employee) {
         return employees.stream()
                 .anyMatch(employee::equals);
