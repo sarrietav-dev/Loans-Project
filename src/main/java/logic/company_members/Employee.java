@@ -72,7 +72,7 @@ public class Employee implements Serializable {
 	 * @throws LoanAlreadyPaidException If the loan was already paid (Each installment was paid).
 	 */
 	public void payALoan(final int LOAN_ID, final Date DATE_OF_PAYMENT) {
-		Receipt receipt = PaymentMethods.payInstallment(this, LOAN_ID, DATE_OF_PAYMENT);
+		Receipt receipt = PaymentMethods.payLoan(this, LOAN_ID, DATE_OF_PAYMENT);
 		receipt.generateReceipt();
 		lastReceiptPath = receipt.getReceiptPath();
 	}

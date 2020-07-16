@@ -33,15 +33,17 @@ public class Dates implements Serializable {
             if (isAuthDateAfterToday(authDate)) {
                 this.authorizationDate = authDate;
             } else {
-                throw new DateOutOfLimitException("Only dates after today! " + "(" + authorizationDate + ")" + " < (" +  DateFormatter.format(new Date()) + ")");
+                throw new DateOutOfLimitException("Only dates after today! " + "(" + authorizationDate + ")" + " < ("
+                        + DateFormatter.format(new Date()) + ")");
             }
         } else {
-            throw new DateOutOfLimitException("Date out of limits! Only until " + CLIENT_DATABASE.getLimitOfAuthDate() + " days of the month!");
+            throw new DateOutOfLimitException("Date out of limits! Only until " + CLIENT_DATABASE.getLimitOfAuthDate()
+                    + " days of the month!");
         }
     }
 
     private boolean isAuthDateAfterToday(Date date) {
-	    return date.after(new Date());
+        return date.after(new Date());
     }
 
     private boolean isAuthDateWithinLimits(Date date) {
