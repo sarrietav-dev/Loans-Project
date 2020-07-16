@@ -33,7 +33,7 @@ public class EmployeeClientsLoans extends javax.swing.JFrame {
     private void showClientsWithLoans(){
         Set <Client> allClients1 = ReadClient.getAllClients();
         
-        Client allClients[] = new Client[allClients1.size()];
+        Client[] allClients = new Client[allClients1.size()];
         allClients = allClients1.toArray(allClients);
         
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -45,14 +45,14 @@ public class EmployeeClientsLoans extends javax.swing.JFrame {
             }
         }
         
-        String matrix[][] = new String[ allClientsLoans.size()][4];
+        String[][] matrix = new String[ allClientsLoans.size()][4];
         
             for (int i=0; i<allClientsLoans.size(); i++)
             {
                 
                 matrix[i][0] = String.valueOf(allClientsLoans.get(i).getClient().getId());
                 matrix[i][1] = allClientsLoans.get(i).getClient().getName();
-                matrix[i][2] = String.valueOf(df.format(allClientsLoans.get(i).getDates().getDeliveryDate()));
+                matrix[i][2] = df.format(allClientsLoans.get(i).getDates().getDeliveryDate());
                 matrix[i][3] = String.valueOf(allClientsLoans.get(i).getAmount());
 
             }
@@ -106,7 +106,7 @@ public class EmployeeClientsLoans extends javax.swing.JFrame {
                 "Id of client", "Client", "Date of assignment", "Amount owed"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
+            final boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
 
@@ -222,7 +222,7 @@ public class EmployeeClientsLoans extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

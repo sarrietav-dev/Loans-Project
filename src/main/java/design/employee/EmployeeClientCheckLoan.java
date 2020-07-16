@@ -117,10 +117,10 @@ public class EmployeeClientCheckLoan extends javax.swing.JFrame {
                 "Date of Installment", "Date of payment", "Installment paid"
             }
         ) {
-            Class[] types = new Class [] {
+            final Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
-            boolean[] canEdit = new boolean [] {
+            final boolean[] canEdit = new boolean [] {
                 false, false, false
             };
 

@@ -30,10 +30,10 @@ public class EmployeeClientsDefaulters extends javax.swing.JFrame {
     private void showDefaulters(){
          Set <Client> allDefaulters1 = ReadClient.getDelayedClients();
          
-         Client allDefaulters[] = new Client[allDefaulters1.size()];
+         Client[] allDefaulters = new Client[allDefaulters1.size()];
          allDefaulters = allDefaulters1.toArray(allDefaulters);
          
-         String matrix[][] = new String[allDefaulters1.size()][2];
+         String[][] matrix = new String[allDefaulters1.size()][2];
         
             for (int i=0; i<allDefaulters1.size(); i++)
             {
@@ -91,7 +91,7 @@ public class EmployeeClientsDefaulters extends javax.swing.JFrame {
                 "Id", "Name"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
+            final boolean[] canEdit = new boolean [] {
                 false, false
             };
 
@@ -201,7 +201,7 @@ public class EmployeeClientsDefaulters extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

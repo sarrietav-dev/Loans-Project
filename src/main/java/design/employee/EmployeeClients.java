@@ -32,7 +32,7 @@ public class EmployeeClients extends javax.swing.JFrame {
         showClients();
         
         tableClients.addMouseListener(new MouseAdapter(){
-            DefaultTableModel model = new DefaultTableModel(); 
+            final DefaultTableModel model = new DefaultTableModel();
             
             @Override
              public void mouseClicked(MouseEvent e){
@@ -68,11 +68,11 @@ public class EmployeeClients extends javax.swing.JFrame {
     private void showClients(){
         Set <Client> allClients1 = ReadClient.getAllClients();
         
-        Client allClients[] = new Client[allClients1.size()];
+        Client[] allClients = new Client[allClients1.size()];
         allClients = allClients1.toArray(allClients);
                 
         
-        String matrix[][] = new String[allClients.length][5];
+        String[][] matrix = new String[allClients.length][5];
         
             for (int i=0; i<allClients.length; i++)
             {
@@ -339,10 +339,10 @@ public class EmployeeClients extends javax.swing.JFrame {
                 "ID", "Name", "Telephone", "Cellphone", "Address"
             }
         ) {
-            Class[] types = new Class [] {
+            final Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
+            final boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
             };
 
@@ -586,7 +586,7 @@ public class EmployeeClients extends javax.swing.JFrame {
 
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
         // TODO add your handling code here:
-        String errors = new String();
+        String errors = "";
         int cont = 0;
         if ("".equals(insertName.getText()) || "".equals(insertPhone.getText()) || "".equals(insertCellphone.getText()) || "".equals(insertAddress.getText()))
         {
@@ -630,7 +630,7 @@ public class EmployeeClients extends javax.swing.JFrame {
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         // TODO add your handling code here:
-         String errors = new String();
+         String errors = "";
         int cont = 0;
         
         try {
@@ -708,7 +708,7 @@ public class EmployeeClients extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

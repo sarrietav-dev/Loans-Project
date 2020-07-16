@@ -75,11 +75,11 @@ public class Authors extends javax.swing.JFrame {
         textAuthor1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         textAuthor1.setText("Author 1");
 
-        textAuthorName1.setText("Sebastián Camilo Arrieta Villarreal");
+        textAuthorName1.setText("Sebastiï¿½n Camilo Arrieta Villarreal");
 
         textAuthorEmail1.setText("sarrietav@unicartagena.edu.co");
 
-        textAuthorName2.setText("José David Castillo Ortega");
+        textAuthorName2.setText("Josï¿½ David Castillo Ortega");
 
         textAuthorEmail2.setText("jcantilloo@unicartagena.edu.co");
 
@@ -218,7 +218,7 @@ public class Authors extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

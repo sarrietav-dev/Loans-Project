@@ -31,7 +31,7 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
         showLoans();
         
         tableLoans.addMouseListener(new MouseAdapter(){
-            DefaultTableModel model = new DefaultTableModel(); 
+            final DefaultTableModel model = new DefaultTableModel();
             
             @Override
              public void mouseClicked(MouseEvent e){
@@ -54,15 +54,15 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
         ArrayList<Loan> allLoans = ReadClient.getLoans(EmployeeSelectedClient.getSelectedClient().getId());
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         
-        String matrix[][] = new String[allLoans.size()][5];
+        String[][] matrix = new String[allLoans.size()][5];
         
             for (int i=0; i<allLoans.size(); i++)
             {
                 matrix[i][0] = String.valueOf(allLoans.get(i).getLoanNumber());
                 matrix[i][1] = allLoans.get(i).getClient().getName();
                 matrix[i][2] = String.valueOf(allLoans.get(i).getAmount());
-                matrix[i][3] = String.valueOf(df.format(allLoans.get(i).getDates().getAuthorizationDate()));
-                matrix[i][4] = String.valueOf(df.format(allLoans.get(i).getDates().getDeliveryDate()));
+                matrix[i][3] = df.format(allLoans.get(i).getDates().getAuthorizationDate());
+                matrix[i][4] = df.format(allLoans.get(i).getDates().getDeliveryDate());
             }
             
             DefaultTableModel tableModel = new DefaultTableModel(
@@ -140,7 +140,7 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
                 "# of Loan", "Applicant", "Value", "Date of autorization", "Delivery date"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
+            final boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
             };
 
@@ -425,7 +425,7 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

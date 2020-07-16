@@ -33,7 +33,7 @@ public class AdminClients extends javax.swing.JFrame {
         showClients();
         
         tableClients.addMouseListener(new MouseAdapter(){
-            DefaultTableModel model = new DefaultTableModel(); 
+            final DefaultTableModel model = new DefaultTableModel();
             
             @Override
              public void mouseClicked(MouseEvent e){
@@ -229,7 +229,7 @@ public class AdminClients extends javax.swing.JFrame {
                 "ID", "Name", "Telephone", "Cellphone", "Address"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
+            final boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
             };
 
@@ -421,11 +421,11 @@ public class AdminClients extends javax.swing.JFrame {
         
         int n = allClients1.size();
         
-        Client allClients[] = new Client[n];
+        Client[] allClients = new Client[n];
         allClients = allClients1.toArray(allClients);
                 
         
-        String matrix[][] = new String[allClients.length][5];
+        String[][] matrix = new String[allClients.length][5];
         
             for (int i=0; i<allClients.length; i++)
             {
@@ -468,7 +468,7 @@ public class AdminClients extends javax.swing.JFrame {
     private void buttonInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInfoActionPerformed
         // TODO add your handling code here:
         EmployeeCheckTotals EmployeeCheckTotals1 = new EmployeeCheckTotals();
-        EmployeeCheckTotals1.adminOrEmployee = true;
+        EmployeeCheckTotals.adminOrEmployee = true;
         this.setVisible(false);
         EmployeeCheckTotals1.setVisible(true);
     }//GEN-LAST:event_buttonInfoActionPerformed
@@ -476,7 +476,7 @@ public class AdminClients extends javax.swing.JFrame {
     private void buttonClientsLoansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonClientsLoansActionPerformed
         // TODO add your handling code here:
         EmployeeClientsLoans EmployeeClientsLoans1 = new EmployeeClientsLoans();
-        EmployeeClientsLoans1.adminOrEmployee = true;
+        EmployeeClientsLoans.adminOrEmployee = true;
         this.setVisible(false);
         EmployeeClientsLoans1.setVisible(true);
     }//GEN-LAST:event_buttonClientsLoansActionPerformed
@@ -491,7 +491,7 @@ public class AdminClients extends javax.swing.JFrame {
     private void buttonDefaultersClientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDefaultersClientsActionPerformed
         // TODO add your handling code here:
         EmployeeClientsDefaulters EmployeeClientsDefaulters1 = new EmployeeClientsDefaulters();
-        EmployeeClientsDefaulters1.adminOrEmployee = true;
+        EmployeeClientsDefaulters.adminOrEmployee = true;
         this.setVisible(false);
         EmployeeClientsDefaulters1.setVisible(true);
     }//GEN-LAST:event_buttonDefaultersClientsActionPerformed
@@ -499,7 +499,7 @@ public class AdminClients extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

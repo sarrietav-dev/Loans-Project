@@ -25,7 +25,7 @@ import logic.company_members.employee_crud.UpdateEmployee;
 public class AdminEmployees extends javax.swing.JFrame {
     
     private static int passwordId;
-    private static String allPasswords[];
+    private static String[] allPasswords;
     
     /**
      * Creates new form AddEmployee
@@ -36,7 +36,7 @@ public class AdminEmployees extends javax.swing.JFrame {
          showEmployees();
         
         tableEmployees.addMouseListener(new MouseAdapter(){
-            DefaultTableModel model = new DefaultTableModel(); 
+            final DefaultTableModel model = new DefaultTableModel();
             
             @Override
              public void mouseClicked(MouseEvent e){
@@ -323,7 +323,7 @@ public class AdminEmployees extends javax.swing.JFrame {
                 "Name", "Telephone", "Cellphone", "Address", "Base salary", "Total Salary"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
+            final boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false
             };
 
@@ -415,9 +415,9 @@ public class AdminEmployees extends javax.swing.JFrame {
         
         ArrayList<Employee> allEmployees = ReadEmployee.getAllEmployees();
         
-        String passwords[] = new String[allEmployees.size()];
+        String[] passwords = new String[allEmployees.size()];
         
-        String matrix[][] = new String[allEmployees.size()][7];
+        String[][] matrix = new String[allEmployees.size()][7];
         
             for (int i=0; i<allEmployees.size(); i++)
             {
@@ -471,7 +471,7 @@ public class AdminEmployees extends javax.swing.JFrame {
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         // TODO add your handling code here:
         
-        String errors = new String();
+        String errors = "";
         int cont = 0;
         
         if ("".equals(insertId.getText()) || "".equals(insertName.getText()) || "".equals(insertTelephone.getText()) || "".equals(insertCellphone.getText()) || "".equals(insertAddress.getText()) || "".equals(insertBaseSalary.getText()))
@@ -541,7 +541,7 @@ public class AdminEmployees extends javax.swing.JFrame {
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
         // TODO add your handling code here:
         
-        String errors = new String();
+        String errors = "";
         int cont = 0;
         
         if ("".equals(insertId.getText()) || "".equals(insertName.getText()) || "".equals(insertTelephone.getText()) || "".equals(insertCellphone.getText()) || "".equals(insertAddress.getText()) || "".equals(insertBaseSalary.getText()))
@@ -596,7 +596,7 @@ public class AdminEmployees extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

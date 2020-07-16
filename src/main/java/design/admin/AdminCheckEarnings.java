@@ -27,7 +27,7 @@ public class AdminCheckEarnings extends javax.swing.JFrame {
     void checkEarnings(){
         ArrayList<Employee> allEmployees = ReadEmployee.getAllEmployees();
         
-        String matrix[][] = new String[allEmployees.size()][3];
+        String[][] matrix = new String[allEmployees.size()][3];
         
             for (int i=0; i<allEmployees.size(); i++)
             {
@@ -86,7 +86,7 @@ public class AdminCheckEarnings extends javax.swing.JFrame {
                 "Id", "Employee", "Earnings"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
+            final boolean[] canEdit = new boolean [] {
                 true, false, false
             };
 
@@ -185,7 +185,7 @@ public class AdminCheckEarnings extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

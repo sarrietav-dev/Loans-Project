@@ -17,8 +17,8 @@ import java.util.Date;
 public class Receipt {
 	private final InformationPack info;
 
-	private String  filePath = "pdf_files"+ File.separator +"receipts" + File.separator;
-	private File path;
+	private final String  filePath = "pdf_files"+ File.separator +"receipts" + File.separator;
+	private final File path;
 
 	private final Document document;
 
