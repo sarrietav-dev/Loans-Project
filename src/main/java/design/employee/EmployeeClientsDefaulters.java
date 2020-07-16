@@ -99,6 +99,7 @@ public class EmployeeClientsDefaulters extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableDefaulterClients.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableDefaulterClients);
 
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);

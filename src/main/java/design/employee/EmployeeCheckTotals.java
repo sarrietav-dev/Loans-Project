@@ -6,7 +6,6 @@
 package design.employee;
 
 import design.admin.AdminClients;
-import javax.swing.JSpinner;
 import logic.company_members.Employee;
 import logic.file_management.client_crud.ReadClient;
 
@@ -21,7 +20,6 @@ public class EmployeeCheckTotals extends javax.swing.JFrame {
      */
     public EmployeeCheckTotals() {
         initComponents();
-        checkAuthorization.setEditor(new JSpinner.DefaultEditor(checkAuthorization));
         CheckTotals();
     }
     
@@ -30,7 +28,8 @@ public class EmployeeCheckTotals extends javax.swing.JFrame {
     private void CheckTotals(){
         checkMaxLend.setText(String.valueOf(Employee.getMaximumAmountToLend()));
         checkMaxPerClient.setText(String.valueOf(Employee.getMaximumToLendPerClient()));
-        checkAuthorization.setValue(Employee.getAuthDate());
+        checkAuthorization.setText(String.valueOf(Employee.getAuthDate()));
+        checkInterest.setText(String.valueOf(ReadClient.getInterestsCollected()));
         checkBorrowed.setText(String.valueOf(ReadClient.getAllBorrowedMoney()));
         checkAvailable.setText(String.valueOf(Employee.getMaximumAmountToLend() - ReadClient.getAllBorrowedMoney()));
     }
@@ -52,7 +51,6 @@ public class EmployeeCheckTotals extends javax.swing.JFrame {
         textAuthorization = new javax.swing.JLabel();
         textMaxLend = new javax.swing.JLabel();
         textMaxPerClient = new javax.swing.JLabel();
-        checkAuthorization = new javax.swing.JSpinner();
         checkMaxPerClient = new javax.swing.JTextField();
         checkMaxLend = new javax.swing.JTextField();
         textInterest = new javax.swing.JLabel();
@@ -61,6 +59,7 @@ public class EmployeeCheckTotals extends javax.swing.JFrame {
         checkBorrowed = new javax.swing.JTextField();
         checkInterest = new javax.swing.JTextField();
         checkAvailable = new javax.swing.JTextField();
+        checkAuthorization = new javax.swing.JTextField();
         buttonBack = new org.edisoncor.gui.button.ButtonIpod();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -86,15 +85,9 @@ public class EmployeeCheckTotals extends javax.swing.JFrame {
         textMaxPerClient.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         textMaxPerClient.setText("Maximum value to lend per client:");
 
-        checkAuthorization.setModel(new javax.swing.SpinnerNumberModel(0, 0, 20, 1));
-        checkAuthorization.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        checkAuthorization.setEnabled(false);
-
         checkMaxPerClient.setEditable(false);
-        checkMaxPerClient.setEnabled(false);
 
         checkMaxLend.setEditable(false);
-        checkMaxLend.setEnabled(false);
 
         textInterest.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         textInterest.setText("Total interest collected:");
@@ -106,13 +99,12 @@ public class EmployeeCheckTotals extends javax.swing.JFrame {
         textAvailable.setText("Total available to lend:");
 
         checkBorrowed.setEditable(false);
-        checkBorrowed.setEnabled(false);
 
         checkInterest.setEditable(false);
-        checkInterest.setEnabled(false);
 
         checkAvailable.setEditable(false);
-        checkAvailable.setEnabled(false);
+
+        checkAuthorization.setEditable(false);
 
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);
@@ -138,13 +130,17 @@ public class EmployeeCheckTotals extends javax.swing.JFrame {
                             .addComponent(textMaxPerClient)
                             .addComponent(textMaxLend)
                             .addComponent(textAuthorization, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(checkMaxPerClient)
-                            .addComponent(checkAuthorization)
-                            .addComponent(checkMaxLend, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1)))
+                        .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelImage1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(panelImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(checkMaxPerClient)
+                                    .addComponent(checkMaxLend, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1))
+                            .addGroup(panelImage1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(checkAuthorization)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelImage1Layout.setVerticalGroup(
@@ -298,7 +294,7 @@ public class EmployeeCheckTotals extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonIpod buttonBack;
-    private javax.swing.JSpinner checkAuthorization;
+    private javax.swing.JTextField checkAuthorization;
     private javax.swing.JTextField checkAvailable;
     private javax.swing.JTextField checkBorrowed;
     private javax.swing.JTextField checkInterest;

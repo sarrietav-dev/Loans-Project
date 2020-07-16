@@ -285,11 +285,13 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="buttonAdd" min="-2" pref="87" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="buttonEdit" min="-2" pref="87" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="buttonCheckEarnings" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="buttonDeselect" min="-2" pref="87" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="buttonBack" min="-2" pref="87" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -302,8 +304,9 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="buttonAdd" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="buttonEdit" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="buttonDeselect" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonCheckEarnings" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="buttonBack" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonDeselect" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -328,13 +331,12 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEditActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonDeselect">
+                <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonCheckEarnings">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Deselect"/>
-                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="text" type="java.lang.String" value="Check Earnings"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDeselectActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCheckEarningsActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonBack">
@@ -343,6 +345,15 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBackActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonDeselect">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Deselect"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDeselectActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -447,7 +458,7 @@
                           </TableColumnModel>
                         </Property>
                         <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                          <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                          <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                         </Property>
                       </Properties>
                     </Component>

@@ -114,6 +114,7 @@ public class EmployeeClientsLoans extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableClientsLoans.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableClientsLoans);
         if (tableClientsLoans.getColumnModel().getColumnCount() > 0) {
             tableClientsLoans.getColumnModel().getColumn(0).setResizable(false);

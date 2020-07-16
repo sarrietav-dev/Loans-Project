@@ -29,10 +29,19 @@ public class Dates implements Serializable {
     private void setAuthorizationDate(String authorizationDate) {
         final ClientDatabase CLIENT_DATABASE = ClientDatabase.getInstance();
         Date authDate = DateFormatter.format(authorizationDate);
-        if (isAuthDateWithinLimits(authDate))
-            this.authorizationDate = authDate;
-        else
+        if (isAuthDateWithinLimits(authDate)) {
+            if (isAuthDateAfterToday(authDate)) {
+                this.authorizationDate = authDate;
+            } else {
+                throw new DateOutOfLimitException("Only dates after today! " + "(" + authorizationDate + ")" + " < (" +  DateFormatter.format(new Date()) + ")");
+            }
+        } else {
             throw new DateOutOfLimitException("Date out of limits! Only until " + CLIENT_DATABASE.getLimitOfAuthDate() + " days of the month!");
+        }
+    }
+
+    private boolean isAuthDateAfterToday(Date date) {
+	    return date.after(new Date());
     }
 
     private boolean isAuthDateWithinLimits(Date date) {
@@ -70,17 +79,17 @@ public class Dates implements Serializable {
         datesSorted.sort(Date::compareTo);
         return datesSorted;
     }
-    
-    public Date getAuthorizationDate(){
-        return this.authorizationDate;
-    }
-    
-    public Date getDeliveryDate(){
-        return this.deliveryDate;
-    }
 
     public HashMap<Date, PaymentStatus> getPaymentDates() {
         return paymentDates;
+    }
+    
+    public Date getAuthorizationDate(){
+        return authorizationDate;
+    }
+    
+    public Date getDeliveryDate(){
+        return deliveryDate;
     }
 
     @Override

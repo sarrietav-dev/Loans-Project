@@ -5,8 +5,6 @@
  */
 package design.employee;
 
-import java.util.Set;
-import logic.file_management.client_crud.ReadClient;
 import logic.loan_classes.Client;
 
 /**

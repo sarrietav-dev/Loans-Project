@@ -33,13 +33,14 @@ public class Employee implements Serializable {
 	public Employee(String id, String password) {
 		this.id = id;
 		this.password = password;
+		this.baseSalary = currentSalary = 0;
 	}
 
 	public Employee(String id, String password, String name, double baseSalary) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
-		this.baseSalary = baseSalary;
+		this.baseSalary = currentSalary = baseSalary;
 	}
 
 	public Employee(String id, String password, String name, String homePhone, String mobilePhone, String address, double baseSalary) {
@@ -49,7 +50,7 @@ public class Employee implements Serializable {
 		this.homePhone = homePhone;
 		this.mobilePhone = mobilePhone;
 		this.address = address;
-		this.baseSalary = baseSalary;
+		this.baseSalary = currentSalary = baseSalary;
 	}
 
 	/**
@@ -71,7 +72,7 @@ public class Employee implements Serializable {
 	 * @throws LoanAlreadyPaidException If the loan was already paid (Each installment was paid).
 	 */
 	public void payALoan(final int LOAN_ID, final Date DATE_OF_PAYMENT) {
-		Receipt receipt = PaymentMethods.payLoan(this, LOAN_ID, DATE_OF_PAYMENT);
+		Receipt receipt = PaymentMethods.payInstallment(this, LOAN_ID, DATE_OF_PAYMENT);
 		receipt.generateReceipt();
 		lastReceiptPath = receipt.getReceiptPath();
 	}
@@ -96,10 +97,9 @@ public class Employee implements Serializable {
 	 */
 	public void addALoan(Loan loan, final int CLIENT_ID) {
 		CreateLoan.create(loan, CLIENT_ID);
-		sumToSalary(loan.getAmount() * .01);
 	}
 
-	private void sumToSalary(double amount) {
+	public void sumToSalary(double amount) {
 		currentSalary += amount;
 	}
 
@@ -180,3 +180,4 @@ public class Employee implements Serializable {
 			'}';
 	}
 }
+

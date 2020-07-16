@@ -177,9 +177,9 @@ public class AdminCheckEarnings extends javax.swing.JFrame {
 
     private void buttonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackActionPerformed
         // TODO add your handling code here:
-        AdminClients AdminClients1 = new AdminClients();
+        AdminEmployees AdminEmployees1 = new AdminEmployees();
         this.setVisible(false);
-        AdminClients1.setVisible(true);
+        AdminEmployees1.setVisible(true);
     }//GEN-LAST:event_buttonBackActionPerformed
 
     /**
