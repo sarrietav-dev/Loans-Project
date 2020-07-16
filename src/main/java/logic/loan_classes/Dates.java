@@ -29,7 +29,6 @@ public class Dates implements Serializable {
     private void setAuthorizationDate(String authorizationDate) {
         final ClientDatabase CLIENT_DATABASE = ClientDatabase.getInstance();
         Date authDate = DateFormatter.format(authorizationDate);
-<<<<<<< HEAD
         if (isAuthDateWithinLimits(authDate)) {
             if (isAuthDateAfterToday(authDate)) {
                 this.authorizationDate = authDate;
