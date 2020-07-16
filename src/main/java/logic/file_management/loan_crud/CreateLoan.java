@@ -37,10 +37,8 @@ public class CreateLoan extends ClientLoanCRUD {
      * @param loans The loans that will be added.
      */
     public static void create(Loan... loans) {
-        Arrays.stream(loans).forEach(loan -> {
-            loan.setLoanNumber(setID());
-            UpdateClient.addLoan(loan);
-        });
+        Arrays.stream(loans)
+            .forEach(loan -> create(loan));
     }
 
     private static int setID() {
