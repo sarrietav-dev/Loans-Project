@@ -46,7 +46,10 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="panelCurves2" min="-2" max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="panelCurves2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -70,7 +73,7 @@
                           <Component id="labelCustom1" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="panelImage2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="panelImage3" max="32767" attributes="0"/>
                           </Group>
                           <Component id="panelImage4" alignment="1" max="32767" attributes="0"/>
@@ -85,9 +88,9 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="labelCustom1" min="-2" pref="27" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="panelImage3" max="32767" attributes="0"/>
-                          <Component id="panelImage2" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="panelImage3" min="-2" max="-2" attributes="0"/>
+                          <Component id="panelImage2" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="panelImage4" min="-2" max="-2" attributes="0"/>
@@ -137,13 +140,12 @@
                     <Component class="javax.swing.JTable" name="tableLoans">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="6" rowCount="16">
+                          <Table columnCount="5" rowCount="16">
                             <Column editable="false" title="# of Loan" type="java.lang.Object"/>
                             <Column editable="false" title="Applicant" type="java.lang.Object"/>
                             <Column editable="false" title="Value" type="java.lang.Object"/>
                             <Column editable="false" title="Date of autorization" type="java.lang.Object"/>
                             <Column editable="false" title="Delivery date" type="java.lang.Object"/>
-                            <Column editable="false" title="Dues" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -173,15 +175,13 @@
                               <Editor/>
                               <Renderer/>
                             </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
                           </TableColumnModel>
                         </Property>
+                        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                          <Color id="Default Cursor"/>
+                        </Property>
                         <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                          <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                          <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                         </Property>
                       </Properties>
                     </Component>
@@ -238,9 +238,9 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                          <EmptySpace pref="52" max="32767" attributes="0"/>
                           <Component id="panelImage1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="26" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -250,7 +250,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="13" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="textId" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="checkId" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -341,7 +341,7 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="190" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="214" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
@@ -397,10 +397,9 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="buttonCancelLoan" alignment="1" pref="109" max="32767" attributes="0"/>
-                              <Component id="buttonPayLoan" alignment="1" pref="0" max="32767" attributes="0"/>
-                              <Component id="buttonBack" alignment="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="buttonAddLoan" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="buttonBack" alignment="0" pref="162" max="32767" attributes="0"/>
+                              <Component id="buttonAddLoan" alignment="0" max="32767" attributes="0"/>
+                              <Component id="buttonCheckLoan" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -409,15 +408,13 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                          <EmptySpace pref="22" max="32767" attributes="0"/>
                           <Component id="buttonAddLoan" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="buttonPayLoan" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="buttonCancelLoan" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                          <Component id="buttonCheckLoan" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                           <Component id="buttonBack" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -427,21 +424,26 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Back"/>
                   </Properties>
-                </Component>
-                <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonPayLoan">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Pay a loan"/>
-                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBackActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonAddLoan">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Add a loan"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAddLoanActionPerformed"/>
+                  </Events>
                 </Component>
-                <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonCancelLoan">
+                <Component class="org.edisoncor.gui.button.ButtonAction" name="buttonCheckLoan">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Cancel a loan"/>
+                    <Property name="text" type="java.lang.String" value="Check Loan"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCheckLoanActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

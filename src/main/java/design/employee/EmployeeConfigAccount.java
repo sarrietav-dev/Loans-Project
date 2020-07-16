@@ -16,7 +16,15 @@ public class EmployeeConfigAccount extends javax.swing.JFrame {
      */
     public EmployeeConfigAccount() {
         initComponents();
+        updateAccountInfo();
     }
+     
+    private void updateAccountInfo()
+    {
+        insertId.setText(EmployeeUsser.getUsser().getId());
+        insertPassword.setText(EmployeeUsser.getUsser().getPassword());
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,6 +67,11 @@ public class EmployeeConfigAccount extends javax.swing.JFrame {
         insertId.setEditable(false);
 
         checkPassword.setText("Show Password");
+        checkPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkPasswordActionPerformed(evt);
+            }
+        });
 
         insertPassword.setEditable(false);
 
@@ -215,6 +228,14 @@ public class EmployeeConfigAccount extends javax.swing.JFrame {
         this.setVisible(false);
         EmployeeChangePassword1.setVisible(true);
     }//GEN-LAST:event_buttonEditActionPerformed
+
+    private void checkPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkPasswordActionPerformed
+        // TODO add your handling code here:
+        if (checkPassword.isSelected())
+            insertPassword.setEchoChar((char)0);
+        else 
+            insertPassword.setEchoChar('*');
+    }//GEN-LAST:event_checkPasswordActionPerformed
 
     /**
      * @param args the command line arguments

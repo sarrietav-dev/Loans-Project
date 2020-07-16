@@ -26,6 +26,10 @@ public class PaymentStatus implements Serializable {
     public boolean isNotPaid() {
         return !isPaid;
     }
+    
+    public Date getPaymentDate() {
+	    return paymentDate;
+    }
 
     @Override
     public String toString() {

@@ -5,6 +5,14 @@
  */
 package design.admin;
 
+import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import logic.company_members.Admin;
+import logic.loan_classes.Dates;
+import javax.swing.JFormattedTextField;
+import logic.databases.ClientDatabase;
+import java.lang.NumberFormatException;
+
 /**
  *
  * @author Administrador
@@ -16,6 +24,17 @@ public class AdminLoans extends javax.swing.JFrame {
      */
     public AdminLoans() {
         initComponents();
+        JFormattedTextField tf = ((JSpinner.DefaultEditor) spinnerAuthorization.getEditor()).getTextField();
+        tf.setEditable(false);
+        showData();
+        
+        
+    }
+    
+    private void showData(){
+        insertValueToLend.setText(String.valueOf(Admin.getMaximumAmountToLend()));
+        insertValuePerClient.setText(String.valueOf(Admin.getMaximumToLendPerClient()));
+        spinnerAuthorization.setValue(Admin.getAuthDate());
     }
 
     /**
@@ -64,13 +83,15 @@ public class AdminLoans extends javax.swing.JFrame {
         textValuePerClient.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         textValuePerClient.setText("Maximum value to lend per client:");
 
-        spinnerAuthorization.setModel(new javax.swing.SpinnerNumberModel(0, 0, 20, 1));
+        spinnerAuthorization.setModel(new javax.swing.SpinnerNumberModel(1, 1, 20, 1));
         spinnerAuthorization.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         spinnerAuthorization.setEnabled(false);
+        spinnerAuthorization.setName(""); // NOI18N
+        spinnerAuthorization.setValue(1);
 
-        insertValuePerClient.setEditable(false);
+        insertValuePerClient.setEnabled(false);
 
-        insertValueToLend.setEditable(false);
+        insertValueToLend.setEnabled(false);
 
         javax.swing.GroupLayout panelImage1Layout = new javax.swing.GroupLayout(panelImage1);
         panelImage1.setLayout(panelImage1Layout);
@@ -120,10 +141,20 @@ public class AdminLoans extends javax.swing.JFrame {
         buttonConfirm.setText("Confirm");
         buttonConfirm.setAnimacion(false);
         buttonConfirm.setEnabled(false);
+        buttonConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonConfirmActionPerformed(evt);
+            }
+        });
 
         buttonEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
         buttonEdit.setText("Edit");
         buttonEdit.setAnimacion(false);
+        buttonEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditActionPerformed(evt);
+            }
+        });
 
         buttonBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back.jpg"))); // NOI18N
         buttonBack.setText("Back");
@@ -219,6 +250,73 @@ public class AdminLoans extends javax.swing.JFrame {
         AdminInterface1.setVisible(true);
     }//GEN-LAST:event_buttonBackActionPerformed
 
+    private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
+        // TODO add your handling code here:
+        insertValueToLend.setEnabled(true);
+        insertValuePerClient.setEnabled(true);
+        spinnerAuthorization.setEnabled(true);
+        buttonEdit.setEnabled(false);
+        buttonConfirm.setEnabled(true);
+        
+    }//GEN-LAST:event_buttonEditActionPerformed
+
+    private void buttonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmActionPerformed
+        // TODO add your handling code here:
+        int cont = 0;
+        String errors = new String();
+        double totalValue = 0, valuePerClient = 0;
+        
+        try {
+            totalValue = Double.parseDouble(insertValueToLend.getText());
+        } catch (NumberFormatException e) {
+            errors += "- You cant use letters for the maximum value to lend or leave it blank! \n";
+            cont++;
+        }
+        
+        try {
+           valuePerClient = Double.parseDouble(insertValuePerClient.getText());
+        } catch (NumberFormatException e) {
+            errors += "- You cant use letters for the maximum value to lend per client or leave it blank! \n";
+            cont++;
+        }
+            
+        try
+        {
+         Admin.changeMaximumAmountToLend(Double.parseDouble(insertValueToLend.getText()));
+         Admin.changeMaximumToLendPerClient(Double.parseDouble(insertValuePerClient.getText()));
+         Admin.changeAuthDate((int) spinnerAuthorization.getValue()); 
+        }
+         catch (NumberFormatException e)
+         {
+            cont++;
+         }
+        
+        
+        if (cont == 0)
+        
+        { 
+            if (totalValue <= valuePerClient) {
+                  errors += "- The value to lend to clients cannot be greater or equal than the total!  \n";
+                  cont++;
+            } 
+            
+            if (cont == 0)
+            {
+                JOptionPane.showMessageDialog(null, "Data updated!", "Success!", JOptionPane.INFORMATION_MESSAGE);
+                insertValueToLend.setEnabled(false);
+                insertValuePerClient.setEnabled(false);
+                spinnerAuthorization.setEnabled(false);
+                buttonEdit.setEnabled(true);
+                buttonConfirm.setEnabled(false);  } 
+            
+            else {  JOptionPane.showMessageDialog(null, errors, "ERROR!", JOptionPane.ERROR_MESSAGE);   }
+            
+        }
+        
+        else {  JOptionPane.showMessageDialog(null, errors, "ERROR!", JOptionPane.ERROR_MESSAGE);   }
+            
+    }//GEN-LAST:event_buttonConfirmActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -272,4 +370,5 @@ public class AdminLoans extends javax.swing.JFrame {
     private javax.swing.JLabel textValuePerClient;
     private javax.swing.JLabel textValueToLend;
     // End of variables declaration//GEN-END:variables
+
 }

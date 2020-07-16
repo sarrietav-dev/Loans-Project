@@ -29,6 +29,7 @@ public class Dates implements Serializable {
     private void setAuthorizationDate(String authorizationDate) {
         final ClientDatabase CLIENT_DATABASE = ClientDatabase.getInstance();
         Date authDate = DateFormatter.format(authorizationDate);
+<<<<<<< HEAD
         if (isAuthDateWithinLimits(authDate)) {
             if (isAuthDateAfterToday(authDate)) {
                 this.authorizationDate = authDate;
@@ -44,6 +45,26 @@ public class Dates implements Serializable {
 
     private boolean isAuthDateAfterToday(Date date) {
         return date.after(new Date());
+||||||| merged common ancestors
+        if (isAuthDateWithinLimits(authDate))
+            this.authorizationDate = authDate;
+        else
+            throw new DateOutOfLimitException("Date out of limits! Only until " + ClientDatabase.getLimitOfAuthDate() + " days of the month!");
+=======
+        if (isAuthDateWithinLimits(authDate)) {
+            if (isAuthDateAfterToday(authDate)) {
+                this.authorizationDate = authDate;
+            } else {
+                throw new DateOutOfLimitException("Only dates after today! " + "(" + authorizationDate + ")" + " < (" +  DateFormatter.format(new Date()) + ")");
+            }
+        } else {
+            throw new DateOutOfLimitException("Date out of limits! Only until " + CLIENT_DATABASE.getLimitOfAuthDate() + " days of the month!");
+        }
+    }
+
+    private boolean isAuthDateAfterToday(Date date) {
+	    return date.after(new Date());
+>>>>>>> design
     }
 
     private boolean isAuthDateWithinLimits(Date date) {
@@ -82,8 +103,16 @@ public class Dates implements Serializable {
         return datesSorted;
     }
 
-    HashMap<Date, PaymentStatus> getPaymentDates() {
+    public HashMap<Date, PaymentStatus> getPaymentDates() {
         return paymentDates;
+    }
+    
+    public Date getAuthorizationDate(){
+        return authorizationDate;
+    }
+    
+    public Date getDeliveryDate(){
+        return deliveryDate;
     }
 
     @Override

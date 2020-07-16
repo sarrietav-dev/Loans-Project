@@ -8,6 +8,16 @@ package design.admin;
 import design.employee.EmployeeCheckTotals;
 import design.employee.EmployeeClientsDefaulters;
 import design.employee.EmployeeClientsLoans;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.table.DefaultTableModel;
+import logic.company_members.Employee;
+import logic.company_members.employee_crud.ReadEmployee;
+import logic.file_management.client_crud.ReadClient;
+import logic.loan_classes.Client;
 
 /**
  *
@@ -20,6 +30,22 @@ public class AdminClients extends javax.swing.JFrame {
      */
     public AdminClients() {
         initComponents();
+        showClients();
+        
+        tableClients.addMouseListener(new MouseAdapter(){
+            DefaultTableModel model = new DefaultTableModel(); 
+            
+            @Override
+             public void mouseClicked(MouseEvent e){
+                int i = tableClients.getSelectedRow();
+                insertId.setText(tableClients.getValueAt(i, 0).toString());
+                insertName.setText(tableClients.getValueAt(i, 1).toString());
+                insertPhone.setText(tableClients.getValueAt(i, 2).toString());
+                insertCellphone.setText(tableClients.getValueAt(i, 3).toString());              
+                insertAddress.setText(tableClients.getValueAt(i, 4).toString());
+            }  
+            }); 
+
     }
 
     /**
@@ -50,7 +76,6 @@ public class AdminClients extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableClients = new javax.swing.JTable();
         panelImage5 = new org.edisoncor.gui.panel.PanelImage();
-        buttonEarnings = new org.edisoncor.gui.button.ButtonIpod();
         buttonInfo = new org.edisoncor.gui.button.ButtonIpod();
         panelImage6 = new org.edisoncor.gui.panel.PanelImage();
         buttonDefaultersClients = new org.edisoncor.gui.button.ButtonIpod();
@@ -212,6 +237,7 @@ public class AdminClients extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableClients.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableClients);
 
         javax.swing.GroupLayout panelImage4Layout = new javax.swing.GroupLayout(panelImage4);
@@ -226,15 +252,6 @@ public class AdminClients extends javax.swing.JFrame {
         );
 
         panelImage5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Information"));
-
-        buttonEarnings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/earnings.png"))); // NOI18N
-        buttonEarnings.setText("Earnings");
-        buttonEarnings.setAnimacion(false);
-        buttonEarnings.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEarningsActionPerformed(evt);
-            }
-        });
 
         buttonInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/info.png"))); // NOI18N
         buttonInfo.setText("Info");
@@ -251,18 +268,15 @@ public class AdminClients extends javax.swing.JFrame {
             panelImage5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelImage5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelImage5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonEarnings, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(buttonInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelImage5Layout.setVerticalGroup(
             panelImage5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImage5Layout.createSequentialGroup()
+                .addContainerGap(54, Short.MAX_VALUE)
                 .addComponent(buttonInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonEarnings, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(53, 53, 53))
         );
 
         panelImage6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Client Filters"));
@@ -360,7 +374,7 @@ public class AdminClients extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(textCheckClients, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
-                .addGroup(panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelCurves1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelCurves1Layout.createSequentialGroup()
                         .addComponent(panelImage5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -400,6 +414,45 @@ public class AdminClients extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     private void showClients(){
+        
+        Set <Client> allClients1 = new HashSet<Client>();
+        allClients1 = ReadClient.getAllClients();
+        
+        int n = allClients1.size();
+        
+        Client allClients[] = new Client[n];
+        allClients = allClients1.toArray(allClients);
+                
+        
+        String matrix[][] = new String[allClients.length][5];
+        
+            for (int i=0; i<allClients.length; i++)
+            {
+                
+                matrix[i][0] = String.valueOf(allClients[i].getId());
+                matrix[i][1] = allClients[i].getName();
+                matrix[i][2] = allClients[i].getHomePhone();
+                matrix[i][3] = allClients[i].getMobilePhone();
+                matrix[i][4] = allClients[i].getAddress();
+
+            }
+            
+            
+            DefaultTableModel tableModel = new DefaultTableModel(
+                    matrix,
+                    new String [] { "id", "Name", "Telephone", "Cellphone", "Address"  }) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {       
+            return false; 
+            }
+        };
+            
+        tableClients.setModel(tableModel);
+            
+    }
+    
     private void insertNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_insertNameActionPerformed
@@ -411,13 +464,6 @@ public class AdminClients extends javax.swing.JFrame {
     private void insertPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertPhoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_insertPhoneActionPerformed
-
-    private void buttonEarningsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEarningsActionPerformed
-        // TODO add your handling code here:
-        AdminCheckEarnings AdminCheckEarnings1 = new AdminCheckEarnings();
-        this.setVisible(false);
-        AdminCheckEarnings1.setVisible(true);
-    }//GEN-LAST:event_buttonEarningsActionPerformed
 
     private void buttonInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInfoActionPerformed
         // TODO add your handling code here:
@@ -489,7 +535,6 @@ public class AdminClients extends javax.swing.JFrame {
     private org.edisoncor.gui.button.ButtonAction buttonBack;
     private org.edisoncor.gui.button.ButtonIpod buttonClientsLoans;
     private org.edisoncor.gui.button.ButtonIpod buttonDefaultersClients;
-    private org.edisoncor.gui.button.ButtonIpod buttonEarnings;
     private org.edisoncor.gui.button.ButtonIpod buttonInfo;
     private javax.swing.JTextField insertAddress;
     private javax.swing.JTextField insertCellphone;
