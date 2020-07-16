@@ -3,7 +3,7 @@ package logic.file_management.client_crud;
 import logic.exceptions.CannotAddMoreLoansException;
 import logic.exceptions.ClientAlreadyExistsException;
 import logic.exceptions.ObjectNotFoundException;
-import logic.file_management.CRUD;
+import logic.file_management.ClientLoanCRUD;
 import logic.loan_classes.Client;
 import logic.loan_classes.Loan;
 
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import static logic.file_management.client_crud.CreateClient.create;
 import static logic.file_management.client_crud.ReadClient.*;
 
-public class UpdateClient extends CRUD {
+public class UpdateClient extends ClientLoanCRUD {
 
 	/**
 	 * Add a loan to the database, if the client that it has it's not found on the database, it's create.

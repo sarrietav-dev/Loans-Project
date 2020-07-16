@@ -1,13 +1,13 @@
 package logic.file_management.loan_crud;
 
-import logic.file_management.CRUD;
+import logic.file_management.ClientLoanCRUD;
 import logic.loan_classes.Client;
 import logic.loan_classes.Loan;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class UpdateLoan extends CRUD {
+public class UpdateLoan extends ClientLoanCRUD {
 
     /**
      * Updates a loan that's on the database.

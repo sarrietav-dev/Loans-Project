@@ -5,7 +5,7 @@ import logic.databases.EmployeeDatabase;
 
 import java.util.ArrayList;
 
-public abstract class CRUD {
+public abstract class EmployeeCRUD {
     protected static final EmployeeDatabase database = EmployeeDatabase.getInstance();
     protected static final ArrayList<Employee> employees = database.getEmployees();
 }

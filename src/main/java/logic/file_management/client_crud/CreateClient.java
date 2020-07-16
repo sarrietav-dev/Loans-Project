@@ -1,7 +1,7 @@
 package logic.file_management.client_crud;
 
 import logic.exceptions.ClientAlreadyExistsException;
-import logic.file_management.CRUD;
+import logic.file_management.ClientLoanCRUD;
 import logic.loan_classes.Client;
 import logic.loan_classes.Loan;
 
@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 import static logic.file_management.client_crud.ReadClient.doesClientExist;
 
-public class CreateClient extends CRUD {
+public class CreateClient extends ClientLoanCRUD {
 
 	/**
 	 * Creates a client and adds it to the database. It must have an unique ID.

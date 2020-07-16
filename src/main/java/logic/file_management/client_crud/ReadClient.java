@@ -1,17 +1,16 @@
 package logic.file_management.client_crud;
 
 import logic.exceptions.ObjectNotFoundException;
-import logic.file_management.CRUD;
+import logic.file_management.ClientLoanCRUD;
 import logic.file_management.loan_crud.ReadLoan;
 import logic.loan_classes.Client;
 import logic.loan_classes.Loan;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ReadClient extends CRUD {
+public class ReadClient extends ClientLoanCRUD {
     public static Set<Client> getAllClients() {
         return data.keySet();
     }

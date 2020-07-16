@@ -3,7 +3,7 @@ package logic.company_members.employee_crud;
 import logic.company_members.Employee;
 import logic.exceptions.EmployeeAlreadyExistsException;
 
-public class CreateEmployee extends CRUD {
+public class CreateEmployee extends EmployeeCRUD {
 
     public static void create(Employee employee) {
         if (ReadEmployee.doesEmployeeExist(employee))

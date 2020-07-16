@@ -1,14 +1,14 @@
 package logic.file_management.loan_crud;
 
 import logic.exceptions.ObjectNotFoundException;
-import logic.file_management.CRUD;
+import logic.file_management.ClientLoanCRUD;
 import logic.loan_classes.Client;
 import logic.loan_classes.Loan;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-public class ReadLoan extends CRUD {
+public class ReadLoan extends ClientLoanCRUD {
 
     /**
      * Looks in the database if a loan ID exists.
