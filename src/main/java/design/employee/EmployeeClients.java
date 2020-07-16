@@ -6,6 +6,7 @@
 package design.employee;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Set;
@@ -494,6 +495,18 @@ public class EmployeeClients extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void insertPhoneActionPerformed(ActionEvent actionEvent) {
+
+    }
+
+    private void insertAddressActionPerformed(ActionEvent actionEvent) {
+
+    }
+
+    private void insertNameActionPerformed(ActionEvent actionEvent) {
+
+    }
 
     private void insertPhoneActionPerformed() {//GEN-FIRST:event_insertPhoneActionPerformed
         // TODO add your handling code here:

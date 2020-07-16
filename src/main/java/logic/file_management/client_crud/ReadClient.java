@@ -24,8 +24,9 @@ public class ReadClient extends ClientLoanCRUD {
         double sum = 0.0;
         for (Loan loan : data.get(client)) {
             double amount = loan.getAmount();
-            if (!loan.isPaid())
+            if (!loan.isPaid()) {
                 sum += amount;
+            }
         }
         return sum;
     }

@@ -11,6 +11,7 @@ import logic.company_members.Employee;
 import logic.company_members.employee_crud.UpdateEmployee;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  *
@@ -216,6 +217,14 @@ public class EmployeeChangePassword extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void insertPasswordActionPerformed(ActionEvent actionEvent) {
+
+    }
+
+    private void insertConfirmPasswordActionPerformed(ActionEvent actionEvent) {
+
+    }
 
     private void insertConfirmPasswordActionPerformed() {//GEN-FIRST:event_insertConfirmPasswordActionPerformed
         // TODO add your handling code here:

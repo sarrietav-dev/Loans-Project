@@ -10,6 +10,7 @@ import design.employee.EmployeeClientsDefaulters;
 import design.employee.EmployeeClientsLoans;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
@@ -386,7 +387,19 @@ public class AdminClients extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     private void showClients(){
+    private void insertPhoneActionPerformed(ActionEvent actionEvent) {
+
+    }
+
+    private void insertAddressActionPerformed(ActionEvent actionEvent) {
+
+    }
+
+    private void insertNameActionPerformed(ActionEvent actionEvent) {
+
+    }
+
+    private void showClients(){
         
         Set <Client> allClients1;
         allClients1 = ReadClient.getAllClients();

@@ -6,6 +6,7 @@
 package design.employee;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DateFormat;
@@ -365,6 +366,18 @@ public class EmployeeConsultClient extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void checkPhoneActionPerformed(ActionEvent actionEvent) {
+
+    }
+
+    private void checkAddressActionPerformed(ActionEvent actionEvent) {
+
+    }
+
+    private void checkNameActionPerformed(ActionEvent actionEvent) {
+
+    }
 
     private void checkPhoneActionPerformed() {//GEN-FIRST:event_checkPhoneActionPerformed
         // TODO add your handling code here:
